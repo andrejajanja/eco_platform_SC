@@ -134,7 +134,7 @@ def makeform_route():
     # except:
     #     return redirect("/login")
         
-    if request.method == "POST":
+    if request.method == "POST": #some change
         try:
             pr =  request.form["ra"]
         except KeyError:
