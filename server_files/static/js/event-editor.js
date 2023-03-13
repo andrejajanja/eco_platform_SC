@@ -225,7 +225,7 @@ file_upload.onchange = async function(e){
     slike.forEach(function (s){
         pom = lil_img.cloneNode(true);
         pom.classList.add("added_image_clicked");
-        pom.src = "/static/post_images/" + s.name;
+        pom.src = "/static/event_images/" + s.name;
         images.appendChild(pom);
     })
     dodeliDesniKlik();

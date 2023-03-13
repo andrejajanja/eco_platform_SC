@@ -329,7 +329,7 @@ maker.addEventListener("submit", async function(e){
 
             //header forme
             pom_dete = maker.children[0].cloneNode(true);
-            data["file"] = pom_dete.children[0].value;
+            data["file"] = pom_dete.children[0].value.toLowerCase().replace(" ", "_");
             data["exp_date"] = pom_dete.children[1].children[1].value;
             data["exp_time"] = pom_dete.children[1].children[2].value;
             data["title"] = pom_dete.children[2].value;

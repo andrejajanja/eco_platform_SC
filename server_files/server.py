@@ -1,7 +1,7 @@
 import redis,sys,os,json,pyodbc
 from subprocess import Popen #this is here for starting the Redis server
 from datetime import datetime
-from lib import (User, User_log, random_string,execute_select_sql,
+from all_library import (User, User_log, random_string,execute_select_sql,
                     dict_to_file,SQLConnector, create_table_from_dict,file_to_dict,
                     dict_u_html, insert_into, generate_post_from_dict, generate_events_page, regenerate_events_page)
 from flask import (Flask, jsonify, make_response, redirect, render_template,
@@ -22,7 +22,7 @@ cookie_dur = 3600 #seconds
 session_driver = redis.Redis(host = "127.0.0.1", port = "6379", db=0) #db = 0 - session cookies
 kon = SQLConnector(r"Driver={ODBC Driver 17 for SQL Server};Server=localhost\SQLEXPRESS;Database=EKO;Trusted_Connection=yes;")
 forms_folder = "server_files/server_data/form_layouts/"
-images_folder = "server_files/static/post_images/"
+images_folder = "server_files/static/event_images/"
 event_posts = "server_files/server_data/event_posts/"
 
 #getting already published forms and posts
@@ -190,10 +190,12 @@ def makeform_route():
             di = file_to_dict(f"{forms_folder}{request.form['pub_form']}.json")
             dict_u_html(di, "server_files/templates/forms/", "server_files/templates/form_layout.html")
             query = create_table_from_dict(di)
+            print(query)
             rez = kon.execute_query(query, True)
             if rez == True:
                 return jsonify({"msg": "successfully published a form"})
             else:
+                print(rez)
                 return jsonify({"msg": "An Error occured while publishing the form, please contact the developers"})
 
         if request.form["ra"] == "unpub":
@@ -372,11 +374,11 @@ def event_layout_route(pst):
 def about_us_route():
     return render_template("about-us.html")
 
-#placeholder-start
 
+#placeholder-start
 #placeholder-end
 
 if sys.argv[1] == "1":
-    redis_server = Popen(["redis/redis-server", "redis/redis.windows.conf"])
+    redis_server = Popen(["redis_windows/redis-server", "redis_windows/redis.windows.conf"])
 if __name__ == "__main__":
     app.run("0.0.0.0", port = 7000)
