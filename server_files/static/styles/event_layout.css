@@ -1,0 +1,124 @@
+html{
+    --leva-razmaknutost: 2%;
+    --debljina-border: 0.1em;
+    --padding-vertical-box: 0.5em;
+}
+a:link{
+    text-decoration: none;
+}
+#kontekst{
+    padding-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+}
+#postHeader{
+    margin-top: 1%;
+    padding: 1%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    height: fit-content;
+    width: 100%;
+    border-top: var(--boja-tema) solid var(--debljina-border);
+    border-bottom: var(--boja-tema) solid var(--debljina-border);
+}
+#typeImg{
+    height: 3em;
+    width: 3em;
+    /*
+    border: var(--boja-tema) dashed var(--debljina-border);
+    box-shadow: 
+        0 0 0.25em 0.25em #fff, 
+        0 0 0.25em 1em var(--boja-teksta); */
+}
+#ttl{
+    margin-left: var(--leva-razmaknutost);
+    font-family: var(--font-tema);
+    font-size: 4vh;
+    font-weight: 500;   
+}
+#location{
+    padding-top: var(--padding-vertical-box);
+    padding-bottom: var(--padding-vertical-box);
+    margin-left: var(--leva-razmaknutost);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: fit-content;
+    width: 25%;
+    border-top: solid var(--boja-tema) var(--debljina-border);
+    border-bottom: solid var(--boja-tema) var(--debljina-border);
+}
+
+/*SREDI CEO OVAJ DEO SA HEADEWROM DA IMA STO MANJE TEKSTA*/
+#location img{
+    height: 3em;
+    width: 3em;
+}
+#location a{
+    margin-left: 7.5%;
+    font-family: var(--font-tema);
+    font-size: 1em;
+    font-weight: 300;
+}
+#time{
+    padding-top: var(--padding-vertical-box);
+    padding-bottom: var(--padding-vertical-box);
+    padding-left: 2em;
+    padding-right: 2em;
+    margin-left: var(--leva-razmaknutost);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: fit-content;
+    width: fit-content;
+    border-top: solid var(--boja-tema) var(--debljina-border);
+    border-bottom: solid var(--boja-tema) var(--debljina-border);
+}
+#time img{
+    height: 3em;
+    width: 3em;
+}
+#time p{
+    margin: 0;
+    margin-left: 15%;
+    font-family: var(--font-tema);
+    font-size: 1em;
+    font-weight: 300;
+    cursor: default;
+}
+#frmLnk{
+    margin-left: var(--leva-razmaknutost);
+    padding: var(--padding-vertical-box);
+    font-family: var(--font-tema);
+    font-size: 1em;
+    font-weight: 500;
+    color: black;
+    background: white;
+    border: solid var(--boja-tema) var(--debljina-border);    
+    border-radius: 2vh;
+    transition: background var(--hover-color-change), color var(--hover-color-change);
+}
+#frmLnk:hover{
+    color: var(--boja-teksta);
+    background: var(--boja-tema);
+}
+.postParag{
+    padding: 2%;
+    font-family: var(--font-tema);
+    font-size: 1em;
+    font-weight: 300;
+    width: 85%;
+    border-left: solid var(--boja-tema) var(--debljina-border);
+}
+.postImg{
+    width: 50%;
+}

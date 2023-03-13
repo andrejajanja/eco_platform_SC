@@ -1,0 +1,147 @@
+html{
+    padding: 0%;
+    --font-tema: "Segoe UI", sans-serif, Arial;
+    --text-boja-tema: #186f18;
+    --hover-forms: #aa8f24;
+    --boja-tema: #12942a; 
+    --underline-thickness: 0.1em;
+    --boja-teksta: #ffe16c;
+    --hover-color-change: 0.25s;
+    --loader-size: 10em;
+    --header-height: 3.75em;
+}
+body{
+    margin: 0%;
+    padding: 0%;
+}
+#header{
+    display: flex;
+    flex-direction: row;
+    margin: 0%;
+    height: var(--header-height);
+    max-width: var;
+    width: 100%;
+    background-color: var(--boja-tema);
+}
+#footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0%;
+    height: var(--header-height);
+    width: 100%;
+    background-color: var(--boja-tema);
+}
+#footer p{
+    font-family: var(--font-tema);
+    color: var(--boja-teksta);
+    font-size: calc(var(--header-height)/4);
+    font-weight: 300;
+}
+#naslov{    
+    margin-left: 2vw;
+    margin-right: 2vw;
+    height: var(--header-height);
+    width: fit-content;
+    text-overflow:ellipsis;
+    font-size: calc(var(--header-height)*0.35);
+    font-family: var(--font-tema);
+    color: var(--boja-teksta);
+}
+#stranice{    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: var(--header-height);
+    width: 70vw;    
+}
+/*button lin*/
+.dugme_head{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0%;
+
+    min-width: fit-content;
+    height: 100%;
+    width: 2vw;
+    margin-right: 2vw;
+
+    border-color: transparent;
+    background: var(--boja-tema);
+    
+    font-family: var(--font-tema);
+    font-weight: 800;
+    font-size: calc(var(--header-height)*0.35);
+    color: var(--boja-teksta);
+
+    transition: color var(--hover-color-change), background var(--hover-color-change);
+}
+a:link{
+    text-decoration: none;
+}
+.dugme_head:hover{
+    background: var(--boja-tema);
+    background: linear-gradient(90deg, rgba(18, 148, 42,0.5) 0%, rgba(255,225,108,1) 20%, rgba(255,225,108,1) 80%, rgba(18, 148, 42,0.5) 100%);
+    color: var(--boja-tema);
+}
+/*dropdown card*/
+.dropdown_head{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: fit-content;
+    height: var(--header-height);
+    width: 8vw;
+}
+.btn_drop{
+    border-color: transparent;
+    background: var(--boja-tema);
+    height: 100%;
+    width: 100%;
+    font-family: var(--font-tema);
+    font-weight: 800;
+    font-size: calc(var(--header-height)*0.35);
+    color: var(--boja-teksta);
+    transition: color var(--hover-color-change), background var(--hover-color-change);
+    outline: none;
+}
+.btn_drop:hover{
+    background: var(--boja-tema);
+    color: var(--boja-tema);
+    background: linear-gradient(90deg, rgba(18, 148, 42,0.5) 0%, rgba(255,225,108,1) 20%, rgba(255,225,108,1) 80%, rgba(18, 148, 42,0.5) 100%);    
+}
+.dropdown_sadrzaj{
+    display: none;
+    position: absolute;
+    top: var(--header-height);
+    background: var(--boja-tema);
+    width: 8vw;
+    box-shadow: 0.5vw 0.5vh 5px var(--boja-teksta);
+    border-bottom-left-radius: 1vh;
+    border-bottom-right-radius: 1vh;
+    
+}
+.dropdown_head:hover .dropdown_sadrzaj {
+    display: block;
+}
+.elem_dropdown {
+    display: block;
+    color: var(--boja-teksta);
+    padding: 1vh;
+    font-family: var(--font-tema);
+    font-weight: 800;
+    font-size: calc(0.25*var(--header-height));
+    border-bottom-left-radius: 1vh;
+    border-bottom-right-radius: 1vh;
+    transition: color var(--hover-color-change), background var(--hover-color-change);
+}
+.elem_dropdown:hover {
+    background: var(--boja-teksta);
+    color: var(--boja-tema);
+}
+#kontekst{
+    height: calc(100vh - calc(2*var(--header-height)));
+    width: 100%;
+}

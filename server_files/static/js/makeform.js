@@ -1,0 +1,436 @@
+//#region promenljive
+const url_stranice = window.location.href;
+const explorer = document.querySelector("#explorer");
+let maker = document.querySelector("#maker");
+let responces = document.querySelector("#respo_table");
+let forme = document.querySelector("#prosle_forme");
+let loader = document.querySelector("#loader");
+let opisp = document.querySelector("#opis_polje");
+//templates
+let templates = document.querySelector("#templates").content.cloneNode(true);
+let polje_sample = templates.querySelector(".polje");
+let tipovi = templates.querySelector("#dropdown_lista");
+let checkkutija = templates.querySelector(".checkbox_polje");
+let panel = templates.querySelector(".panel_za_dodavanje");
+let form_file = templates.querySelector(".formice");
+let red = document.createElement("tr");
+let field = document.createElement("td");
+
+let trenIndex = 0;
+let pocetniIndex = 0;
+let publs = {};
+//#endregion promenljive
+
+//#region funkcije
+function updateSerial(){
+    //napisi ovo malo elegantnije
+    for(let i = 0; i<maker.children.length;i++){
+        maker.children[i].i = i;
+    }
+}
+
+//ne radi cuvanje vise opcija, obrise poslednju, vrv je problem sa onim editorom. da li?
+function fokusirajMakerElement(e){
+    let i = e.currentTarget.i;
+    //dalja logika za dodavanje editora
+    if(!(i==(maker.children.length-1)) && !(i<pocetniIndex)){
+        //skini ceo editor sa polja koje je bilo pre
+        if(trenIndex>0 && !(maker.children[trenIndex].children[0].children.length == 1)){
+            try{
+                maker.children[trenIndex].children[0].removeChild(maker.children[trenIndex].children[0].lastChild);
+                maker.children[trenIndex].addEventListener("click", fokusirajMakerElement,false);
+                if(maker.children[trenIndex].dataset.type == "checkb"){
+                    maker.children[trenIndex].children[1].removeChild(maker.children[trenIndex].children[1].lastChild);
+                }   
+            }catch{}  
+        }
+        //dodaj editor na trenutno polje
+        maker.children[i].children[0].appendChild(tipovi.cloneNode(true));
+        if(maker.children[i].dataset.type == "checkb"){
+            maker.children[i].children[1].appendChild(panel.cloneNode(true))
+        }
+        maker.children[i].removeEventListener("click", fokusirajMakerElement, false);
+        maker.children[i].i = i;
+    }
+    trenIndex = i;
+}
+function bazdariTipPolja(index){
+    let pom_polje = maker.children[index].cloneNode(true);
+    let tip = pom_polje.dataset.type;
+    pom_polje.replaceChild(pom_polje.children[1].cloneNode(false), pom_polje.children[1]);
+    //komp kao komponenta
+    if(tip == "sentc"){
+        let komp = document.createElement("input");
+        komp.className = "txt_fld";
+        komp.type = "text"
+        komp.name = "vr" + index;
+        komp.placeholder = "Short text answer";
+        komp.disabled = true;
+        pom_polje.children[1].appendChild(komp);
+        maker.replaceChild(pom_polje,maker.children[index]);
+        maker.children[index].i = index;
+        maker.children[index].children[1].className = "sentance_fld";
+        return;
+    }
+
+    if(tip == "parag"){
+        let komp = document.createElement("textarea");
+        komp.className = "parag_fld";
+        komp.name = "vr" + index;
+        komp.value = "This is a field for paragraph input.";
+        komp.disabled = true;
+        pom_polje.children[1].appendChild(komp);
+        maker.replaceChild(pom_polje,maker.children[index]);
+        maker.children[index].i = index;
+        maker.children[index].children[1].className = "paragraph_fld";
+        return;
+    }
+
+    if(tip == "checkb"){
+        let kutija = checkkutija.cloneNode(true)
+        let pom_panel = panel.cloneNode(true)
+
+        kutija.children[0].name +=index + ".0";
+        kutija.children[1].name +=index + ".0"; 
+
+        pom_polje.children[1].append(kutija, pom_panel)
+        maker.replaceChild(pom_polje,maker.children[index]);
+        maker.children[index].children[1].className = "checkbox_fld";
+        maker.children[index].i = index;
+        return;
+    }
+
+    if(tip == "date"){
+        let komp = document.createElement("input");
+        komp.className = "date_box";
+        komp.type = "date"
+        komp.name = "vr" + index;
+        komp.disabled = true;
+        pom_polje.children[1].appendChild(komp);
+        maker.replaceChild(pom_polje,maker.children[index]);
+        maker.children[index].i = index;
+        maker.children[index].children[1].className = "date_fld";
+        return;
+    }
+
+    if(tip == "time"){
+        let komp = document.createElement("input");
+        komp.className = "time_box";
+        komp.type = "time"
+        komp.name = "vr" + index;
+        komp.disabled = true;
+        pom_polje.children[1].appendChild(komp);
+        maker.replaceChild(pom_polje,maker.children[index]);
+        maker.children[index].i = index;
+        maker.children[index].children[1].className = "time_fld";
+        return;
+    }
+}
+//puni "Past forms:"" kutiju sa prethodnno napravljenim formama
+async function fillFormsExplorer(){
+    let form_names = await req_json({ra: "load"}, "POST")
+    let pom;
+    forme.innerHTML = ""   
+    publs = {};
+    form_names["forms"].forEach(function (ime_forme, i){
+        publs[ime_forme[0]] = ime_forme[1];
+        pom = form_file.cloneNode(true);
+        pom.dataset.file = ime_forme[0];
+        pom.children[1].value = ime_forme[0];
+        pom.children[2].style.display = "none";
+        if(ime_forme[1] == true){
+            pom.children[2].style.display = "block";
+        }
+        pom.dataset.postoji = ime_forme[1]
+        pom.onmousedown = async function (e) {
+            if (e.which == 3) {
+                let odg = await req_json({"ra": "unpub", "form": ime_forme[0]}, "POST");
+                publs[maker.children[0].children[0].value] = false;
+                if(odg["msg"] == "1"){
+                    forme.children[i].children[2].style.display = "none";
+                }else{
+                    alert('An Error occured while trying to unpublish form: ${ime_forme[0]}');
+                }
+            }
+        };
+        forme.appendChild(pom);
+    })
+
+    pom = form_file.children[1].cloneNode(true);
+    pom.id = "new_form_btn";
+    pom.name = "new";
+    pom.value = "- New Form -";
+    forme.appendChild(pom);
+
+    //maybe put this one up next to past forms
+    pom = form_file.children[1].cloneNode(true);
+    pom.id = "publish_btn";
+    pom.name = "publish";
+    pom.value = "-- Publish current form --";
+    forme.appendChild(pom); 
+}
+function new_form() {
+    //code cisti sve sot je na forma povrsini;
+    pomd = [maker.children[0], maker.children[maker.children.length-1]];
+    maker.innerHTML = "";
+    maker.appendChild(pomd[0]);
+    maker.appendChild(polje_sample.cloneNode(true));
+    maker.appendChild(pomd[1]);
+    maker.children[0].children[0].value = "";
+    maker.children[0].children[0].disabled = false;
+    maker.children[0].children[1].children[1].value = "";
+    maker.children[0].children[1].children[2].value = "";
+    maker.children[0].children[2].value = "";
+    maker.children[0].children[3].value = "";
+
+    maker.children[1].addEventListener("click", fokusirajMakerElement, false);
+    maker.children[1].i = 1;
+    opisp.style.height = "5em";
+}
+
+//#endregion funkcije
+
+//#region event listeners
+
+forme.addEventListener("contextmenu", function (e){
+    e.preventDefault();
+}, false);
+
+explorer.addEventListener("submit", async function(e){
+    e.preventDefault()
+    maker.style.display = "none";
+    loader.style.display = "flex";
+    responces.style.display = "none";
+    let pomd,odg;
+    switch (e.submitter.name) {
+        case "file":
+            odg = await req_json({"ra": "frm_meta", "form_name": e.submitter.parentNode.dataset.file}, "POST");
+            let di = JSON.parse(odg["form_data"]);
+
+            //resetuje celu formu
+            pomd = [maker.children[0], maker.children[maker.children.length-1]];
+            maker.innerHTML = "";
+            maker.appendChild(pomd[0]);
+            maker.appendChild(pomd[1]);
+            maker.children[0].children[0].value = di["file"];
+            maker.children[0].children[0].disabled = true;
+            maker.children[0].children[1].children[1].value = di["exp_date"];
+            maker.children[0].children[1].children[2].value = di["exp_time"];
+            maker.children[0].children[2].value = di["title"];
+            maker.children[0].children[3].value = di["description"];
+
+            //popunjavanje sacuvanih polja
+            let pom;
+            for (let i = 0; i < di["fields"].length; i++) {
+                pom = polje_sample.cloneNode(true);
+                pom.dataset.type = di["fields"][i]["type"];
+                pom.children[0].children[0].value = di["fields"][i]["head"];
+                maker.insertBefore(pom, maker.children[maker.children.length-1]);
+                bazdariTipPolja(i+1);            
+                if(maker.children[i+1].dataset.type == "checkb"){
+                    let checkb;
+                    maker.children[i+1].children[1].innerHTML = "";
+                    di["fields"][i]["options"].forEach(function (v){
+                        checkb = checkkutija.cloneNode(true);
+                        checkb.children[1].value = v;
+                        maker.children[i+1].children[1].appendChild(checkb);
+                    })
+                }
+                //dodaj ovde da moze i checkb tip polja da bazdari kako valja, jer ovde ne ubacuje uopste
+                maker.children[i+1].addEventListener("click", fokusirajMakerElement,false);
+            }            
+            autoResize();
+            maker.style.display = "flex";
+            loader.style.display = "none";
+            responces.style.display = "none";
+            break;
+
+        case "new":
+            new_form();
+            maker.style.display = "flex";
+            loader.style.display = "none";
+            responces.style.display = "none";
+            break;
+
+        case "publish":
+            if(publs[maker.children[0].children[0].value]){
+                alert("Form is already published");
+            }else{
+                odg = await req_json({"ra": "pub", "pub_form": maker.children[0].children[0].value}, "POST");
+                fillFormsExplorer();
+                alert(odg["msg"]);
+            }            
+            maker.style.display = "flex";
+            loader.style.display = "none";
+            break;
+
+        case "resp":
+            odg = await req_json({"ra": "respo", "form": e.submitter.parentNode.dataset.file}, "POST");
+            let po;
+            responces.innerHTML = "";
+            pomd = document.createElement("caption")
+            pomd.id = "cap_table";
+            pomd.innerHTML = "Responces for form: " + e.submitter.parentNode.dataset.file;
+            responces.appendChild(pomd)
+            let podaci = JSON.parse(odg["data"]);
+            podaci.forEach(function (red_sql){
+                pomd = red.cloneNode(true);
+                red_sql.forEach(function (p){
+                    po = field.cloneNode(true);
+                    po.innerHTML = p;
+                    pomd.appendChild(po);
+                });
+                responces.appendChild(pomd);                
+            });            
+            loader.style.display = "none";
+            responces.style.display = "inline";
+            break;
+
+        case "del":
+            odg = await req_json({"ra": "dlt", "form": e.submitter.parentNode.dataset.file, "pub": publs[e.submitter.parentNode.dataset.file]}, "POST");
+            await fillFormsExplorer();
+            new_form();
+            alert(odg["msg"])
+            maker.style.display = "flex";
+            loader.style.display = "none";
+            responces.style.display = "none";
+            break;
+        default:
+            break;
+    }
+},false)
+
+//svaki submit u celoj maker formi
+maker.addEventListener("submit", async function(e){
+    e.preventDefault();
+    let pomocna;
+    let func = e.submitter.dataset.fun;
+    switch (func) {
+        //#region funkcionalnost za panel za dodavanje, oduzimanje i cuvanje polja;
+        case "add_fld":
+            let duzina = maker.children.length;
+            let pom_fld = polje_sample.cloneNode(true);
+            pom_fld.children[0].children[0].name = "na" + (duzina-pocetniIndex-1);
+            maker.insertBefore(pom_fld, maker.children[duzina-1]);
+            maker.children[duzina-1].addEventListener("click", fokusirajMakerElement);
+            updateSerial();
+            break;
+        case "sub_fld":
+            if(maker.children.length == (pocetniIndex+2)){
+                console.error("There are no more fields that can be deleted");
+                return;
+            }
+            maker.removeChild(maker.children[maker.children.length-2])
+            updateSerial();
+            break;
+        case "save_all":
+            let pom_dete, data = {};
+            //PROVERA DA LI SME DA SE SACUVA NOVA FORMA POD TIM FILE IMENOM!!!!!!
+
+            //header forme
+            pom_dete = maker.children[0].cloneNode(true);
+            data["file"] = pom_dete.children[0].value;
+            data["exp_date"] = pom_dete.children[1].children[1].value;
+            data["exp_time"] = pom_dete.children[1].children[2].value;
+            data["title"] = pom_dete.children[2].value;
+            data["description"] = pom_dete.children[3].value;
+            let polja = [];
+            //pojedinacna polja
+            for(let i = 1; i<maker.children.length-1;i++){
+                pom_dete = maker.children[i].cloneNode(true);
+                let tip = pom_dete.dataset.type;                
+                if(tip == "idk" || tip == undefined){
+                    //dodaj da obavestava korisnika i obelezava gde nema
+                    console.log("Field type unknown, skipping field");
+                    continue;
+                }
+
+                let field_head = pom_dete.children[0].children[0].value;
+                if(field_head==""){
+                    //napravi da se highlightuje polje ciji naslov nije unet
+                    console.log("Field title unknown, skipping field");
+                    continue;
+                }
+
+                if(tip == "checkb"){
+                    //opc su sve opcije u samom polju, mult je da li moze vise kutija da se klikne odjednom
+                    let opc = [], mult = 1;
+                    pom_dete = pom_dete.children[1];
+                    if(pom_dete.children[pom_dete.children.length-1].className == "panel_za_dodavanje"){
+                        pomocna = pom_dete.children.length-1;
+                    }else{
+                        pomocna = pom_dete.children.length;
+                    }
+
+                    
+                    for (let j = 0; j < pomocna; j++) {
+                        opc.push(pom_dete.children[j].children[1].value);                        
+                    }
+                    polja.push({"type": "checkb", "head": field_head, "options": opc, "multiple": mult});
+                    continue;
+                }
+                polja.push({"type": tip, "head": field_head});
+            }
+            data["fields"] = polja;
+
+            //optimizuj da ovde salje ime pod kojim fajl treba da bude upisan, da ne bi morao da ga raspakuje pa pakuje opet
+            let odg = await req_json({"ra": "svd", "data": JSON.stringify(data)},"POST");
+            if(odg["msg"] == "1"){
+                await fillFormsExplorer();
+            }else{                
+                alert("Server error while saving a form");
+            }
+            break;
+        //#endregion funkcionalnost za panel za dodavanje, oduzimanje i cuvanje polja;
+        
+        //#region panel za dodavanje i oduzimanje konkretnih checkboxova u polju
+        case "add_checkb":
+            pomocna = maker.children[trenIndex].cloneNode(true);
+            pomocna.children[1].insertBefore(checkkutija.cloneNode(true),pomocna.children[1].lastChild);
+            maker.replaceChild(pomocna,maker.children[trenIndex]);
+            maker.children[trenIndex].i = trenIndex;
+            break;
+        case "sub_checkb":
+            pomocna = maker.children[trenIndex].cloneNode(true);
+            let duzinica = pomocna.children[1].children.length;
+            if(duzinica == 1){
+                console.error("There are no more checkboxes that can be deleted");
+                break;
+            }
+            pomocna.children[1].removeChild(pomocna.children[1].children[duzinica-2]);
+            maker.replaceChild(pomocna,maker.children[trenIndex]);
+            maker.children[trenIndex].i = trenIndex;
+            break;
+        //#endregion panel za dodavanje i oduzimanje konkretnih checkboxova u polju
+        default:
+            break;
+    }
+},false)
+
+maker.addEventListener("input", function(e){
+    e.preventDefault();
+    if(e.target.dataset.fun == "select"){
+        maker.children[trenIndex].dataset.type = e.target.value;
+        bazdariTipPolja(trenIndex);
+    }
+},false)
+
+opisp.addEventListener('input', autoResize, false)
+function autoResize() {
+    //zavrsi da ovo radi kada se  forma ucitava
+    opisp.style.height = 'auto';
+    opisp.style.height = (opisp.scrollHeight+20) + 'px';
+}
+
+
+
+//#endregion event listeners
+
+//#region funkcije koje se izvrsavaju posthumno
+
+fillFormsExplorer();
+for(let i = pocetniIndex; i<maker.children.length-1;i++){
+    maker.children[i].addEventListener("click", fokusirajMakerElement,false);
+    maker.children[i].i = i;
+}
+//#endregion funkcije koje se izvrsavaju posthumno

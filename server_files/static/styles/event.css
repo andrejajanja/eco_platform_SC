@@ -1,0 +1,43 @@
+/*Komponente:*/
+#kontekst{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    align-items: center;
+}
+.event{
+    margin: 0.5em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 4em;
+    width: 80%;
+    border-top: solid var(--boja-tema) 0.1em;
+    border-bottom: solid var(--boja-tema) 0.1em;
+    transition: margin var(--hover-color-change), height var(--hover-color-change);
+}
+.event:hover{
+    margin: 0;
+    height: 5em;
+}
+.event_img{
+    margin-left: 2%;
+    height: 3em;
+    width: 3em;
+}
+.event_ttl{
+    margin-left: 3%;
+    margin-right: 2%;
+    font-family: var(--font-tema);
+    font-weight: 300;
+    font-size: 2em;
+    color: #000;
+}
+.event_txt{
+    margin-left: 1%;
+    margin-right: 2%;
+    font-family: var(--font-tema);
+    font-weight: 300;
+    font-size: 1.5em;
+    color: #000;
+}

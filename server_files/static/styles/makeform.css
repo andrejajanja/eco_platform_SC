@@ -1,0 +1,515 @@
+:root{
+    --forms-list-size: 2.25em;
+}
+
+#kontekst{
+    display: flex;
+    flex-direction: row;
+}
+/*Komponente*/
+#explorer{
+    width: 30%;
+}
+#maker{
+    width: 70%;
+    height: 100%;
+    align-items:center;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+/*SREDI DA SVUGDE BUDU CUSTOM SCROLL BAROVI*/
+#maker::-webkit-scrollbar {
+    width: 0.6em;
+}
+
+#maker::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0.1em rgba(0, 0, 0, 0.3);
+    border-radius: 0.2em;
+}
+
+#maker::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+
+/*#region loader*/
+
+#loader{
+    display: none;
+    width: 70%;
+    height: 100%;
+    padding-left: 30%;
+    align-items: center;
+}
+
+.spinner {
+    width: var(--loader-size);
+    height: var(--loader-size);
+    animation: spinner-y0fdc1 2s infinite ease;
+    transform-style: preserve-3d;
+}
+
+.spinner > div {
+    background-color: rgba(0, 255, 34, 0.075);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    border: 0.2em solid #09ff00;
+}
+
+.spinner div:nth-of-type(1) {
+    transform: translateZ(calc(var(--loader-size)/2*(-1))) rotateY(180deg);
+}
+
+.spinner div:nth-of-type(2) {
+    transform: rotateY(-270deg) translateX(50%);
+    transform-origin: top right;
+}
+
+.spinner div:nth-of-type(3) {
+    transform: rotateY(270deg) translateX(-50%);
+    transform-origin: center left;
+}
+
+.spinner div:nth-of-type(4) {
+    transform: rotateX(90deg) translateY(-50%);
+    transform-origin: top center;
+}
+
+.spinner div:nth-of-type(5) {
+    transform: rotateX(-90deg) translateY(50%);
+    transform-origin: bottom center;
+}
+
+.spinner div:nth-of-type(6) {
+    transform: translateZ(calc(var(--loader-size)/2));
+}
+
+@keyframes spinner-y0fdc1 {
+0% {
+    transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
+}
+
+50% {
+    transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
+}
+
+100% {
+    transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
+}
+}
+/*#endregion loader*/
+
+/*#region zavrsi ovo celo za naslov deo forme*/
+#form_header{
+    margin-top: 1em;
+    border: var(--boja-tema) solid var(--underline-thickness);
+    width: 42em;
+    display: flex;
+    height: fit-content;
+    flex-direction: column;
+    border-radius: 1em;
+}
+
+.specifikacija{
+    align-self: flex-start;
+    margin-top: 1em;
+    margin-left: 1em;
+    width: 38em;
+    border: transparent;
+    border-bottom: var(--hover-forms) solid var(--underline-thickness);
+    font-size: medium;
+}
+
+textarea, div, input, p{
+    font-family: var(--font-tema);
+}
+
+#ime_save_polje{
+    
+}
+#ime_save_polje:focus{
+    outline: none;
+}
+
+#exp_box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 3em;
+    width: 100%;
+}
+
+#label_wrapper{
+    position: relative;
+    margin-left: 3%;
+    cursor: default;
+}
+
+#exp_label{
+    font-size: 1em;
+    font-weight: 350;
+}
+.info_box{
+    display: none;
+    position: absolute;
+    width: 28em;
+    text-align: center;
+    z-index: 2;
+    top: -2.75em;
+    padding: 0.5em;
+    background-color: var(--boja-tema);
+    border-radius: 0.75em;
+    color: var(--boja-teksta);
+}
+
+@keyframes fadein {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+#label_wrapper:hover > .info_box{
+    display: block;
+    animation: fadein var(--hover-color-change);
+}
+.exp_input{
+    margin-left: 5%;
+    padding: 1%;
+    width: 25%;
+    font-weight: 350;
+    border: none;
+    border-bottom: solid var(--hover-forms) 0.1em;
+    outline: none;
+}
+
+#naslov_polje{
+    font-size:large;
+    width: 33.6em;
+}
+#naslov_polje:focus{
+    font-size:large;
+    width: 33.6em;
+    outline: none;
+}
+#opis_polje{
+    outline: none;
+    resize: none;
+    width: 38em;
+    min-height: 5em;
+    margin-bottom: 1em;
+}
+#opis_polje:focus{
+    outline: none;
+}
+/*#endregion zavrsi ovo celo za naslov deo forme*/
+
+#polja{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#dodaj{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: row;
+}
+.cntrl_btn{
+    background-color: #ffffff;
+    border: var(--hover-forms) solid var(--underline-thickness);
+    width: 3em;
+    height: 3em;
+    margin-right: 1em;
+    border-radius: 1em;
+    font-size: small;
+    font-weight: 600;
+    padding: 0em;
+    cursor:pointer;
+    transition: background-color var(--hover-color-change);
+}
+
+.cntrl_btn:hover{
+    background-color: var(--boja-teksta);
+}
+.save{
+    margin-left: 5em;
+    width: 7em;
+}
+
+/*#region past forms*/
+#naslov_past_forms{
+    font-size: medium;
+    border: 0.1em solid var(--boja-tema);
+    margin-left: 1em;
+    width: fit-content;
+    padding: 0.5em;
+    padding-left: 2em;
+    padding-right: 2em;
+    border-radius: 0.75em;
+}
+#prosle_forme{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.formice{
+    width: 20vw;
+    margin-left: 2em;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-bottom: var(--hover-forms) solid var(--underline-thickness);
+}
+
+.del_btn{
+    background-image: url(/static/images/delete.png);
+    background-size: 100% 100%;
+    background-color: #ffffff;
+    border: transparent;
+    color: transparent;
+    cursor: pointer;   
+    width: var(--forms-list-size);
+    height: var(--forms-list-size);
+    align-self: flex-end;
+    border-radius: 0.75em;
+    aspect-ratio: 1;
+    transition: background-color var(--hover-color-change);
+    outline: none;
+}
+
+.del_btn:hover{
+    background-color: var(--boja-teksta);   
+}
+
+.name_btn{
+    outline: none;
+    font-size: 0.9em;
+    width: 11em;
+    height: var(--forms-list-size);
+    background-color: transparent;
+    outline: none;
+    margin-left: 1em;
+    border: transparent;
+}
+
+.name_btn:hover{
+    border-bottom: var(--boja-tema) solid var(--underline-thickness);
+}
+
+.respo_btn{
+    display: block;
+    background-image: url(/static/images/exam.png);
+    background-size: 100% 100%;
+    background-color: transparent;
+    border: transparent;
+    color: transparent;
+    cursor: pointer;   
+    margin-left: 1em;
+    width: var(--forms-list-size);
+    height: var(--forms-list-size);
+    border-radius: 0.75em;
+    aspect-ratio: 1;
+    margin-left: auto;
+    transition: background-color var(--hover-color-change);
+    outline: none;
+}
+
+.respo_btn:hover{
+    background-color: var(--boja-teksta);   
+}
+
+#new_form_btn{
+    width: 20vw;
+    margin-left: 2em;
+    margin-top: 5em;
+    font-style: italic;
+    font-weight: 300;
+}
+
+#publish_btn{
+    margin-top: 1em;
+    margin-left: 2em;
+    font-style: italic;
+    width: 20vw;
+    font-weight: 300;
+}
+/*#endregion past forms*/
+/*celo polje forme i sve njegove komponente*/
+.polje{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+    width: 40em;
+    border: var(--hover-forms) solid var(--underline-thickness);
+    border-radius: 0.7em;
+    height: fit-content;
+    align-items: center;
+    padding: 1em;
+}
+/*komponenete samog polja*/
+.polje_head{
+    align-items: center;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 0.5em;
+}
+/*komponente u naslovu*/
+.naslov{
+    font-size: medium;
+    align-self: flex-start;
+    width: 28em;
+    margin-bottom: 0.5em;
+    border: transparent;
+    border-bottom: var(--hover-forms) solid var(--underline-thickness);
+}
+.naslov:focus{
+    outline: none;
+}
+#dropdown_lista{
+    font-size: medium;
+    padding: 0.5em;
+    margin-left: auto;
+    width: 10em;
+}
+/* klasa za svaki pojedinacni tip polja*/
+.sentance_fld{
+    width: 100%;
+    margin-bottom: 1em;
+}
+.paragraph_fld{
+    width: 100%;
+    margin-bottom: 1em;
+}
+.checkbox_fld{
+    width: 100%;
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+}
+/*#region checkboxes deo*/
+.checkbox_polje{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.5em;
+}
+.checkkutija{
+
+}
+.checklabel{
+    padding-bottom: 0.2em;
+    align-self: flex-start;
+    margin-left: 1em;
+    width: 15em;
+    border: transparent;
+    border-bottom: black solid var(--underline-thickness);
+    font-size: medium;
+}
+
+.checklabel:focus{
+    outline: none;
+}
+
+.panel_za_dodavanje{
+    margin-left: 6em;
+}
+.check_btn{
+    width: 2em;
+    height: 2em;
+    border: var(--hover-forms) solid calc(var(--underline-thickness)/10); /*sredi debljinu ove granice*/
+    background-color: transparent;
+    border-radius: 0.75em;
+    font-size: 1.25em;
+}
+/*#endregion checkboxes deo*/
+.date_fld{
+    width: 100%;
+    margin-bottom: 1em;
+}
+.time_fld{
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+/*#region responce data*/
+
+#respo_table{
+    width: 65%;
+    height: 100%;
+    display:none;
+    overflow-y: scroll;
+    border-collapse: collapse;
+    font-size: medium;
+    font-weight: 350;
+    padding-bottom: 10vh;
+}
+
+#cap_table{
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+tr{
+    background-color: #ffffff;
+    transition: background-color calc(var(--hover-color-change)/2);
+}
+
+tr:hover{
+    background-color: var(--boja-teksta);
+}
+
+td{
+    word-wrap: break-word;
+    padding: 1vw;
+    border-bottom: var(--underline-thickness) solid var(--hover-forms);
+}
+
+/*#endregion responce data*/
+
+.txt_fld{
+    margin-left: 10%;
+    padding: 0.25em;
+    width: 50%;
+    font-size: 1em;
+}
+
+.parag_fld{
+    margin-left: 10%;
+    padding: 0.25em;
+    height: 8em;
+    width: 70%;
+    font-size: 0.9em;
+    resize: none;
+}
+.date_box{
+    margin-left: 10%;
+    padding: 1%;
+    width: 40%;
+    font-size: 1em;
+}
+.time_box{
+    margin-left: 10%;
+    padding: 1%;
+    width: 40%;
+    font-size: 1em;
+}

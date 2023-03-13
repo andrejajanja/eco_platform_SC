@@ -1,0 +1,91 @@
+#kontekst{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.naslov_forma{
+    text-align: center;
+    margin: 0%;
+    margin-bottom: 2vh;
+    width: 20vw;
+    margin-top: 2vh;
+    font-size: 5vh;
+    font-family: var(--font-tema);
+    font-weight: 300;    
+}
+.paket_naslov_txt_unos{
+    margin-bottom: 3%;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.naslov_za_unos_polje{
+    font-family: var(--font-tema);
+    font-size: 2.5vh;
+    font-weight: 200;
+    letter-spacing: 0.05vw;
+    margin: 0%;
+    margin-bottom: 3%;
+}
+.unos_polje_txt{
+    font-size: 2vh;
+    font-family: var(--font-tema);
+    font-weight: 250;
+    padding: 2%;
+}
+.dugmici_region{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+.dugme{
+    width: 20%;
+    margin-bottom: 1%;
+    height: 4vh;
+    border-radius: 1vh;
+    font-size: 2vh;
+    font-family: var(--font-tema);
+    font-weight: 200;
+}
+.log{
+    font-family: var(--font-tema);
+    background-color: var(--boja-tema);
+    color: var(--boja-teksta);
+    border-style: none;
+    transition: color var(--hover-color-change), background-color var(--hover-color-change);
+}
+.log:hover{
+    background-color: var(--boja-teksta);
+    color: var(--boja-tema);
+}
+
+.sign{
+    font-family: var(--font-tema);
+    border-style: none;
+    background-color: #0995f6;
+    color: #ecf5fd;
+}
+
+.forgpass{
+    font-family: var(--font-tema);
+    border-style: ridge;
+    border-width: 0.2vh;
+    background-color: transparent;
+}
+
+#status_login{
+    background-color: #247e24;
+    color: white;
+    font-family: var(--font-tema);
+    font-size: larger;
+    display:none;
+    padding: 2%;
+    border-radius: 2vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}

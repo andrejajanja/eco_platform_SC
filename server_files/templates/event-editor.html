@@ -1,0 +1,104 @@
+<!DOCTYPE html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Events Editor • The Environmental Team</title>
+        <link rel="icon" href="/static/images/light-bulb.png" type="image/x-icon"/>
+        <script type = "text/javascript" src='/static/js/lib.js'></script>
+        <script defer type="text/javascript" src='/static/js/event-editor.js'></script>
+        <link rel="stylesheet" type="text/css" href='/static/styles/head_style.css'>
+        <link rel="stylesheet" type="text/css" href='/static/styles/event-editor.css'>
+    </head>
+    <body>
+        <div id = "header">
+            <h1 id = "naslov">The Environmental Team</h1>
+            <div id = "stranice">
+                <a class = "dugme_head" href = "/events">Events</a>
+                <a class = "dugme_head" href = "/map">Map</a>
+                <a class = "dugme_head" href = "/about-us">About Us</a>
+                <div class = "dropdown_head">
+                    <button class = "btn_drop">Editors</button>
+                    <div class="dropdown_sadrzaj">
+                        <a class = "elem_dropdown" href = "/form-editor">Forms</a>
+                    </div>                    
+                </div>
+                <div class = "dropdown_head">
+                    <button class = "btn_drop">Account</button>
+                    <div class="dropdown_sadrzaj">
+                        <a class = "elem_dropdown" href = "/user">My Account</a>
+                        <a class = "elem_dropdown" href = "/logout">Logout</a>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <div id = "loader">
+            <div class="spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div id = "kontekst">
+            <form id ="posts">
+                <div id ="posts_header">
+                    <div id = "posts_panel">
+                        <input class = "posts_panel_btn" type="submit" value = "New post" data-fun="new" >
+                    </div>
+                    <p id="posts_label">Saved posts:</p>                    
+                </div>
+                <div id ="posts_list"></div>
+            </form>
+            <form id = "editor" data-tren="" data-pubed="false">
+                <div id = "images_container">
+                    <div id = "editor_images">
+                        <div id = "images">
+                            <input id = "images_add_btn" type = "submit" value = "Add new image" data-fun="add_img">
+                            <input id="files" style="display: none;" type="file" multiple>
+                        </div>
+                        <div id = "image_box">
+                            <img id = "previewed" src = "static/images/insert-picture-icon.png" alt = "Error displaying image">
+                        </div>
+                    </div>
+                    <input id = "img_btn" type = "image" data-fun="fold" src = "static/images/expand_img.png">
+                </div>    
+                <div id = "editor_date_title">
+                    <input id = "post_title" class = "editor_txt_fld" type="text" placeholder="Enter post title here">
+                    <div id = "map_lok">
+                        <img id = "img_lok" src = "static/images/location.png">
+                        <input id = "btn_lok" type = "submit" value = "Pick a location" data-fun="lok" data-lok = "">
+                    </div>
+                    <select id = "sel_frm" class = "dropdownl">
+                        <option value = "">Choose a form</option>
+                    </select>
+                    <input id = "post_date" class = "editor_txt_fld" type="date">
+                    <select id = "sel_eve" class = "dropdownl">
+                        <option value = "">Choose type</option>
+                        <option value = "Cleaning">Cleaning</option>
+                        <option value = "Market">Market</option>
+                        <option value = "Planting">Planting</option>
+                    </select>
+                </div>
+                <textarea id = "editor_text" placeholder="Enter event post text here"></textarea>
+                <div id = "editor_panel">
+                    <input type="submit" class="editor_panel_btn" value = "Save" data-fun="save">
+                    <input type="submit" class="editor_panel_btn" value = "Publish post" data-fun="pub">
+                </div>
+            </form>
+        </div>
+        <div id = "footer">
+            <p>Made by Andreja Janković, 2023, andrejajanja@gmail.com</p>
+        </div>
+        <template id = "templates">
+            <input type="image" class = "added_image" data-fun="img" src = "">
+            <div class = "posts_post">
+                <input class = "del_img_post" value = "" type = "submit" data-fun = "delp" data-post="">
+                <input class = "post_txt" type="submit" value = ""  data-fun = "post">
+                <input class = "pub_img_post" value = "" type = "submit" data-fun = "unpubp" data-post="">
+            </div>
+            <option class="opcija_frm" value = ""></option>
+        </template>
+    </body>
+</html>

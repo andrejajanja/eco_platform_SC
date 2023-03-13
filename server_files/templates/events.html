@@ -1,0 +1,59 @@
+<!DOCTYPE html lang = "en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>
+        🚨📢Events🚨📢 • The Environmental Team
+    </title>
+    <link href="/static/images/light-bulb.png" rel="icon" type="image/x-icon"/>
+    <link href="/static/styles/head_style.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/styles/event.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div id="header">
+        <h1 id="naslov">
+            The Environmental Team
+        </h1>
+        <div id="stranice">
+            <a class="dugme_head" href="/events">
+                Events
+            </a>
+            <a class="dugme_head" href="/map">
+                Map
+            </a>
+            <a class="dugme_head" href="/about-us">
+                About Us
+            </a>
+            {%include loged_in %}
+        </div>
+    </div>
+    <div id="kontekst">
+        <a href="/events/ciscenje" target="_self" rel="next" class="event">
+                <img src="/static/images/Market.png" class="event_img">
+                <h1 class="event_ttl">ciscenje</h1>
+                <img src="/static/images/location.png" class="event_img">
+                <p class = "event_txt">Ada Ciganlija, Beograd, Serbia</p>
+                <img src="/static/images/calendar.png" class="event_img">
+                <p class = "event_txt">2023-03-23</p>
+        </a>
+        <a class="event" href="/events/kum" rel="next" target="_self">
+            <img class="event_img" src="/static/images/Cleaning.png"/>
+            <h1 class="event_ttl">
+                kum
+            </h1>
+            <img class="event_img" src="/static/images/location.png"/>
+            <p class="event_txt">
+                Bratislava, Slovakia
+            </p>
+            <img class="event_img" src="/static/images/calendar.png"/>
+            <p class="event_txt">
+                2023-03-16
+            </p>
+        </a>
+    </div>
+    <div id="footer">
+        <p>
+            Made by Andreja Janković, 2023, andrejajanja@gmail.com
+        </p>
+    </div>
+</body>

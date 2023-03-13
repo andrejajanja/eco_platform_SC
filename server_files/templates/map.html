@@ -1,0 +1,31 @@
+<!DOCTYPE html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Map • The Environmental Team</title>
+        <link rel="icon" href="/static/images/light-bulb.png" type="image/x-icon"/>
+        <link rel="stylesheet" type="text/css" href='/static/styles/head_style.css'>
+        <link rel="stylesheet" type="text/css" href='/static/styles/map.css'>
+        <script type="text/javascript" src='/static/js/lib.js'></script>
+        <script type="text/javascript" src='/static/js/map.js'></script>
+        <script defer type="text/javascript" src='/static/js/map_g_api.js'></script>
+        <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2KFn-b-s5YNgoZgfr9jwPQ3fAWQQQcdY&callback=mapInitialization"></script>
+    </head>
+    <body>
+        <div id = "header">
+            <h1 id = "naslov">The Environmental Team</h1>
+            <div id = "stranice">
+                <a class = "dugme_head" href = "/events">Events</a>
+                <a class = "dugme_head" href = "/join-us">Join Us</a>
+                <a class = "dugme_head" href = "/about-us">About Us</a>
+                {%include loged_in %}
+            </div>
+        </div>
+        <div id = "kontekst">
+            <div id = "mapa"></div>
+        </div>
+        <div id = "footer">
+            <p>Made by Andreja Janković, 2023, andrejajanja@gmail.com</p>
+        </div>
+    </body>
+</html>

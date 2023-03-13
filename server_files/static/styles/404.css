@@ -1,0 +1,17 @@
+#kontekst{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*Komponente:*/
+#sign_err{
+    font-size: 50vh;
+    font-family: var(--font-tema);
+    font-weight: 300;
+}
+
+#desc{
+    font-size: 3vh;
+    font-family: var(--font-tema);
+}
