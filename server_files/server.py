@@ -163,12 +163,13 @@ def makeform_route():
         
         if request.form["ra"] == "get_data":
             data = json.loads(request.form["data"]) 
-            query = "select * from "
-            whe = "";
+            query = f"select * from {request.form['frm']}"
+            where = " where"
             for fld in data["conds"]:
-                print(fld)
-            rez = kon.execute_query(query, False)
-            return jsonify({"msg": "purr bestie","data": json.dumps(rez)})
+                where += f''' {fld} = 'true' and'''
+            query += f"{where};"
+            rez = [tuple(r) for r in kon.execute_query(query.replace(" and;", ";"), False)]
+            return jsonify({"data": json.dumps(rez, default=str)})
         
         if request.form["ra"] == "load":
             forme_u_bazi = [x[0] for x in kon.execute_query("SELECT table_name FROM information_schema.tables", False)]

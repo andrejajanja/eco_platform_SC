@@ -1,4 +1,4 @@
-//#region promenljive
+//#region variables
 const url_stranice = window.location.href;
 const explorer = document.querySelector("#explorer");
 let maker = document.querySelector("#maker");
@@ -6,6 +6,7 @@ let responces = document.querySelector("#responces");
 let forme = document.querySelector("#prosle_forme");
 let loader = document.querySelector("#loader");
 let opisp = document.querySelector("#opis_polje");
+let table = document.querySelector(".respoTable");
 //templates
 let templates = document.querySelector("#templates").content.cloneNode(true);
 let polje_sample = templates.querySelector(".polje");
@@ -14,14 +15,15 @@ let checkkutija = templates.querySelector(".checkbox_polje");
 let panel = templates.querySelector(".panel_za_dodavanje");
 let form_file = templates.querySelector(".formice");
 let checkbSelect = templates.querySelector(".checkbSelect");
-let red = document.createElement("tr");
+let header = templates.querySelector(".tableHeader");
+let row = document.createElement("tr");
 let field = document.createElement("td");
 
 let frm_name = "";
 let trenIndex = 0;
 let pocetniIndex = 0;
 let publs = {};
-//#endregion promenljive
+//#endregion variables
 
 //#region funkcije
 function updateSerial(){
@@ -439,9 +441,23 @@ responces.addEventListener("submit", async function (e) {
                     data["conds"].push(responces.children[1].children[i].value);
                 }
             }
-            console.log(data);
-            odg = await req_json({"ra": "get_data", "data": JSON.stringify(data), "frm": }, "POST");
-            console.log(odg)
+            table.innerHTML = "";
+            pom = header.cloneNode("");
+
+
+            odg = await req_json({"ra": "get_data", "data": JSON.stringify(data), "frm": frm_name}, "POST");
+            pom = JSON.parse(odg["data"]);
+            let tableRow, cell;
+            pom.forEach(function (sqlRow){
+                tableRow = row.cloneNode(true);
+                sqlRow.forEach(function (element){
+                    cell = field.cloneNode(true);
+                    cell.innerHTML = element;
+                    tableRow.append(cell);
+                })
+                table.append(tableRow);
+            })  
+
             break;
         default:
             break;
