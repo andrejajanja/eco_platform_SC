@@ -1,0 +1,37 @@
+{
+    "file": "formica",
+    "exp_date": "",
+    "exp_time": "",
+    "title": "aaa",
+    "description": "bbbbb",
+    "fields": [
+        {
+            "type": "sentc",
+            "head": "Ime"
+        },
+        {
+            "type": "sentc",
+            "head": "Prezime"
+        },
+        {
+            "type": "checkb",
+            "head": "Opc1",
+            "options": [
+                "Novi Sad",
+                "Beograd",
+                "Nis"
+            ],
+            "multiple": 1
+        },
+        {
+            "type": "checkb",
+            "head": "Pitanje 2",
+            "options": [
+                "Gore",
+                "Dole",
+                "Desno"
+            ],
+            "multiple": 1
+        }
+    ]
+}

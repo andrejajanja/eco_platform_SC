@@ -1,255 +1,86 @@
 USE EKO;
 GO
-INSERT INTO Users
-VALUES ('andreja0@janja.xyz','andreja','tadic','Beograd');
+INSERT INTO formica VALUES ('andreja','tadic','true','true','false','false','true','true');
 GO
-INSERT INTO Ids
-VALUES ('andreja0@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('andreja','simic','false','true','false','false','false','false');
 GO
-INSERT INTO Users
-VALUES ('andreja1@janja.xyz','andreja','simic','Beograd');
+INSERT INTO formica VALUES ('andreja','sapic','true','false','true','true','true','true');
 GO
-INSERT INTO Ids
-VALUES ('andreja1@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('andreja','milovanovic','true','true','false','true','false','false');
 GO
-INSERT INTO Users
-VALUES ('andreja2@janja.xyz','andreja','sapic','Beograd');
+INSERT INTO formica VALUES ('andreja','arsenovic','false','false','false','false','true','false');
 GO
-INSERT INTO Ids
-VALUES ('andreja2@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('andreja','petrovic','true','true','false','true','false','true');
 GO
-INSERT INTO Users
-VALUES ('andreja3@janja.xyz','andreja','milovanovic','Beograd');
+INSERT INTO formica VALUES ('miki','tadic','true','false','false','true','false','true');
 GO
-INSERT INTO Ids
-VALUES ('andreja3@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('miki','simic','true','false','false','false','true','false');
 GO
-INSERT INTO Users
-VALUES ('andreja4@janja.xyz','andreja','arsenovic','Beograd');
+INSERT INTO formica VALUES ('miki','sapic','false','false','true','false','true','true');
 GO
-INSERT INTO Ids
-VALUES ('andreja4@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('miki','milovanovic','false','true','true','false','true','false');
 GO
-INSERT INTO Users
-VALUES ('andreja5@janja.xyz','andreja','petrovic','Beograd');
+INSERT INTO formica VALUES ('miki','arsenovic','true','true','false','true','false','false');
 GO
-INSERT INTO Ids
-VALUES ('andreja5@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('miki','petrovic','true','true','true','true','true','true');
 GO
-INSERT INTO Users
-VALUES ('miki0@janja.xyz','miki','tadic','Beograd');
+INSERT INTO formica VALUES ('marija','tadic','true','false','false','false','true','true');
 GO
-INSERT INTO Ids
-VALUES ('miki0@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('marija','simic','true','false','false','false','true','true');
 GO
-INSERT INTO Users
-VALUES ('miki1@janja.xyz','miki','simic','Beograd');
+INSERT INTO formica VALUES ('marija','sapic','true','true','true','true','true','false');
 GO
-INSERT INTO Ids
-VALUES ('miki1@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('marija','milovanovic','true','false','true','true','true','true');
 GO
-INSERT INTO Users
-VALUES ('miki2@janja.xyz','miki','sapic','Beograd');
+INSERT INTO formica VALUES ('marija','arsenovic','true','true','false','true','true','true');
 GO
-INSERT INTO Ids
-VALUES ('miki2@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('marija','petrovic','false','false','false','false','true','true');
 GO
-INSERT INTO Users
-VALUES ('miki3@janja.xyz','miki','milovanovic','Beograd');
+INSERT INTO formica VALUES ('pedja','tadic','true','false','false','true','true','true');
 GO
-INSERT INTO Ids
-VALUES ('miki3@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('pedja','simic','true','false','true','false','true','true');
 GO
-INSERT INTO Users
-VALUES ('miki4@janja.xyz','miki','arsenovic','Beograd');
+INSERT INTO formica VALUES ('pedja','sapic','false','true','true','false','false','false');
 GO
-INSERT INTO Ids
-VALUES ('miki4@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('pedja','milovanovic','false','false','true','false','true','false');
 GO
-INSERT INTO Users
-VALUES ('miki5@janja.xyz','miki','petrovic','Beograd');
+INSERT INTO formica VALUES ('pedja','arsenovic','false','true','false','false','true','true');
 GO
-INSERT INTO Ids
-VALUES ('miki5@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('pedja','petrovic','true','true','false','false','false','false');
 GO
-INSERT INTO Users
-VALUES ('marija0@janja.xyz','marija','tadic','Beograd');
+INSERT INTO formica VALUES ('aca','tadic','true','true','false','true','false','true');
 GO
-INSERT INTO Ids
-VALUES ('marija0@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('aca','simic','true','true','true','false','false','true');
 GO
-INSERT INTO Users
-VALUES ('marija1@janja.xyz','marija','simic','Beograd');
+INSERT INTO formica VALUES ('aca','sapic','true','true','true','false','false','false');
 GO
-INSERT INTO Ids
-VALUES ('marija1@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('aca','milovanovic','true','false','true','false','false','true');
 GO
-INSERT INTO Users
-VALUES ('marija2@janja.xyz','marija','sapic','Beograd');
+INSERT INTO formica VALUES ('aca','arsenovic','false','true','false','true','true','false');
 GO
-INSERT INTO Ids
-VALUES ('marija2@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('aca','petrovic','false','true','true','true','true','false');
 GO
-INSERT INTO Users
-VALUES ('marija3@janja.xyz','marija','milovanovic','Beograd');
+INSERT INTO formica VALUES ('nemanja','tadic','false','false','true','false','true','false');
 GO
-INSERT INTO Ids
-VALUES ('marija3@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('nemanja','simic','false','false','true','false','true','false');
 GO
-INSERT INTO Users
-VALUES ('marija4@janja.xyz','marija','arsenovic','Beograd');
+INSERT INTO formica VALUES ('nemanja','sapic','false','true','false','true','false','false');
 GO
-INSERT INTO Ids
-VALUES ('marija4@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('nemanja','milovanovic','true','false','true','true','false','true');
 GO
-INSERT INTO Users
-VALUES ('marija5@janja.xyz','marija','petrovic','Beograd');
+INSERT INTO formica VALUES ('nemanja','arsenovic','false','true','true','true','true','false');
 GO
-INSERT INTO Ids
-VALUES ('marija5@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('nemanja','petrovic','false','true','false','true','false','true');
 GO
-INSERT INTO Users
-VALUES ('pedja0@janja.xyz','pedja','tadic','Beograd');
+INSERT INTO formica VALUES ('dunja','tadic','true','false','true','true','false','false');
 GO
-INSERT INTO Ids
-VALUES ('pedja0@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('dunja','simic','true','false','true','false','true','false');
 GO
-INSERT INTO Users
-VALUES ('pedja1@janja.xyz','pedja','simic','Beograd');
+INSERT INTO formica VALUES ('dunja','sapic','false','false','true','false','true','true');
 GO
-INSERT INTO Ids
-VALUES ('pedja1@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('dunja','milovanovic','false','false','false','true','true','false');
 GO
-INSERT INTO Users
-VALUES ('pedja2@janja.xyz','pedja','sapic','Beograd');
+INSERT INTO formica VALUES ('dunja','arsenovic','true','false','false','false','true','false');
 GO
-INSERT INTO Ids
-VALUES ('pedja2@janja.xyz','628723c2ed47b82898277d290da62bb3');
+INSERT INTO formica VALUES ('dunja','petrovic','true','false','true','false','true','false');
 GO
-INSERT INTO Users
-VALUES ('pedja3@janja.xyz','pedja','milovanovic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('pedja3@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('pedja4@janja.xyz','pedja','arsenovic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('pedja4@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('pedja5@janja.xyz','pedja','petrovic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('pedja5@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('aca0@janja.xyz','aca','tadic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('aca0@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('aca1@janja.xyz','aca','simic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('aca1@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('aca2@janja.xyz','aca','sapic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('aca2@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('aca3@janja.xyz','aca','milovanovic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('aca3@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('aca4@janja.xyz','aca','arsenovic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('aca4@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('aca5@janja.xyz','aca','petrovic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('aca5@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('nemanja0@janja.xyz','nemanja','tadic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('nemanja0@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('nemanja1@janja.xyz','nemanja','simic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('nemanja1@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('nemanja2@janja.xyz','nemanja','sapic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('nemanja2@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('nemanja3@janja.xyz','nemanja','milovanovic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('nemanja3@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('nemanja4@janja.xyz','nemanja','arsenovic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('nemanja4@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('nemanja5@janja.xyz','nemanja','petrovic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('nemanja5@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('dunja0@janja.xyz','dunja','tadic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('dunja0@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('dunja1@janja.xyz','dunja','simic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('dunja1@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('dunja2@janja.xyz','dunja','sapic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('dunja2@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('dunja3@janja.xyz','dunja','milovanovic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('dunja3@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('dunja4@janja.xyz','dunja','arsenovic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('dunja4@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-INSERT INTO Users
-VALUES ('dunja5@janja.xyz','dunja','petrovic','Beograd');
-GO
-INSERT INTO Ids
-VALUES ('dunja5@janja.xyz','628723c2ed47b82898277d290da62bb3');
-GO
-quit

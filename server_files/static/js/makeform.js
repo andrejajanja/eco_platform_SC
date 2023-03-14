@@ -2,7 +2,7 @@
 const url_stranice = window.location.href;
 const explorer = document.querySelector("#explorer");
 let maker = document.querySelector("#maker");
-let responces = document.querySelector("#respo_table");
+let responces = document.querySelector("#responces");
 let forme = document.querySelector("#prosle_forme");
 let loader = document.querySelector("#loader");
 let opisp = document.querySelector("#opis_polje");
@@ -13,9 +13,11 @@ let tipovi = templates.querySelector("#dropdown_lista");
 let checkkutija = templates.querySelector(".checkbox_polje");
 let panel = templates.querySelector(".panel_za_dodavanje");
 let form_file = templates.querySelector(".formice");
+let checkbSelect = templates.querySelector(".checkbSelect");
 let red = document.createElement("tr");
 let field = document.createElement("td");
 
+let frm_name = "";
 let trenIndex = 0;
 let pocetniIndex = 0;
 let publs = {};
@@ -28,8 +30,6 @@ function updateSerial(){
         maker.children[i].i = i;
     }
 }
-
-//ne radi cuvanje vise opcija, obrise poslednju, vrv je problem sa onim editorom. da li?
 function fokusirajMakerElement(e){
     let i = e.currentTarget.i;
     //dalja logika za dodavanje editora
@@ -201,11 +201,11 @@ explorer.addEventListener("submit", async function(e){
     maker.style.display = "none";
     loader.style.display = "flex";
     responces.style.display = "none";
-    let pomd,odg;
+    let pomd,odg, di;
     switch (e.submitter.name) {
         case "file":
             odg = await req_json({"ra": "frm_meta", "form_name": e.submitter.parentNode.dataset.file}, "POST");
-            let di = JSON.parse(odg["form_data"]);
+            di = JSON.parse(odg["form_data"]);
 
             //resetuje celu formu
             pomd = [maker.children[0], maker.children[maker.children.length-1]];
@@ -244,14 +244,12 @@ explorer.addEventListener("submit", async function(e){
             loader.style.display = "none";
             responces.style.display = "none";
             break;
-
         case "new":
             new_form();
             maker.style.display = "flex";
             loader.style.display = "none";
             responces.style.display = "none";
             break;
-
         case "publish":
             if(publs[maker.children[0].children[0].value]){
                 alert("Form is already published");
@@ -265,25 +263,30 @@ explorer.addEventListener("submit", async function(e){
             break;
 
         case "resp":
-            odg = await req_json({"ra": "respo", "form": e.submitter.parentNode.dataset.file}, "POST");
-            let po;
-            responces.innerHTML = "";
-            pomd = document.createElement("caption")
-            pomd.id = "cap_table";
-            pomd.innerHTML = "Responces for form: " + e.submitter.parentNode.dataset.file;
-            responces.appendChild(pomd)
-            let podaci = JSON.parse(odg["data"]);
-            podaci.forEach(function (red_sql){
-                pomd = red.cloneNode(true);
-                red_sql.forEach(function (p){
-                    po = field.cloneNode(true);
-                    po.innerHTML = p;
-                    pomd.appendChild(po);
-                });
-                responces.appendChild(pomd);                
-            });            
+            let option;
+            odg = await req_json({"ra": "frm_meta", "form_name": e.submitter.parentNode.dataset.file}, "POST");
+            frm_name = e.submitter.parentNode.dataset.file;
+            responces.children[0].children[0].innerHTML = "Responces for: " + e.submitter.parentNode.dataset.file;
+            responces.children[1].innerHTML = "<p>Filter data:</p>";
+            di = JSON.parse(odg["form_data"]);
+            di["fields"].forEach(function (v, i){
+                if(v["type"] == "checkb"){
+                    pomd = checkbSelect.cloneNode(true);
+                    option = document.createElement("option");
+                    option.innerHTML = v["head"];
+                    option.value = "0";
+                    pomd.append(option);
+                    v["options"].forEach(function (opt,j){
+                        option = document.createElement("option");
+                        option.innerHTML = opt;
+                        option.value = `KOL${i}_${j}`;
+                        pomd.append(option);
+                    });
+                    responces.children[1].append(pomd);
+                }
+            })
             loader.style.display = "none";
-            responces.style.display = "inline";
+            responces.style.display = "flex";
             break;
 
         case "del":
@@ -322,6 +325,9 @@ maker.addEventListener("submit", async function(e){
             }
             maker.removeChild(maker.children[maker.children.length-2])
             updateSerial();
+            break;
+
+        case "get_data":
             break;
         case "save_all":
             let pom_dete, data = {};
@@ -422,7 +428,35 @@ function autoResize() {
     opisp.style.height = (opisp.scrollHeight+20) + 'px';
 }
 
-
+responces.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    let pom, odg;
+    switch (e.submitter.dataset.fun) {
+        case "fetch":
+            let data = {"conds": []};
+            for (let i = 1; i < responces.children[1].children.length; i++) {
+                if (responces.children[1].children[i].value != "0") {
+                    data["conds"].push(responces.children[1].children[i].value);
+                }
+            }
+            console.log(data);
+            odg = await req_json({"ra": "get_data", "data": JSON.stringify(data), "frm": }, "POST");
+            console.log(odg)
+            break;
+        default:
+            break;
+    }
+    // let podaci = JSON.parse(odg["data"]);
+    // podaci.forEach(function (red_sql){
+    //     pomd = red.cloneNode(true);
+    //     red_sql.forEach(function (p){
+    //         po = field.cloneNode(true);
+    //         po.innerHTML = p;
+    //         pomd.appendChild(po);
+    //     });
+    //     responces.appendChild(pomd);                
+    // });            
+})
 
 //#endregion event listeners
 

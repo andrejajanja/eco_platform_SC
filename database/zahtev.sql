@@ -2,11 +2,11 @@
 USE EKO;  
 GO  
 
-DROP TABLE poziv;
+select * from formica;
 GO
 quit
 
-select * from poziv;
+DROP TABLE poziv;
 GO
 quit
 

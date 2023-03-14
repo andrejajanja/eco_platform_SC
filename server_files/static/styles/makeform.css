@@ -453,22 +453,30 @@ textarea, div, input, p{
 
 /*#region responce data*/
 
-#respo_table{
+#responces{
+    display: flex;
+    flex-direction: column;
     width: 65%;
     height: 100%;
     display:none;
-    overflow-y: scroll;
+    overflow-y: auto;
     border-collapse: collapse;
-    font-size: medium;
-    font-weight: 350;
-    padding-bottom: 10vh;
 }
-
-#cap_table{
-    margin-top: 3vh;
-    margin-bottom: 3vh;
+.respoHeader{
+    display: flex;
+    flex-direction: row;
 }
-
+.tableTitle{
+    font-size: 1em;
+}
+.fetchBtn{
+    margin-left: auto;
+    font-size: 1em;
+}
+.queryMaker{
+    display: flex;
+    flex-direction: row;
+}
 tr{
     background-color: #ffffff;
     transition: background-color calc(var(--hover-color-change)/2);

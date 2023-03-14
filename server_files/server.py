@@ -160,7 +160,16 @@ def makeform_route():
                 return jsonify({"msg":"Form successfully deleted"})
             except KeyError:
                 return jsonify({"msg": "Invalid post request for this function"})
-            
+        
+        if request.form["ra"] == "get_data":
+            data = json.loads(request.form["data"]) 
+            query = "select * from "
+            whe = "";
+            for fld in data["conds"]:
+                print(fld)
+            rez = kon.execute_query(query, False)
+            return jsonify({"msg": "purr bestie","data": json.dumps(rez)})
+        
         if request.form["ra"] == "load":
             forme_u_bazi = [x[0] for x in kon.execute_query("SELECT table_name FROM information_schema.tables", False)]
             imena_formi = [x[:-5] for x in os.listdir(forms_folder)]
@@ -190,12 +199,10 @@ def makeform_route():
             di = file_to_dict(f"{forms_folder}{request.form['pub_form']}.json")
             dict_u_html(di, "server_files/templates/forms/", "server_files/templates/form_layout.html")
             query = create_table_from_dict(di)
-            print(query)
             rez = kon.execute_query(query, True)
             if rez == True:
                 return jsonify({"msg": "successfully published a form"})
             else:
-                print(rez)
                 return jsonify({"msg": "An Error occured while publishing the form, please contact the developers"})
 
         if request.form["ra"] == "unpub":
