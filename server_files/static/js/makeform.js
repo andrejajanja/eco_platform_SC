@@ -15,7 +15,7 @@ let checkkutija = templates.querySelector(".checkbox_polje");
 let panel = templates.querySelector(".panel_za_dodavanje");
 let form_file = templates.querySelector(".formice");
 let checkbSelect = templates.querySelector(".checkbSelect");
-let header = templates.querySelector(".tableHeader");
+//let tableHeader = templates.querySelector(".tHeader");
 let row = document.createElement("tr");
 let field = document.createElement("td");
 
@@ -442,9 +442,46 @@ responces.addEventListener("submit", async function (e) {
                 }
             }
             table.innerHTML = "";
-            pom = header.cloneNode("");
-
-
+            
+            //filling the table header
+            pom1 = document.createElement("tr");
+            let pom2 = document.createElement("tr");
+            
+            odg = await req_json({"ra": "frm_meta", "form_name": frm_name}, "POST");
+            let di = JSON.parse(odg["form_data"]);
+            let colLabel1 = document.createElement("th");
+            let colLabel2 = document.createElement("th");
+            colLabel1.colSpan = 1;
+            colLabel2.innerHTML = "No.";
+            colLabel2.colSpan = 1;
+            pom1.append(colLabel1);
+            pom2.append(colLabel2);
+            di["fields"].forEach(function (fld) {
+                colLabel1 = document.createElement("th");
+                colLabel2 = document.createElement("th");
+                if (fld["type"] == "checkb") {
+                    colLabel1.innerHTML = fld["head"];
+                    colLabel1.colSpan = fld["options"].length;
+                    colLabel1.className = "checkbHeader";
+                    pom1.append(colLabel1);
+                    fld["options"].forEach(function (opc) {
+                        colLabel2 = document.createElement("th");
+                        colLabel2.innerHTML = opc;
+                        colLabel2.colSpan = 1;
+                        pom2.append(colLabel2);
+                    })
+                } else {
+                    colLabel1.colSpan = 1;
+                    colLabel2.innerHTML = fld["head"];
+                    colLabel2.colSpan = 1;
+                    pom1.append(colLabel1);
+                    pom2.append(colLabel2);
+                }
+                
+            })
+            table.append(pom1);
+            table.append(pom2);
+            //filling the forms of a row
             odg = await req_json({"ra": "get_data", "data": JSON.stringify(data), "frm": frm_name}, "POST");
             pom = JSON.parse(odg["data"]);
             let tableRow, cell;

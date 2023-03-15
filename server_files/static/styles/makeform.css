@@ -521,3 +521,7 @@ td{
     width: 40%;
     font-size: 1em;
 }
+.checkbHeader{
+    border-left: 2px solid var(--boja-tema);
+    border-right: 2px solid var(--boja-tema);
+}
