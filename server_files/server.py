@@ -164,10 +164,11 @@ def makeform_route():
         if request.form["ra"] == "get_data":
             data = json.loads(request.form["data"]) 
             query = f"select * from {request.form['frm']}"
-            where = " where"
-            for fld in data["conds"]:
-                where += f''' {fld} = 'true' and'''
-            query += f"{where};"
+            if data["conds"] != []:
+                where = " where"
+                for fld in data["conds"]:
+                    where += f''' {fld} = 'true' and'''
+                query += f"{where};"
             rez = [tuple(r) for r in kon.execute_query(query.replace(" and;", ";"), False)]
             return jsonify({"data": json.dumps(rez, default=str)})
         

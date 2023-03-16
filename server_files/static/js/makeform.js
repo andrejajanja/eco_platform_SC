@@ -7,6 +7,7 @@ let forme = document.querySelector("#prosle_forme");
 let loader = document.querySelector("#loader");
 let opisp = document.querySelector("#opis_polje");
 let table = document.querySelector(".respoTable");
+let copyFlds = document.querySelector("#copyFlds");
 //templates
 let templates = document.querySelector("#templates").content.cloneNode(true);
 let polje_sample = templates.querySelector(".polje");
@@ -435,19 +436,26 @@ responces.addEventListener("submit", async function (e) {
     let pom, odg;
     switch (e.submitter.dataset.fun) {
         case "fetch":
+            //ovde mozda loader da se stavi kad dobavlja podatke
             let data = {"conds": []};
             for (let i = 1; i < responces.children[1].children.length; i++) {
                 if (responces.children[1].children[i].value != "0") {
                     data["conds"].push(responces.children[1].children[i].value);
                 }
             }
-            table.innerHTML = "";
+            //ovo ne sljaka, samo obrisi podatke iz forme, posle 3. reda (deteta broj 2)
+            for (let i = 2; i < table.children.length; i++) {
+                table.removeChild(table.children[i])
+            }
             
+
+            //pomeri ovo u deo kada ucitava samu formu
             //filling the table header
-            pom1 = document.createElement("tr");
+            let pom1 = document.createElement("tr");
             let pom2 = document.createElement("tr");
             
             odg = await req_json({"ra": "frm_meta", "form_name": frm_name}, "POST");
+            //responces.dataset.
             let di = JSON.parse(odg["form_data"]);
             let colLabel1 = document.createElement("th");
             let colLabel2 = document.createElement("th");
@@ -494,8 +502,10 @@ responces.addEventListener("submit", async function (e) {
                 })
                 table.append(tableRow);
             })  
-
-            break;
+            return;
+        case "copy":
+            console.log("AAAA");
+            return;
         default:
             break;
     }

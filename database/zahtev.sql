@@ -1,7 +1,7 @@
 --OVO JE ZA POKRETANJE: sqlcmd -S localhost\SQLEXPRESS -i baza\zahtev.sql
 USE EKO;  
 GO  
-select * from formica where KOL3_1 = 'true';
+select count(*) from formica where KOL3_1 = 'true';
 GO
 quit
 
