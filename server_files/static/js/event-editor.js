@@ -57,8 +57,8 @@ async function savePost() {
     pom["head"] = title.value;
     pom["date"] = date.value;
     pom["txt"] = event_txt.value;
-    pom["lok"] = lok_btn.value;
-    pom["kords"] = editor.dataset.cords;
+    pom["lok"] = lok_btn.dataset.lok;
+    pom["kords"] = lok_btn.dataset.cords;
     pom["frm"] = forms.value;
     pom["type"] = dogs.value;
     pom["imgs"] = [];
@@ -131,6 +131,7 @@ function ocistiPovrsinu(){
     event_txt.value = "";
     lok_btn.value = "Pick a location";
     lok_btn.dataset.lok = "";
+    lok_btn.dataset.cords = "";
     forms.selectedIndex = "0";
     dogs.selectedIndex = "0";
     window.localStorage.removeItem("post_lok");
@@ -146,14 +147,24 @@ async function popuniEditor(name){
     event_txt.value = pom["txt"];
     forms.value = pom["frm"];
     dogs.value = pom["type"];
-    editor.dataset.cords = pom["kords"];
-    if(lok_btn.dataset.lok == ""){
+    if(pom_kords.length == 0){
+        lok_btn.dataset.lok = pom["lok"];
         lok_btn.value = pom["lok"];
-        lok_btn.dataset.lok = pom["lok"];        
+        lok_btn.dataset.cords = pom["kords"];
     }else{
-        lok_btn.value = lok_btn.dataset.lok;
-    }
-
+        if(pom_kords[0] != pom["lok"]){
+            lok_btn.dataset.lok = pom_kords[0];
+            lok_btn.value = pom_kords[0];
+        }else{
+            lok_btn.dataset.lok = pom["lok"];
+            lok_btn.value = pom["lok"];
+        }
+        if(pom_kords[1] != pom["kords"]){
+            lok_btn.dataset.cords = pom_kords[1];
+        }else{
+            lok_btn.dataset.cords = pom["kords"];
+        }
+    }    
     let img;
     img = images.children[0].cloneNode(true);
     images.innerHTML = "";
@@ -172,20 +183,15 @@ async function popuniEditor(name){
     }
     prew.src = "static/images/insert-picture-icon.png";
 }
-
 //#endregion functions
 
 //#region event listeners
 prew.onmousedown = function (e){
     if (e.which == 3) {        
-        let pom = lil_img.cloneNode(true);
         if (prew.src == default_image) {
             return;
         }
-        pom.classList.add("added_image_clicked");
-        pom.src = prew.src;
-        images.appendChild(pom);
-        dodeliDesniKlik(); //uradi da umesto ovoga dodeljuje onmouse down samo poslednjem detetu
+        dodeliDesniKlik();
         prew.src = "static/images/insert-picture-icon.png";
     }
 }
@@ -275,7 +281,7 @@ posts.addEventListener("submit", async function(e){
             ocistiPovrsinu();
             return;
         case "unpubp":
-            pom = await req_json({"ra": "unpub", "post": e.submitter.dataset.post, "kords": editor.dataset.cords},"POST");
+            pom = await req_json({"ra": "unpub", "post": e.submitter.dataset.post, "kords": lok_btn.dataset.cords},"POST");
             e.submitter.style.display = "none";
             editor.dataset.pubed = "0";
             alert(pom["msg"]);
@@ -335,9 +341,7 @@ editor.addEventListener("submit", async function(e){
             return;
         case "img":
             pom = e.submitter.src;
-            if (prew.src == default_image) {
-                images.removeChild(e.submitter);
-            }else{
+            if (prew.src != default_image) {                        
                 e.submitter.src = prew.src;
             }            
             prew.src = pom;
@@ -377,9 +381,6 @@ dodeliDesniKlik();dajPostove();dajForme();
 
 if(window.localStorage.getItem("post_lok")!=null && window.localStorage.getItem("post_lok")!=""){
     pom_kords = JSON.parse(window.localStorage.getItem("post_lok"));
-    lok_btn.value = pom_kords[0];
-    lok_btn.dataset.lok = pom_kords[0];
-    editor.dataset.cords = pom_kords[1];
     window.localStorage.removeItem("post_lok");
 }
 if(window.localStorage.getItem("current_post")!=null && window.localStorage.getItem("current_post")!=""){
