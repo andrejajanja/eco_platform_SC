@@ -20,7 +20,7 @@ cookie_dur = 3600 #seconds
 
 #Databases
 session_driver = redis.Redis(host = "127.0.0.1", port = "6379", db=0) #db = 0 - session cookies
-kon = SQLConnector(r"Driver={ODBC Driver 17 for SQL Server};Server=localhost\SQLEXPRESS;Database=EKO;Trusted_Connection=yes;")
+# kon = SQLConnector(r"Driver={ODBC Driver 17 for SQL Server};Server=localhost\SQLEXPRESS;Database=EKO;Trusted_Connection=yes;")
 forms_folder = "server_files/server_data/form_layouts/"
 images_folder = "server_files/static/event_images/"
 event_posts = "server_files/server_data/event_posts/"
@@ -152,23 +152,23 @@ def makeform_route():
             try:
                 if request.form["pub"] == "true":
                     os.remove(f"server_files/templates/forms/{request.form['form']}.html")
-                    rez = kon.execute_query(f"DROP TABLE {request.form['form']};", True)
+                    # rez = kon.execute_query(f"DROP TABLE {request.form['form']};", True)
                     active_forms.remove(request.form['form'])
-                    if rez != True:
-                        return jsonify({"msg": "A database error occured while deleting the form, please contact the developers"})
+                    # if rez != True:
+                    #     return jsonify({"msg": "A database error occured while deleting the form, please contact the developers"})
                 os.remove(f"{forms_folder}{request.form['form']}.json")
                 return jsonify({"msg":"Form successfully deleted"})
             except KeyError:
                 return jsonify({"msg": "Invalid post request for this function"})
             
         if request.form["ra"] == "load":
-            forme_u_bazi = [x[0] for x in kon.execute_query("SELECT table_name FROM information_schema.tables", False)]
+            # forme_u_bazi = [x[0] for x in kon.execute_query("SELECT table_name FROM information_schema.tables", False)]
             imena_formi = [x[:-5] for x in os.listdir(forms_folder)]
             salje = []
             for fr in imena_formi:
                 pom = False
-                if fr in forme_u_bazi:
-                    pom = True
+                # if fr in forme_u_bazi:
+                #     pom = True
                 salje.append((fr, pom))
             return jsonify({"forms": salje})
 
@@ -191,30 +191,30 @@ def makeform_route():
             dict_u_html(di, "server_files/templates/forms/", "server_files/templates/form_layout.html")
             query = create_table_from_dict(di)
             print(query)
-            rez = kon.execute_query(query, True)
-            if rez == True:
-                return jsonify({"msg": "successfully published a form"})
-            else:
-                print(rez)
-                return jsonify({"msg": "An Error occured while publishing the form, please contact the developers"})
+            # rez = kon.execute_query(query, True)
+            # if rez == True:
+            #     return jsonify({"msg": "successfully published a form"})
+            # else:
+            #     print(rez)
+            #     return jsonify({"msg": "An Error occured while publishing the form, please contact the developers"})
 
         if request.form["ra"] == "unpub":
             try:
                 os.remove(f"server_files/templates/forms/{request.form['form']}.html")
-                rez = kon.execute_query(f"DROP TABLE {request.form['form']};", True)
+                # rez = kon.execute_query(f"DROP TABLE {request.form['form']};", True)
                 active_forms.remove(request.form['form'])
-                if rez != True:
-                    raise Exception("Database Error")
+                # if rez != True:
+                #     raise Exception("Database Error")
                 return jsonify({"msg": "1"})
             except Exception as e:
                 print(e)
                 return jsonify({"msg": "0"})
             
         if request.form["ra"] == "respo":
-            tabela = [tuple(red) for red in kon.execute_query(f"select * from {request.form['form']};",False)]
-            return jsonify({"s": "vratio odg", "data": json.dumps(tabela,default=str)})
+            # tabela = [tuple(red) for red in kon.execute_query(f"select * from {request.form['form']};",False)]
+            # return jsonify({"s": "vratio odg", "data": json.dumps(tabela,default=str)})
 
-        return jsonify({"msg": "responce of a POST request, there wasn't any function specific return"})
+            return jsonify({"msg": "responce of a POST request, there wasn't any function specific return"})
     if request.method == "GET":
         return render_template("form-editor.html")
 
@@ -227,13 +227,13 @@ def forms_route(frm):
             return jsonify({"msg": "Invalid post request for this route"})
         try:        
             que = insert_into(request.form["form"],request.form['data'][:-1])
-            pom = kon.execute_query(que, True) #SQL INJECTION HAZARD
-            if pom == True: 
-                return jsonify({"msg": "You successfully submited Your form responce."})
-            else:
-                with open("server_files/server_errors/sql_server_related.txt", "a", encoding="UTF-8") as fp:
-                    fp.write(f'''--- {datetime.now().strftime("%d/%m/%Y <> %H:%M:%S")} ---\n\nSql insert:\n\t{pom}\n\nQuery that coused the error:\n\t{que}\n\n''')
-                return jsonify({"msg": "There was an error while submitting the form, please try again later."})
+            # pom = kon.execute_query(que, True) #SQL INJECTION HAZARD
+            # if pom == True: 
+            #     return jsonify({"msg": "You successfully submited Your form responce."})
+            # else:
+            #     with open("server_files/server_errors/sql_server_related.txt", "a", encoding="UTF-8") as fp:
+            #         fp.write(f'''--- {datetime.now().strftime("%d/%m/%Y <> %H:%M:%S")} ---\n\nSql insert:\n\t{pom}\n\nQuery that coused the error:\n\t{que}\n\n''')
+            #     return jsonify({"msg": "There was an error while submitting the form, please try again later."})
         except pyodbc.Error as e:
             with open("server_files/server_errors/sql_server_related.txt", "a", encoding="UTF-8") as fp:
                 fp.write(f'''--- {datetime.now().strftime("%d/%m/%Y <> %H:%M:%S")} ---\n\nSql insert:\n\t{e.args[1]}\n\nQuery that coused the error:\n\t{que}\n\n''')
