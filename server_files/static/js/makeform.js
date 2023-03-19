@@ -16,6 +16,9 @@ let checkkutija = templates.querySelector(".checkbox_polje");
 let panel = templates.querySelector(".panel_za_dodavanje");
 let form_file = templates.querySelector(".formice");
 let checkbSelect = templates.querySelector(".checkbSelect");
+let checkbRow = templates.querySelector(".checkbRow");
+let checkAll = templates.querySelector('[data-fun = "checkAll"]');
+let uncheckAll = templates.querySelector('[data-fun = "uncheckAll"]');
 //let tableHeader = templates.querySelector(".tHeader");
 let row = document.createElement("tr");
 let field = document.createElement("td");
@@ -191,6 +194,7 @@ function new_form() {
     opisp.style.height = "5em";
 }
 
+
 //#endregion funkcije
 
 //#region event listeners
@@ -266,28 +270,79 @@ explorer.addEventListener("submit", async function(e){
             break;
 
         case "resp":
-            let option;
+            let option, counter = 1;
             odg = await req_json({"ra": "frm_meta", "form_name": e.submitter.parentNode.dataset.file}, "POST");
             frm_name = e.submitter.parentNode.dataset.file;
             responces.children[0].children[0].innerHTML = "Responces for: " + e.submitter.parentNode.dataset.file;
             responces.children[1].innerHTML = "<p>Filter data:</p>";
             di = JSON.parse(odg["form_data"]);
+
+            copyFlds.innerHTML = "";
+            option = document.createElement("option");
+            option.innerHTML = "Select column";
+            option.value = 0;
+            copyFlds.append(option);
+
             di["fields"].forEach(function (v, i){
                 if(v["type"] == "checkb"){
-                    pomd = checkbSelect.cloneNode(true);
+                    pomd = checkbSelect.cloneNode();
                     option = document.createElement("option");
                     option.innerHTML = v["head"];
                     option.value = "0";
                     pomd.append(option);
                     v["options"].forEach(function (opt,j){
+                        counter++;
                         option = document.createElement("option");
                         option.innerHTML = opt;
                         option.value = `KOL${i}_${j}`;
                         pomd.append(option);
                     });
                     responces.children[1].append(pomd);
+                }else{
+                    option = document.createElement("option");
+                    option.innerHTML = v["head"];
+                    option.value = counter;
+                    copyFlds.append(option);
+                    counter++;
                 }
             })
+            table.innerHTML = "";
+            let pom1 = document.createElement("tr");
+            let pom2 = document.createElement("tr");        
+            let colLabel1 = document.createElement("th");
+            let colLabel2 = document.createElement("th");
+            colLabel1.colSpan = 1;
+            colLabel2.append(checkAll.cloneNode());
+            colLabel2.append(uncheckAll.cloneNode());
+            colLabel2.colSpan = 1;
+            pom1.append(colLabel1);
+            pom2.append(colLabel2);
+            di["fields"].forEach(function (fld) {
+                colLabel1 = document.createElement("th");
+                colLabel2 = document.createElement("th");
+                if (fld["type"] == "checkb") {
+                    colLabel1.innerHTML = fld["head"];
+                    colLabel1.colSpan = fld["options"].length;
+                    colLabel1.className = "checkbHeader";
+                    pom1.append(colLabel1);
+                    fld["options"].forEach(function (opc) {
+                        colLabel2 = document.createElement("th");
+                        colLabel2.innerHTML = opc;
+                        colLabel2.colSpan = 1;
+                        pom2.append(colLabel2);
+                    })
+                } else {
+                    colLabel1.colSpan = 1;
+                    colLabel2.innerHTML = fld["head"];
+                    colLabel2.colSpan = 1;
+                    pom1.append(colLabel1);
+                    pom2.append(colLabel2);
+                }
+                
+            })
+            table.append(pom1);
+            table.append(pom2);
+            
             loader.style.display = "none";
             responces.style.display = "flex";
             break;
@@ -328,9 +383,6 @@ maker.addEventListener("submit", async function(e){
             }
             maker.removeChild(maker.children[maker.children.length-2])
             updateSerial();
-            break;
-
-        case "get_data":
             break;
         case "save_all":
             let pom_dete, data = {};
@@ -433,7 +485,7 @@ function autoResize() {
 
 responces.addEventListener("submit", async function (e) {
     e.preventDefault();
-    let pom, odg;
+    let pom, odg, childs, trow;
     switch (e.submitter.dataset.fun) {
         case "fetch":
             //ovde mozda loader da se stavi kad dobavlja podatke
@@ -444,57 +496,21 @@ responces.addEventListener("submit", async function (e) {
                 }
             }
             //ovo ne sljaka, samo obrisi podatke iz forme, posle 3. reda (deteta broj 2)
-            for (let i = 2; i < table.children.length; i++) {
-                table.removeChild(table.children[i])
+            while (table.children.length > 2){
+                table.removeChild(table.children[2])
             }
-            
-
             //pomeri ovo u deo kada ucitava samu formu
             //filling the table header
-            let pom1 = document.createElement("tr");
-            let pom2 = document.createElement("tr");
-            
-            odg = await req_json({"ra": "frm_meta", "form_name": frm_name}, "POST");
-            //responces.dataset.
-            let di = JSON.parse(odg["form_data"]);
-            let colLabel1 = document.createElement("th");
-            let colLabel2 = document.createElement("th");
-            colLabel1.colSpan = 1;
-            colLabel2.innerHTML = "No.";
-            colLabel2.colSpan = 1;
-            pom1.append(colLabel1);
-            pom2.append(colLabel2);
-            di["fields"].forEach(function (fld) {
-                colLabel1 = document.createElement("th");
-                colLabel2 = document.createElement("th");
-                if (fld["type"] == "checkb") {
-                    colLabel1.innerHTML = fld["head"];
-                    colLabel1.colSpan = fld["options"].length;
-                    colLabel1.className = "checkbHeader";
-                    pom1.append(colLabel1);
-                    fld["options"].forEach(function (opc) {
-                        colLabel2 = document.createElement("th");
-                        colLabel2.innerHTML = opc;
-                        colLabel2.colSpan = 1;
-                        pom2.append(colLabel2);
-                    })
-                } else {
-                    colLabel1.colSpan = 1;
-                    colLabel2.innerHTML = fld["head"];
-                    colLabel2.colSpan = 1;
-                    pom1.append(colLabel1);
-                    pom2.append(colLabel2);
-                }
-                
-            })
-            table.append(pom1);
-            table.append(pom2);
             //filling the forms of a row
             odg = await req_json({"ra": "get_data", "data": JSON.stringify(data), "frm": frm_name}, "POST");
             pom = JSON.parse(odg["data"]);
             let tableRow, cell;
             pom.forEach(function (sqlRow){
                 tableRow = row.cloneNode(true);
+                cell = field.cloneNode(true);
+                cell.append(checkbRow.cloneNode());
+                tableRow.append(cell);
+                sqlRow.shift();
                 sqlRow.forEach(function (element){
                     cell = field.cloneNode(true);
                     cell.innerHTML = element;
@@ -504,7 +520,34 @@ responces.addEventListener("submit", async function (e) {
             })  
             return;
         case "copy":
-            console.log("AAAA");
+            if(copyFlds.value == 0){
+                alert("You must select a column in order to copt values from it.");
+            }
+            let clip = ""
+            childs = table.children;
+            trow;
+            for (let i = 2; i < childs.length; i++) {
+                trow = childs[i];                
+                if(trow.children[0].children[0].checked){
+                    clip += trow.children[copyFlds.value].innerHTML + " ";
+                }
+            }
+            navigator.clipboard.writeText(clip);
+            alert("Selected fields copied to clipboard.");
+            return;
+        case "checkAll":
+            childs = table.children;            
+            for (let i = 2; i < childs.length; i++) {
+                trow = childs[i];
+                trow.children[0].children[0].checked = true;
+            }
+            return;            
+        case "uncheckAll":
+            childs = table.children;            
+            for (let i = 2; i < childs.length; i++) {
+                trow = childs[i];
+                trow.children[0].children[0].checked = false;
+            }
             return;
         default:
             break;
