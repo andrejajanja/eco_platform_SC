@@ -312,11 +312,14 @@ def event_editor_route():
         if request.form["ra"] == "posts":
             postovi = []
             for x in os.listdir(event_posts):
+                
+                lok = file_to_dict(f"{event_posts}{x}") #ovo je hella ne nefikasno jer je sranje, gledaj da onda sa ovim samo posaljes sve pofatke o svim formama
+                #alternativno napravi neki json ili rencik koji cuva samo podatke koji dogadjaj je na kojoj lokaciji, to je manje parsiranja svakako, nego sad svaku formu da parsira
                 x = x[:-5]
                 pom = 0
                 if x in active_posts:
                     pom = 1
-                postovi.append([x,pom])
+                postovi.append([x,pom,lok])
             return jsonify({"posts": postovi})
         if request.form["ra"] == "lp": #load post
             pom = ""
@@ -339,9 +342,11 @@ def event_editor_route():
             os.remove(f"server_files/templates/event/{request.form['post']}.html")
             regenerate_events_page(request.form['post'], "server_files/templates/events.html")
             active_posts.remove(request.form['post'])
-
+            print(active_posts)
             #this bug arises here, due to some bad logic in deleting locations from json file
+            print(active_locations, request.form["kords"])
             active_locations.remove(request.form["kords"])
+            print(active_locations)
             dict_to_file(active_locations, "server_files/server_data/locations.json")
             return jsonify({"msg": "Successfully unpublished the post."})
         if request.form["ra"] == "pub":

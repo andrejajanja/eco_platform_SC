@@ -182,6 +182,7 @@ async function popuniEditor(name){
         }
     }
     prew.src = "static/images/insert-picture-icon.png";
+    return pom["kords"]
 }
 //#endregion functions
 
@@ -266,7 +267,7 @@ posts.addEventListener("submit", async function(e){
             }else{
                 editor.dataset.pubed = "0";
             }
-            popuniEditor(e.submitter.value);
+            await popuniEditor(e.submitter.value);
             kontekst.style.display = "flex";
             loader.style.display = "none";
             return;
@@ -281,7 +282,7 @@ posts.addEventListener("submit", async function(e){
             ocistiPovrsinu();
             return;
         case "unpubp":
-            pom = await req_json({"ra": "unpub", "post": e.submitter.dataset.post, "kords": lok_btn.dataset.cords},"POST");
+            pom = await req_json({"ra": "unpub", "post": e.submitter.dataset.post, "kords": e.submitter.parentNode.dataset.kords},"POST");
             e.submitter.style.display = "none";
             editor.dataset.pubed = "0";
             alert(pom["msg"]);
