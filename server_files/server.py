@@ -337,10 +337,12 @@ def event_editor_route():
             return jsonify({"msg": "event post saved successfully"})
         if request.form["ra"] == "unpub":
             os.remove(f"server_files/templates/event/{request.form['post']}.html")
+            regenerate_events_page(request.form['post'], "server_files/templates/events.html")
             active_posts.remove(request.form['post'])
+
+            #this bug arises here, due to some bad logic in deleting locations from json file
             active_locations.remove(request.form["kords"])
             dict_to_file(active_locations, "server_files/server_data/locations.json")
-            regenerate_events_page(request.form['post'], "server_files/templates/events.html")
             return jsonify({"msg": "Successfully unpublished the post."})
         if request.form["ra"] == "pub":
             try:
