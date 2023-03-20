@@ -40,19 +40,23 @@ async function savePost() {
             pomm = title.value.replaceAll(" ", "-").toLowerCase();
             editor.dataset.tren = pomm;
         }
-        if(dogs.selectedIndex == 0)
-        {
-            alert("You must select an event type.");
-            return;
-        }
+        
     }else{
-        if(dogs.selectedIndex == 0)
-        {
-            alert("You must select an event type.");
-            return;
-        }
+        
         pomm = editor.dataset.tren;
     }
+
+    if(dogs.selectedIndex == 0)
+    {
+        alert("You must select an event type.");
+        return;
+    }
+
+    if(date.value == ""){
+        alert("You must select a date on which the event occurs.");
+        return;
+    }
+
     pom = {};
     pom["head"] = title.value;
     pom["date"] = date.value;
@@ -68,7 +72,7 @@ async function savePost() {
         }
         pom["imgs"].push(images.children[i].src);
     }
-    odg = await req_json({"ra": "svd","file": pomm, "data": JSON.stringify(pom)}, "POST");
+    odg = await req_json({"ra": "svd","file": pomm, "data": JSON.stringify(pom), "lok": lok_btn.dataset.cords}, "POST");
     await dajPostove();
 }
 async function dajForme() {
@@ -111,6 +115,7 @@ async function dajPostove() {
         if(v[1] == "1"){
             pom.children[2].style.display = "block";
         }
+
         posts_list.appendChild(pom);
     });
 }

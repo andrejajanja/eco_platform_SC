@@ -271,6 +271,11 @@ def generate_post_from_dict(di, file: str, default_file: str, default_path: str)
     pomd = ""
     for x in di["date"].split("-")[::-1]:
         pomd += f"{x}."
+
+    frmLink = ""
+    if di["frm"] != "":
+        frmLink = f'''<a id = "frmLnk" href = "/forms/{di["frm"]}">Join us by filling out this form!</a>'''
+
     cont.append(f'''<div id ="postHeader">
             <img id = "typeImg" src ="/static/images/{di["type"]}.png">
             <h1 id = "ttl">{di['head']}</h1>
@@ -282,7 +287,7 @@ def generate_post_from_dict(di, file: str, default_file: str, default_path: str)
                 <img src = "/static/images/calendar.png">
                 <p>{pomd}</p>
             </div>              
-            <a id = "frmLnk" href = "/forms/{di["frm"]}">Join us by filling out this form!</a>
+            {frmLink}
         </div> ''')
 
     for i, paragraf in enumerate(di["txt"].split("\n")):
@@ -298,13 +303,16 @@ def generate_events_page(di: dict, file: str)->None:
     with open(file, mode="r", encoding="UTF-8") as fp:
         soup = bs4.BeautifulSoup(fp.read(), features="html.parser")
     cont = soup.find("div", attrs={"id": "kontekst"})
+    date = ""
+    for x in di['date'].split("-")[::-1]:
+        date += f"{x}."
     cont.insert(0, f'''<a href="/events/{di['head'].lower().replace(" ", "-")}" target="_self" rel="next" class="event">
                 <img src="/static/images/{di['type']}.png" class="event_img">
                 <h1 class="event_ttl">{di['head']}</h1>
                 <img src="/static/images/location.png" class="event_img">
                 <p class = "event_txt">{di['lok']}</p>
                 <img src="/static/images/calendar.png" class="event_img">
-                <p class = "event_txt">{di['date']}</p>
+                <p class = "event_txt">{date}</p>
         </a>''')
 
     formatter = bs4.formatter.HTMLFormatter(indent=4)

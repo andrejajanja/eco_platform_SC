@@ -26,12 +26,14 @@ images_folder = "server_files/static/event_images/"
 event_posts = "server_files/server_data/event_posts/"
 
 #getting already published forms and posts
-active_forms, active_posts, active_locations = [],[], list(file_to_dict("server_files/server_data/locations.json"))
+active_forms, active_posts, = [],[]
 for frm in os.listdir("server_files/templates/forms/"):
     active_forms.append(frm[:-5])
 
 for post in os.listdir("server_files/templates/event/"):
     active_posts.append(post[:-5])
+
+active_locations, event_locations = list(file_to_dict("server_files/server_data/locations.json")), file_to_dict("server_files/server_data/savedLocations.json")
 
 #konekcija = connect(r"Driver={ODBC Driver 17 for SQL Server};Server=localhost\SQLEXPRESS;Database=EKO;Trusted_Connection=yes;")
 #driver_aa = redis.Redis(host = "127.0.0.1", port = "6379", db = 1)
@@ -311,17 +313,14 @@ def event_editor_route():
             return jsonify({"frms": json.dumps(list(active_forms))})
         if request.form["ra"] == "posts":
             postovi = []
-            for x in os.listdir(event_posts):
-                
-                lok = file_to_dict(f"{event_posts}{x}") #ovo je hella ne nefikasno jer je sranje, gledaj da onda sa ovim samo posaljes sve pofatke o svim formama
-                #alternativno napravi neki json ili rencik koji cuva samo podatke koji dogadjaj je na kojoj lokaciji, to je manje parsiranja svakako, nego sad svaku formu da parsira
-                x = x[:-5]
-                pom = 0
-                if x in active_posts:
-                    pom = 1
-                postovi.append([x,pom,lok])
+            for post in os.listdir(event_posts):    
+                post = post[:-5]
+                isActive = 0
+                if post in active_posts:
+                    isActive = 1
+                postovi.append([post,isActive])
             return jsonify({"posts": postovi})
-        if request.form["ra"] == "lp": #load post
+        if request.form["ra"] == "lp":
             pom = ""
             with open(f"{event_posts}{request.form['n']}.json", "r", encoding="UTF-8") as f:
                 pom = f.read()
@@ -334,7 +333,10 @@ def event_editor_route():
                 return jsonify({"msg": "Image deleted successfully"})
             except:
                 return jsonify({"msg": "Error deleting an images"})
-        if request.form["ra"] == "svd":
+        if request.form["ra"] == "svd":            
+            if request.form["lok"] != "":
+                event_locations[request.form["file"]] = request.form["lok"]
+                dict_to_file(event_locations, f"server_files/server_data/savedLocations.json")
             with open(f"{event_posts}{request.form['file']}.json", "w", encoding="UTF-8") as f:
                 f.write(request.form["data"])
             return jsonify({"msg": "event post saved successfully"})
@@ -342,11 +344,7 @@ def event_editor_route():
             os.remove(f"server_files/templates/event/{request.form['post']}.html")
             regenerate_events_page(request.form['post'], "server_files/templates/events.html")
             active_posts.remove(request.form['post'])
-            print(active_posts)
-            #this bug arises here, due to some bad logic in deleting locations from json file
-            print(active_locations, request.form["kords"])
-            active_locations.remove(request.form["kords"])
-            print(active_locations)
+            active_locations.remove(event_locations[request.form['post']])
             dict_to_file(active_locations, "server_files/server_data/locations.json")
             return jsonify({"msg": "Successfully unpublished the post."})
         if request.form["ra"] == "pub":
@@ -368,7 +366,9 @@ def event_editor_route():
                 os.remove(images_folder + p)
             os.remove(f"{event_posts}{request.form['post']}.json")
             if request.form['post'] in active_posts:
-                os.remove(f"server_files/templates/event/{request.form['post']}.html")
+                os.remove(f"server_files/templates/event/{request.form['post']}.html")            
+            event_locations.pop(request.form["post"])
+            dict_to_file(event_locations, f"server_files/server_data/savedLocations.json")
             return jsonify({"msg": "File deleted successfully"})    
         return jsonify({"msg": "responce of a POST request, there wasn't any function specific return"})
     if request.method == "PUT":
