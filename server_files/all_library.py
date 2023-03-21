@@ -332,3 +332,10 @@ def regenerate_events_page(page_name: str, file: str):
     formatter = bs4.formatter.HTMLFormatter(indent=4)
     with open(file, mode="w", encoding="UTF-8") as fp:
         fp.write(soup.prettify(formatter=formatter))
+
+def format_date(date):
+    d = ""
+    date = date.split("-")[::-1]
+    for x in date:
+        d += f"{x}."
+    return d

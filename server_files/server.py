@@ -1,9 +1,11 @@
 import redis,sys,os,json,pyodbc
+from itertools import chain
 from subprocess import Popen #this is here for starting the Redis server
 from datetime import datetime
 from all_library import (User, User_log, random_string,execute_select_sql,
                     dict_to_file,SQLConnector, create_table_from_dict,file_to_dict,
-                    dict_u_html, insert_into, generate_post_from_dict, generate_events_page, regenerate_events_page)
+                    dict_u_html, insert_into, generate_post_from_dict, generate_events_page,
+                    regenerate_events_page, format_date)
 from flask import (Flask, jsonify, make_response, redirect, render_template,
                    request)
 
@@ -34,7 +36,6 @@ for post in os.listdir("server_files/templates/event/"):
     active_posts.append(post[:-5])
 
 active_locations, event_locations = list(file_to_dict("server_files/server_data/locations.json")), file_to_dict("server_files/server_data/savedLocations.json")
-
 #konekcija = connect(r"Driver={ODBC Driver 17 for SQL Server};Server=localhost\SQLEXPRESS;Database=EKO;Trusted_Connection=yes;")
 #driver_aa = redis.Redis(host = "127.0.0.1", port = "6379", db = 1)
 
@@ -344,17 +345,28 @@ def event_editor_route():
             os.remove(f"server_files/templates/event/{request.form['post']}.html")
             regenerate_events_page(request.form['post'], "server_files/templates/events.html")
             active_posts.remove(request.form['post'])
-            active_locations = dict(active_locations)
+
+            pom = active_locations
+            active_locations = {}
+            for lok in pom:
+                active_locations[lok[0]] = lok[1:]
             active_locations.pop(event_locations[request.form['post']])
-            active_locations = list(tuple(active_locations.items()))
+            pom = active_locations
+            active_locations = []
+            for x in zip(pom.keys(), pom.values()):
+                x = list(x)
+                pom = [x[0]]
+                pom.extend(x[1])                
+                active_locations.append(pom)
             dict_to_file(active_locations, "server_files/server_data/locations.json")
+
             return jsonify({"msg": "Successfully unpublished the post."})
         if request.form["ra"] == "pub":
             try:
                 di = file_to_dict(f"server_files/server_data/event_posts/{request.form['name']}.json")
                 generate_post_from_dict(di, request.form['name'], "server_files/templates/event_layout.html", "server_files/templates/event/")
                 active_posts.append(request.form['name'])
-                active_locations.append([di["kords"], di["type"]])
+                active_locations.append([di["kords"], di["head"], di["type"], format_date(di["date"])])
                 generate_events_page(di, "server_files/templates/events.html")
                 dict_to_file(active_locations, "server_files/server_data/locations.json")
                 return jsonify({"msg": "Post published successfuly"})
@@ -369,6 +381,20 @@ def event_editor_route():
             os.remove(f"{event_posts}{request.form['post']}.json")
             if request.form['post'] in active_posts:
                 os.remove(f"server_files/templates/event/{request.form['post']}.html")            
+            regenerate_events_page(request.form['post'], "server_files/templates/events.html")
+            pom = active_locations
+            active_locations = {}
+            for lok in pom:
+                active_locations[lok[0]] = lok[1:]
+            active_locations.pop(event_locations[request.form['post']])
+            pom = active_locations
+            active_locations = []
+            for x in zip(pom.keys(), pom.values()):
+                x = list(x)
+                pom = [x[0]]
+                pom.extend(x[1])                
+                active_locations.append(pom)
+            dict_to_file(active_locations, "server_files/server_data/locations.json")
             event_locations.pop(request.form["post"])
             dict_to_file(event_locations, f"server_files/server_data/savedLocations.json")
             return jsonify({"msg": "File deleted successfully"})    
