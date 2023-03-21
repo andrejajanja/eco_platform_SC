@@ -91,7 +91,7 @@ async function dajForme() {
     })
 }
 function dodeliDesniKlik() {
-    for (let i = 1; i < images.children.length; i++) {        
+    for (let i = 1; i < images.children.length; i++) { 
         images.children[i].onmousedown = async function (e) {
             if (e.which == 3) {
                 let odg = await req_json({"ra": "dlt_img", "img": images.children[i].src}, "POST");                

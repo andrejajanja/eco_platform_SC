@@ -1,11 +1,11 @@
 const url_stranice = window.location.href;
-let ciscenja = []
+let events = []
 async function ucitaj_kords() {
     let odg = await req_json({ra: "loks"}, "POST");
     let pom;
     odg.forEach(function (e){
-        pom = e.split(",");
-        ciscenja.push({lat: parseFloat(pom[0]), lng: parseFloat(pom[1])});
+        pom = e[0].split(",");
+        events.push([{lat: parseFloat(pom[0]), lng: parseFloat(pom[1])}, e[1]]);
     })
     return;
 }

@@ -20,7 +20,7 @@ cookie_dur = 3600 #seconds
 
 #Databases
 session_driver = redis.Redis(host = "127.0.0.1", port = "6379", db=0) #db = 0 - session cookies
-kon = SQLConnector(r"Driver={ODBC Driver 17 for SQL Server};Server=localhost\SQLEXPRESS;Database=EKO;Trusted_Connection=yes;")
+#kon = SQLConnector(r"Driver={ODBC Driver 17 for SQL Server};Server=localhost\SQLEXPRESS;Database=EKO;Trusted_Connection=yes;")
 forms_folder = "server_files/server_data/form_layouts/"
 images_folder = "server_files/static/event_images/"
 event_posts = "server_files/server_data/event_posts/"
@@ -344,7 +344,9 @@ def event_editor_route():
             os.remove(f"server_files/templates/event/{request.form['post']}.html")
             regenerate_events_page(request.form['post'], "server_files/templates/events.html")
             active_posts.remove(request.form['post'])
-            active_locations.remove(event_locations[request.form['post']])
+            active_locations = dict(active_locations)
+            active_locations.pop(event_locations[request.form['post']])
+            active_locations = list(tuple(active_locations.items()))
             dict_to_file(active_locations, "server_files/server_data/locations.json")
             return jsonify({"msg": "Successfully unpublished the post."})
         if request.form["ra"] == "pub":
@@ -352,7 +354,7 @@ def event_editor_route():
                 di = file_to_dict(f"server_files/server_data/event_posts/{request.form['name']}.json")
                 generate_post_from_dict(di, request.form['name'], "server_files/templates/event_layout.html", "server_files/templates/event/")
                 active_posts.append(request.form['name'])
-                active_locations.append(di["kords"])
+                active_locations.append([di["kords"], di["type"]])
                 generate_events_page(di, "server_files/templates/events.html")
                 dict_to_file(active_locations, "server_files/server_data/locations.json")
                 return jsonify({"msg": "Post published successfuly"})

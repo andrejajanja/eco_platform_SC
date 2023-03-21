@@ -3,19 +3,17 @@ function mapInitialization() {
     const mapica = new google.maps.Map(document.getElementById("mapa"), {
         zoom: 5,
         center: centar,
+        mapTypeId: google.maps.MapTypeId.HYBRID
       });
-    if(ciscenja.length != 0){
-        centar = ciscenja[0];
-        let markeri = [];
-        ciscenja.forEach(function (elem){
-            markeri.push(new google.maps.Marker({
-                position: elem,
-                icon: "/static/images/broom32.png"
-            }));
-        });
-        markeri.forEach(function (elem){       
-            elem.setMap(mapica);
-        })
-    }
+    let markeri = [];
+    events.forEach(function (elem){
+        markeri.push(new google.maps.Marker({
+            position: elem[0],
+            icon: `/static/images/${elem[1]}32.png`
+        }));
+    });
+    markeri.forEach(function (elem){       
+        elem.setMap(mapica);
+    })
 }
 window.initMap = mapInitialization;
