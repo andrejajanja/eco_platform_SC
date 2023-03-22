@@ -32,7 +32,7 @@
             <h1 id = "ttl">Ada Ciganlija</h1>
             <div id = "location">
                 <img src = "/static/images/location.png">
-                <a title = "Click here to see the location" rel = "next" target = "_blank" href = "https://www.google.com/maps/search/?api=1&query=44.78916399451933,20.413865633041205">Čukarica, Belgrade, Serbia</a>
+                <a onclick = "clickLink('Ada Ciganlija')" title = "Click here to see the location" rel = "next" target = "_blank" href = "/map">Čukarica, Belgrade, Serbia</a>
             </div>
             <div id = "time">
                 <img src = "/static/images/calendar.png">
@@ -54,3 +54,8 @@
         </p>
     </div>
 </body>
+<script>
+    function clickLink(lok){
+            window.localStorage.setItem("highLoc", lok);
+        }
+</script>

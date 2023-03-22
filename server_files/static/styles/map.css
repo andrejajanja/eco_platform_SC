@@ -16,7 +16,7 @@
 .infoWindow{
     display: flex;
     flex-direction: column;
-    width: 15em;
+    width: 20em;
 }
 .elemBox{
     margin-top: 1.5em;

@@ -29,6 +29,8 @@ let opcija_frm = templates.querySelector(".opcija_frm");
 let pom_kords = [];
 //#endregion variables
 
+let f = "https://stackoverflow.com/questions/10317017/javascript-get-domain-only-from-document-referrer";
+
 //#region functions
 async function savePost() {
     let pomm;

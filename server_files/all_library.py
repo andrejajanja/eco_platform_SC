@@ -281,7 +281,7 @@ def generate_post_from_dict(di, file: str, default_file: str, default_path: str)
             <h1 id = "ttl">{di['head']}</h1>
             <div id = "location">
                 <img src = "/static/images/location.png">
-                <a title = "Click here to see the location" rel = "next" target = "_blank" href = "https://www.google.com/maps/search/?api=1&query={di["kords"]}">{di["lok"]}</a>
+                <a onclick = "clickLink('{di["head"]}')" title = "Click here to see the location" rel = "next" target = "_blank" href = "/map">{di["lok"]}</a>
             </div>
             <div id = "time">
                 <img src = "/static/images/calendar.png">
