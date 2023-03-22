@@ -1,6 +1,4 @@
-import redis,sys,os,json,pyodbc
-from itertools import chain
-from subprocess import Popen #this is here for starting the Redis server
+import redis,os,json,pyodbc
 from datetime import datetime
 from all_library import (User, User_log, random_string,execute_select_sql,
                     dict_to_file,SQLConnector, create_table_from_dict,file_to_dict,
@@ -8,11 +6,8 @@ from all_library import (User, User_log, random_string,execute_select_sql,
                     regenerate_events_page, format_date)
 from flask import (Flask, jsonify, make_response, redirect, render_template,
                    request)
-
-#additional imports for later
-#from ua_parser import user_agent_parser
-#from waitress import serve
-#from paste.translogger import TransLogger
+from waitress import serve
+from paste.translogger import TransLogger
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -22,7 +17,7 @@ cookie_dur = 3600 #seconds
 
 #Databases
 session_driver = redis.Redis(host = "127.0.0.1", port = "6379", db=0) #db = 0 - session cookies
-#kon = SQLConnector(r"Driver={ODBC Driver 17 for SQL Server};Server=localhost\SQLEXPRESS;Database=EKO;Trusted_Connection=yes;")
+kon = SQLConnector(r"Driver={ODBC Driver 17 for SQL Server};Server=localhost\SQLEXPRESS;Database=EKO;Trusted_Connection=yes;")
 forms_folder = "server_files/server_data/form_layouts/"
 images_folder = "server_files/static/event_images/"
 event_posts = "server_files/server_data/event_posts/"
@@ -418,11 +413,15 @@ def event_layout_route(pst):
 def about_us_route():
     return render_template("about-us.html")
 
-
 #placeholder-start
 #placeholder-end
 
-if sys.argv[1] == "1":
-    redis_server = Popen(["redis_windows/redis-server", "redis_windows/redis.windows.conf"])
 if __name__ == "__main__":
-    app.run("0.0.0.0", port = 7000)
+    serve(TransLogger(app, 
+            setup_console_handler=False,
+            logger_name="Eco_platform", 
+            format = ('[%(time)s] Metod: %(REQUEST_METHOD)s Status: %(status)s\tSize: %(bytes)s [bytes]\tReqd: %(REQUEST_URI)s')),
+            host='0.0.0.0',
+            port=5000
+            #url_scheme = "https"                     
+    )
