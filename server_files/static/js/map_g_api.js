@@ -1,5 +1,4 @@
 let win = document.querySelector("#templates").content.querySelector(".infoWindow");
-console.log(window.localStorage.getItem("highLoc"));
 function mapInitialization() {
     let centar = {"lat": 44.810556, "lng":20.472354}
     const mapica = new google.maps.Map(document.getElementById("mapa"), {
@@ -29,11 +28,6 @@ function mapInitialization() {
         })
 
         if(check && elem[1] == window.localStorage.getItem("highLoc")){
-            pomMarker = new google.maps.Marker({
-                position: elem[0],
-                icon: `/static/images/${elem[2]}64.gif`,
-                optimize: false    
-            })
             pomInfo.open({
                 anchor: pomMarker, mapica
             });

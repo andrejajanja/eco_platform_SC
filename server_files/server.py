@@ -9,11 +9,9 @@ from flask import (Flask, jsonify, make_response, redirect, render_template,
 from waitress import serve
 from paste.translogger import TransLogger
 
-print("Imported modules")
-
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-print("Initialized the app")
+print("Initialized the app and Imported Modules")
 
 #server specific variables -- this can go to the json file
 cookie_dur = 3600 #seconds
@@ -22,20 +20,22 @@ cookie_dur = 3600 #seconds
 session_driver = redis.Redis(host = "127.0.0.1", port = "6379", db=0) #db = 0 - session cookies
 print("Connected to redis")
 kon = SQLConnector(r"EKO.db")
-print("Loaded SQL db, and connected")
-forms_folder = "server_files/server_data/form_layouts/"
-images_folder = "server_files/static/event_images/"
-event_posts = "server_files/server_data/event_posts/"
+print("Loaded and connected to SQL db")
+
+root = ""
+forms_folder = f"{root}server_files/server_data/form_layouts/"
+images_folder = f"{root}server_files/static/event_images/"
+event_posts = f"{root}server_files/server_data/event_posts/"
 
 #getting already published forms and posts
 active_forms, active_posts, = [],[]
-for frm in os.listdir("server_files/templates/forms/"):
+for frm in os.listdir(f"{root}server_files/templates/forms/"):
     active_forms.append(frm[:-5])
 
-for post in os.listdir("server_files/templates/event/"):
+for post in os.listdir(f"{root}server_files/templates/event/"):
     active_posts.append(post[:-5])
 
-active_locations, event_locations = list(file_to_dict("server_files/server_data/locations.json")), file_to_dict("server_files/server_data/savedLocations.json")
+active_locations, event_locations = list(file_to_dict(f"{root}server_files/server_data/locations.json")), file_to_dict(f"{root}server_files/server_data/savedLocations.json")
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -86,10 +86,10 @@ def logging_in():
 @app.route('/logout', methods = ["GET"])
 def logout_route():
     try:
-        kolac = request.cookies["session_id"]
+        coockie_id = request.cookies["session_id"]
     except:
         return jsonify({"msg": "Invalid request for this route"})
-    session_driver.delete(kolac)
+    session_driver.delete(coockie_id)
     res = make_response(redirect("/login"))
     res.set_cookie("session_id", "", max_age=0)
     return res
@@ -108,11 +108,6 @@ def profile_page():
         except KeyError:
             return jsonify({"msg": "Invalid post request for this route"})
 
-        if request.form["ra"] == "out":
-            #ZAVRSI OVDE SVU LOGIKU VEZANU ZA LOGOUT
-            print("Pokusan logout")
-            return jsonify({"msg": "this will be done soon"})
-
     if request.method == "GET":
         try:
             key = session_driver.get(request.cookies['session_id']).decode()
@@ -123,17 +118,17 @@ def profile_page():
         return render_template("user_d.html", email = korisnik.email, ime = korisnik.ime, prezime = korisnik.prezime, grad = korisnik.grad)
     return jsonify({"Error": "Server didn't accept that request type"})
 
-#FINNISH FORGOT PASSWORD, REGISTER PAGES
+#FINNISH FORGOT PASSWORD
 
 @app.route('/form-editor', methods = ["GET", "POST"])
 def makeform_route():
-    # try:
-    #     if session_driver.exists(request.cookies["session_id"]) != 1:
-    #         return redirect("/login")            
-    # except:
-    #     return redirect("/login")
+    try:
+        if session_driver.exists(request.cookies["session_id"]) != 1:
+            return redirect("/login")            
+    except:
+        return redirect("/login")
         
-    if request.method == "POST": #some change
+    if request.method == "POST":
         try:
             pr =  request.form["ra"]
         except KeyError:
@@ -150,7 +145,7 @@ def makeform_route():
         if request.form["ra"] == "dlt":
             try:
                 if request.form["pub"] == "true":
-                    os.remove(f"server_files/templates/forms/{request.form['form']}.html")
+                    os.remove(f"{root}server_files/templates/forms/{request.form['form']}.html")
                     rez = kon.execute_query(f"DROP TABLE {request.form['form']};", True)
                     active_forms.remove(request.form['form'])
                     if rez != True:
@@ -183,22 +178,16 @@ def makeform_route():
             return jsonify({"forms": salje})
 
         if request.form["ra"] == "frm_meta":
-            #reads json file and sends to the user
             ime = request.form["form_name"]
             respo = ""
             with open(f"{forms_folder}{ime}.json") as fp:
                 respo = fp.read()
             return jsonify({"form_data": respo})
 
-        if request.form["ra"] == "out":
-            print("polusaj log out")
-            #LOG OUT CODE FOR THE USER
-            return jsonify({"msg": "successfully loged out"})
-        
         if request.form["ra"] == "pub":
             active_forms.append(request.form["pub_form"])
             di = file_to_dict(f"{forms_folder}{request.form['pub_form']}.json")
-            dict_u_html(di, "server_files/templates/forms/", "server_files/templates/form_layout.html")
+            dict_u_html(di, f"{root}server_files/templates/forms/", f"{root}server_files/templates/form_layout.html")
             query = create_table_from_dict(di)
             rez = kon.execute_query(query, True)
             if rez == True:
@@ -208,7 +197,7 @@ def makeform_route():
 
         if request.form["ra"] == "unpub":
             try:
-                os.remove(f"server_files/templates/forms/{request.form['form']}.html")
+                os.remove(f"{root}server_files/templates/forms/{request.form['form']}.html")
                 rez = kon.execute_query(f"DROP TABLE {request.form['form']};", True)
                 active_forms.remove(request.form['form'])
                 if rez != True:
@@ -239,11 +228,11 @@ def forms_route(frm):
             if pom == True: 
                 return jsonify({"msg": "You successfully submited Your form responce."})
             else:
-                with open("server_files/server_errors/sql_server_related.txt", "a", encoding="UTF-8") as fp:
+                with open(f"{root}server_files/server_errors/sql_server_related.txt", "a", encoding="UTF-8") as fp:
                     fp.write(f'''--- {datetime.now().strftime("%d/%m/%Y <> %H:%M:%S")} ---\n\nSql insert:\n\t{pom}\n\nQuery that coused the error:\n\t{que}\n\n''')
                 return jsonify({"msg": "There was an error while submitting the form, please try again later."})
         except sqlite3.Error as e:
-            with open("server_files/server_errors/sql_server_related.txt", "a", encoding="UTF-8") as fp:
+            with open(f"{root}server_files/server_errors/sql_server_related.txt", "a", encoding="UTF-8") as fp:
                 fp.write(f'''--- {datetime.now().strftime("%d/%m/%Y <> %H:%M:%S")} ---\n\nSql insert:\n\t{e.args[1]}\n\nQuery that coused the error:\n\t{que}\n\n''')
             return jsonify({"msg": "There was an error while submitting the form, please try again later."})
     if request.method == "GET":
@@ -258,7 +247,7 @@ def map_route():
     if request.method == "POST":
         if request.form["ra"] == "loks":
             r = ""
-            with open("server_files/server_data/locations.json") as fp:
+            with open(f"{root}server_files/server_data/locations.json") as fp:
                 r = fp.read()
             return r
         return jsonify({"msg": "responce of a POST request, there wasn't any function specific return"})
@@ -272,11 +261,12 @@ def map_route():
         
 @app.route('/map-editor', methods = ["GET", "POST"])
 def map_editor_route():
-    # try:
-    #     if session_driver.exists(request.cookies["session_id"]) != 1:
-    #         return redirect("/login")            
-    # except:
-    #     return redirect("/login")
+    try:
+        if session_driver.exists(request.cookies["session_id"]) != 1:
+            return redirect("/login")            
+    except:
+        return redirect("/login")
+    
     if request.method == "GET":
         return render_template("map-editor.html")
 
@@ -295,11 +285,11 @@ def event_route():
 @app.route('/event-editor', methods = ["GET", "POST", "PUT"])
 def event_editor_route():
     global active_posts, active_locations
-    # try:
-    #     if session_driver.exists(request.cookies["session_id"]) != 1:
-    #         return redirect("/login")            
-    # except:
-    #     return redirect("/login")
+    try:
+        if session_driver.exists(request.cookies["session_id"]) != 1:
+            return redirect("/login")            
+    except:
+        return redirect("/login")
 
     if request.method == "POST":
         try:
@@ -333,13 +323,13 @@ def event_editor_route():
         if request.form["ra"] == "svd":            
             if request.form["lok"] != "":
                 event_locations[request.form["file"]] = request.form["lok"]
-                dict_to_file(event_locations, f"server_files/server_data/savedLocations.json")
+                dict_to_file(event_locations, f"{root}server_files/server_data/savedLocations.json")
             with open(f"{event_posts}{request.form['file']}.json", "w", encoding="UTF-8") as f:
                 f.write(request.form["data"])
             return jsonify({"msg": "event post saved successfully"})
         if request.form["ra"] == "unpub":
-            os.remove(f"server_files/templates/event/{request.form['post']}.html")
-            regenerate_events_page(request.form['post'], "server_files/templates/events.html")
+            os.remove(f"{root}server_files/templates/event/{request.form['post']}.html")
+            regenerate_events_page(request.form['post'], f"{root}server_files/templates/events.html")
             active_posts.remove(request.form['post'])
 
             pom = active_locations
@@ -354,17 +344,17 @@ def event_editor_route():
                 pom = [x[0]]
                 pom.extend(x[1])                
                 active_locations.append(pom)
-            dict_to_file(active_locations, "server_files/server_data/locations.json")
+            dict_to_file(active_locations, f"{root}server_files/server_data/locations.json")
 
             return jsonify({"msg": "Successfully unpublished the post."})
         if request.form["ra"] == "pub":
             try:
-                di = file_to_dict(f"server_files/server_data/event_posts/{request.form['name']}.json")
-                generate_post_from_dict(di, request.form['name'], "server_files/templates/event_layout.html", "server_files/templates/event/")
+                di = file_to_dict(f"{root}server_files/server_data/event_posts/{request.form['name']}.json")
+                generate_post_from_dict(di, request.form['name'], f"{root}server_files/templates/event_layout.html", f"{root}server_files/templates/event/")
                 active_posts.append(request.form['name'])
                 active_locations.append([di["kords"], di["head"], di["type"], format_date(di["date"])])
-                generate_events_page(di, "server_files/templates/events.html")
-                dict_to_file(active_locations, "server_files/server_data/locations.json")
+                generate_events_page(di, f"{root}server_files/templates/events.html")
+                dict_to_file(active_locations, f"{root}server_files/server_data/locations.json")
                 return jsonify({"msg": "Post published successfuly"})
             except Exception as e:
                 print(e)
@@ -376,8 +366,8 @@ def event_editor_route():
                 os.remove(images_folder + p)
             os.remove(f"{event_posts}{request.form['post']}.json")
             if request.form['post'] in active_posts:
-                os.remove(f"server_files/templates/event/{request.form['post']}.html")            
-            regenerate_events_page(request.form['post'], "server_files/templates/events.html")
+                os.remove(f"{root}server_files/templates/event/{request.form['post']}.html")            
+            regenerate_events_page(request.form['post'], f"{root}server_files/templates/events.html")
             pom = active_locations
             active_locations = {}
             for lok in pom:
@@ -390,9 +380,9 @@ def event_editor_route():
                 pom = [x[0]]
                 pom.extend(x[1])                
                 active_locations.append(pom)
-            dict_to_file(active_locations, "server_files/server_data/locations.json")
+            dict_to_file(active_locations, f"{root}server_files/server_data/locations.json")
             event_locations.pop(request.form["post"])
-            dict_to_file(event_locations, f"server_files/server_data/savedLocations.json")
+            dict_to_file(event_locations, f"{root}server_files/server_data/savedLocations.json")
             return jsonify({"msg": "File deleted successfully"})    
         return jsonify({"msg": "responce of a POST request, there wasn't any function specific return"})
     if request.method == "PUT":
