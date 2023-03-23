@@ -1,4 +1,20 @@
-# konekcija = connect(r"Driver={ODBC Driver 17 for SQL Server};Server=localhost\SQLEXPRESS;Database=EKO;Trusted_Connection=yes;")
-# k = konekcija.cursor()
-# r = k.execute("SELECT * from Ids where email = 'andreja0@janja.xyz';")
-# konekcija.close()
+import sqlite3
+
+# di = file_to_dict("python_playground/formica.json")
+
+# kon = sqlite3.connect("EKO.db")
+# cur = kon.cursor()
+# cur.execute("drop table Users")
+# kon.commit()
+# kon.close()
+
+skripta = ""
+with open("database/automatic_base.sql","r") as file:
+    skripta = file.read()
+
+kon = sqlite3.connect("EKO.db")
+cur = kon.cursor()
+cur.executescript(skripta)
+#cur.execute("Drop table formica")
+kon.commit()
+kon.close()

@@ -1,6 +1,5 @@
-import random,string,json,bs4,pyodbc
-from pyodbc import connect
-
+import random,string,json,bs4,sqlite3
+from datetime import datetime
 #Classes
 class User_log:
     def __init__(self, data) -> None:
@@ -53,7 +52,7 @@ class SQLConnector:
     
     '''
     def __init__(self, conn_str: str) -> None:
-        self.con = pyodbc.connect(conn_str)
+        self.con = sqlite3.connect(conn_str, check_same_thread=False)
     
     def execute_query(self,query: str, commit: bool):
         '''
@@ -80,7 +79,11 @@ class SQLConnector:
             else:
                 return kurs.fetchall()
         except Exception as e:
-            return e.args
+            with open("server_files/server_errors/sql_server_related.txt", "a", encoding="UTF-8") as fp:
+                    fp.write(f'''--- {datetime.now().strftime("%d/%m/%Y <> %H:%M:%S")} ---\n\nFlask server tried to execute this query:\n\t{query}\nThat caused this error: {e}\n\n''')
+            return 0
+
+        
 
     def __str__(self) -> str:
         return "This is an instance of SQLConnector class"
@@ -101,16 +104,6 @@ def random_string(n: int):
     s - str - string of random characters
     '''
     return "".join(random.choice(string.ascii_letters) for i in range(n))
-
-def execute_select_sql(query: str) -> list:
-    pom = []
-    konekcija = connect(r"Driver={ODBC Driver 17 for SQL Server};Server=localhost\SQLEXPRESS;Database=EKO;Trusted_Connection=yes;")
-    k = konekcija.cursor()
-    #SQL INJECTION HAZARD WITH THIS KIND OF QUERY
-    r = k.execute(query)
-    pom = r.fetchall()
-    konekcija.close()   
-    return pom
 
 def dict_to_file(di: dict, file_path: str) -> None:
     '''
@@ -177,8 +170,9 @@ def create_table_from_dict(di):
             pom = f"\tKOL{i} TIME NOT NULL,\n"
         kolone += pom
     return f'''CREATE TABLE {di["file"]} (
-        ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-    {kolone});'''
+        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    {kolone[:-2]}
+    );'''
 
 def dict_u_html(di: dict, default_path: str, default_file: str) -> None:
     #otvara pocetni fajl
@@ -257,7 +251,7 @@ def insert_into(table, data):
     pom = ""
     for v in data.split("`"):
         pom += f"'{v}',"
-    kom = f'''INSERT INTO {table} VALUES ({pom[:-1]});'''
+    kom = f'''INSERT INTO {table} VALUES (NULL, {pom[:-1]});'''
     return kom
 
 def generate_post_from_dict(di, file: str, default_file: str, default_path: str) -> None:

@@ -1,6 +1,6 @@
-import redis,os,json,pyodbc
+import redis,os,json,sqlite3
 from datetime import datetime
-from all_library import (User, User_log, random_string,execute_select_sql,
+from all_library import (User, User_log, random_string,
                     dict_to_file,SQLConnector, create_table_from_dict,file_to_dict,
                     dict_u_html, insert_into, generate_post_from_dict, generate_events_page,
                     regenerate_events_page, format_date)
@@ -9,15 +9,20 @@ from flask import (Flask, jsonify, make_response, redirect, render_template,
 from waitress import serve
 from paste.translogger import TransLogger
 
+print("Imported modules")
+
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
+print("Initialized the app")
 
 #server specific variables -- this can go to the json file
 cookie_dur = 3600 #seconds
 
 #Databases
 session_driver = redis.Redis(host = "127.0.0.1", port = "6379", db=0) #db = 0 - session cookies
-kon = SQLConnector(r"Driver={ODBC Driver 17 for SQL Server};Server=localhost\SQLEXPRESS;Database=EKO;Trusted_Connection=yes;")
+print("Connected to redis")
+kon = SQLConnector(r"EKO.db")
+print("Loaded SQL db, and connected")
 forms_folder = "server_files/server_data/form_layouts/"
 images_folder = "server_files/static/event_images/"
 event_posts = "server_files/server_data/event_posts/"
@@ -31,8 +36,6 @@ for post in os.listdir("server_files/templates/event/"):
     active_posts.append(post[:-5])
 
 active_locations, event_locations = list(file_to_dict("server_files/server_data/locations.json")), file_to_dict("server_files/server_data/savedLocations.json")
-#konekcija = connect(r"Driver={ODBC Driver 17 for SQL Server};Server=localhost\SQLEXPRESS;Database=EKO;Trusted_Connection=yes;")
-#driver_aa = redis.Redis(host = "127.0.0.1", port = "6379", db = 1)
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -55,20 +58,18 @@ def logging_in():
         if form_data["ra"] == "log":
             pom = ""
             try:
-                koris = User_log(execute_select_sql(f'''SELECT * from Ids where email = '{form_data["us"]}';'''))
-                if koris.status:
-                    if koris.password == form_data["ps"]:
-                        id_korisnika = execute_select_sql(f'''SELECT id from Users where email = '{form_data["us"]}';''')[0][0]
+                koris = User_log(kon.execute_query(f'''SELECT * from Ids where email = '{form_data["us"]}';''', False))
+                if koris.status and koris.password == form_data["ps"]:
+                        id_korisnika = kon.execute_query(f'''SELECT id from Users where email = '{form_data["us"]}';''', False)[0][0]
                         odgovor = make_response(jsonify({"status": 1}))
                         rnd_str = random_string(8)
                         odgovor.set_cookie("session_id", rnd_str, max_age=cookie_dur)
                         session_driver.set(rnd_str,id_korisnika, cookie_dur)
                         return odgovor
-                    else:
-                        pom = "Wrong email/password"
                 else:
                     pom = "Wrong email/password"
-            except:
+            except Exception as e:
+                print(e)
                 pom = "Server error occured while you tried to sign in"
             return make_response(jsonify({"status": 0,"message":pom}))
         return jsonify({"Error": "Procedure not found"})
@@ -118,7 +119,7 @@ def profile_page():
         except:
             return redirect("/login")
         #bazdari ga da koristi moj konektor za ovaj user login
-        korisnik = User(execute_select_sql(f"select * from Users where id = {key};"))
+        korisnik = User(kon.execute_query(f"select * from Users where id = {key};", False))
         return render_template("user_d.html", email = korisnik.email, ime = korisnik.ime, prezime = korisnik.prezime, grad = korisnik.grad)
     return jsonify({"Error": "Server didn't accept that request type"})
 
@@ -171,7 +172,7 @@ def makeform_route():
             return jsonify({"data": json.dumps(rez, default=str)})
         
         if request.form["ra"] == "load":
-            forme_u_bazi = [x[0] for x in kon.execute_query("SELECT table_name FROM information_schema.tables", False)]
+            forme_u_bazi = [x[0] for x in kon.execute_query("SELECT name FROM sqlite_schema WHERE type ='table' AND name NOT LIKE 'sqlite_%';", False)]
             imena_formi = [x[:-5] for x in os.listdir(forms_folder)]
             salje = []
             for fr in imena_formi:
@@ -241,7 +242,7 @@ def forms_route(frm):
                 with open("server_files/server_errors/sql_server_related.txt", "a", encoding="UTF-8") as fp:
                     fp.write(f'''--- {datetime.now().strftime("%d/%m/%Y <> %H:%M:%S")} ---\n\nSql insert:\n\t{pom}\n\nQuery that coused the error:\n\t{que}\n\n''')
                 return jsonify({"msg": "There was an error while submitting the form, please try again later."})
-        except pyodbc.Error as e:
+        except sqlite3.Error as e:
             with open("server_files/server_errors/sql_server_related.txt", "a", encoding="UTF-8") as fp:
                 fp.write(f'''--- {datetime.now().strftime("%d/%m/%Y <> %H:%M:%S")} ---\n\nSql insert:\n\t{e.args[1]}\n\nQuery that coused the error:\n\t{que}\n\n''')
             return jsonify({"msg": "There was an error while submitting the form, please try again later."})
@@ -417,11 +418,12 @@ def about_us_route():
 #placeholder-end
 
 if __name__ == "__main__":
+    #app.run(port = 7000)
     serve(TransLogger(app, 
             setup_console_handler=False,
-            logger_name="Eco_platform", 
-            format = ('[%(time)s] Metod: %(REQUEST_METHOD)s Status: %(status)s\tSize: %(bytes)s [bytes]\tReqd: %(REQUEST_URI)s')),
+            logger_name="EKO", 
+            format = ('[%(time)s] %(REQUEST_METHOD)s %(status)s\t %(bytes)s [bytes]\t%(REQUEST_URI)s')),
             host='0.0.0.0',
-            port=5000
+            port=7000
             #url_scheme = "https"                     
     )
