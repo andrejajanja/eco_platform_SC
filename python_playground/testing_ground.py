@@ -1,5 +1,3 @@
-import redis
+x = '''The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum"'''
 
-re = redis.Redis(host = "127.0.0.1", port = "6379", db=0) #db = 0 - session cookies
-
-print(re.get("aa"))
+print(len(x))

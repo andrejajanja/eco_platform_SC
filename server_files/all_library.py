@@ -260,7 +260,7 @@ def generate_post_from_dict(di, file: str, default_file: str, default_path: str)
     with open(default_file, mode="r", encoding="UTF-8") as fp:
         soup = bs4.BeautifulSoup(fp.read(), features="html.parser")
     soup.head.title.string = f"{di['head']} • The Environmental Team"
-    cont = soup.find("div", attrs={"id": "kontekst"})
+    cont = soup.find("div", attrs={"id": "kontekst"}) #change this id as to be right on event page
 
     pomd = ""
     for x in di["date"].split("-")[::-1]:
@@ -296,18 +296,44 @@ def generate_post_from_dict(di, file: str, default_file: str, default_path: str)
 def generate_events_page(di: dict, file: str)->None:
     with open(file, mode="r", encoding="UTF-8") as fp:
         soup = bs4.BeautifulSoup(fp.read(), features="html.parser")
-    cont = soup.find("div", attrs={"id": "kontekst"})
+    cont = soup.find("div", attrs={"class": "events"})
     date = ""
     for x in di['date'].split("-")[::-1]:
         date += f"{x}."
-    cont.insert(0, f'''<a href="/events/{di['head'].lower().replace(" ", "-")}" target="_self" rel="next" class="event">
-                <img src="/static/images/{di['type']}.png" class="event_img">
-                <h1 class="event_ttl">{di['head']}</h1>
-                <img src="/static/images/location.png" class="event_img">
-                <p class = "event_txt">{di['lok']}</p>
-                <img src="/static/images/calendar.png" class="event_img">
-                <p class = "event_txt">{date}</p>
-        </a>''')
+    cont.insert(0, f'''        
+        <div class="event-cards green-border green-fill">
+                {di['head']}<br>
+                <h2>{di['lok']}</h2>
+                <p>{di["txt"][0:162]}...</p>
+                <a class="green-border button2" href="/events/{di['head'].lower().replace(" ", "-")}">View more</a><br>
+                {date}
+            </div>''')
+
+    formatter = bs4.formatter.HTMLFormatter(indent=4)
+    with open(file, mode="w", encoding="UTF-8") as fp:
+        fp.write(soup.prettify(formatter=formatter))
+
+def generate_main_page(di: dict, file: str)->None:
+    with open(file, mode="r", encoding="UTF-8") as fp:
+        soup = bs4.BeautifulSoup(fp.read(), features="html.parser")
+
+    for x in soup.children:
+        print(x)
+
+    cont = soup.find("ul", attrs={"id": "latest"})
+    date = ""
+    for x in di['date'].split("-")[::-1]:
+        date += f"{x}."
+    cont.insert(0, f'''        
+            <li>
+                <a href="/events/{di['head'].lower().replace(" ", "-")}">
+                <h2>{di['head']}<br></h2>
+                <p>{di["lok"]}<br></p>
+                <p>{date}<br></p>                    
+                </a>
+            </li>''')
+    
+    #FIND A WAY TO REMOVE LAST CHILD BS4
 
     formatter = bs4.formatter.HTMLFormatter(indent=4)
     with open(file, mode="w", encoding="UTF-8") as fp:
@@ -316,7 +342,7 @@ def generate_events_page(di: dict, file: str)->None:
 def regenerate_events_page(page_name: str, file: str):
     with open(file, mode="r", encoding="UTF-8") as fp:
         soup = bs4.BeautifulSoup(fp.read(), features="html.parser")
-    cont = soup.find("div", attrs={"id": "kontekst"})
+    cont = soup.find("div", attrs={"id": "events"})
     for i,post in enumerate(cont):
         
         if type(post) == bs4.element.NavigableString:

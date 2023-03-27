@@ -2,7 +2,7 @@ import redis,os,json,sqlite3
 from datetime import datetime
 from all_library import (User, User_log, random_string,
                     dict_to_file,SQLConnector, create_table_from_dict,file_to_dict,
-                    dict_u_html, insert_into, generate_post_from_dict, generate_events_page,
+                    dict_u_html, insert_into, generate_post_from_dict, generate_events_page, generate_main_page,
                     regenerate_events_page, format_date)
 from flask import (Flask, jsonify, make_response, redirect, render_template,
                    request)
@@ -43,7 +43,7 @@ def page_not_found(e):
 
 @app.route('/', methods = ["GET", "POST"])
 def default():
-    return "Unfortunately, default page is not finnished yet"
+    return render_template("main.html")
 
 @app.route('/login', methods = ["GET", "POST"])
 def logging_in():
@@ -122,11 +122,11 @@ def profile_page():
 
 @app.route('/form-editor', methods = ["GET", "POST"])
 def makeform_route():
-    try:
-        if session_driver.exists(request.cookies["session_id"]) != 1:
-            return redirect("/login")            
-    except:
-        return redirect("/login")
+    # try:
+    #     if session_driver.exists(request.cookies["session_id"]) != 1:
+    #         return redirect("/login")            
+    # except:
+    #     return redirect("/login")
         
     if request.method == "POST":
         try:
@@ -285,11 +285,11 @@ def event_route():
 @app.route('/event-editor', methods = ["GET", "POST", "PUT"])
 def event_editor_route():
     global active_posts, active_locations
-    try:
-        if session_driver.exists(request.cookies["session_id"]) != 1:
-            return redirect("/login")            
-    except:
-        return redirect("/login")
+    # try:
+    #     if session_driver.exists(request.cookies["session_id"]) != 1:
+    #         return redirect("/login")            
+    # except:
+    #     return redirect("/login")
 
     if request.method == "POST":
         try:
@@ -348,17 +348,18 @@ def event_editor_route():
 
             return jsonify({"msg": "Successfully unpublished the post."})
         if request.form["ra"] == "pub":
-            try:
+            # try:
                 di = file_to_dict(f"{root}server_files/server_data/event_posts/{request.form['name']}.json")
-                generate_post_from_dict(di, request.form['name'], f"{root}server_files/templates/event_layout.html", f"{root}server_files/templates/event/")
-                active_posts.append(request.form['name'])
-                active_locations.append([di["kords"], di["head"], di["type"], format_date(di["date"])])
-                generate_events_page(di, f"{root}server_files/templates/events.html")
-                dict_to_file(active_locations, f"{root}server_files/server_data/locations.json")
+                # generate_post_from_dict(di, request.form['name'], f"{root}server_files/templates/event_layout.html", f"{root}server_files/templates/event/")
+                # active_posts.append(request.form['name'])
+                # active_locations.append([di["kords"], di["head"], di["type"], format_date(di["date"])])
+                # generate_events_page(di, f"{root}server_files/templates/events.html")
+                generate_main_page(di, f"{root}server_files/templates/main.html")
+                # dict_to_file(active_locations, f"{root}server_files/server_data/locations.json")
                 return jsonify({"msg": "Post published successfuly"})
-            except Exception as e:
-                print(e)
-                return jsonify({"msg": "An Error occured while publishing the post"})    
+            # except Exception as e:
+            #     print(e)
+            #     return jsonify({"msg": "An Error occured while publishing the post"})    
         if request.form["ra"] == "dlt":
             di = file_to_dict(f"{event_posts}{request.form['post']}.json")
             for p in di["imgs"]:
@@ -408,12 +409,12 @@ def about_us_route():
 #placeholder-end
 
 if __name__ == "__main__":
-    #app.run(port = 7000)
-    serve(TransLogger(app, 
-            setup_console_handler=False,
-            logger_name="EKO", 
-            format = ('[%(time)s] %(REQUEST_METHOD)s %(status)s\t %(bytes)s [bytes]\t%(REQUEST_URI)s')),
-            host='0.0.0.0',
-            port=7000
-            #url_scheme = "https"                     
-    )
+    app.run(host = "0.0.0.0", port = 7000)
+    # serve(TransLogger(app, 
+    #         setup_console_handler=False,
+    #         logger_name="EKO", 
+    #         format = ('[%(time)s] %(REQUEST_METHOD)s %(status)s\t %(bytes)s [bytes]\t%(REQUEST_URI)s')),
+    #         host='0.0.0.0',
+    #         port=7000
+    #         #url_scheme = "https"                     
+    # )
