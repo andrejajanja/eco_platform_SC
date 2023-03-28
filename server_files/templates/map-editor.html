@@ -3,28 +3,52 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Map Editor • The Environmental Team</title>
-        <link rel="icon" href="/static/images/light-bulb.png" type="image/x-icon"/>
+        <link rel="icon" href="/static/images/logo.png" type="image/x-icon"/>
         <script defer type="text/javascript" src='/static/js/map-editor.js'></script>
         <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2KFn-b-s5YNgoZgfr9jwPQ3fAWQQQcdY&callback=mapInitialization"></script>
+        <link rel="stylesheet" type="text/css" href='/static/styles/head-style.css'>
         <link rel="stylesheet" type="text/css" href='/static/styles/head_style.css'>
         <link rel="stylesheet" type="text/css" href='/static/styles/map-editor.css'>
     </head>
     <body>
-        <div id = "header">
-            <h1 id = "naslov">The Environmental Team</h1>
-            <div id = "stranice">
-                <a class = "dugme_head" href = "/events">Events</a>
-                <a class = "dugme_head" href = "/map">Map</a>
-                <a class = "dugme_head" href = "/about-us">About Us</a>
-                <div class = "dropdown_head">
-                    <button class = "btn_drop">Account</button>
-                    <div class="dropdown_sadrzaj">
-                        <a class = "elem_dropdown" href = "/user">My Account</a>
-                        <a class = "elem_dropdown" href = "/logout">Logout</a>
+        <nav class="green-border-navbar green-fill-navbar navbar">
+            <a href="/">
+                <img class="navbar-left" src="static/images/logo.png"/>
+            </a>
+            <ul class="navbar-middle">
+                <li>
+                    <a href="/events">
+                        Events
+                    </a>
+                </li>
+                <li>
+                    <a href="/map">
+                        Map
+                    </a>
+                </li>
+                <li>
+                    <a href="/contact-us">
+                        Contact us
+                    </a>
+                </li>
+                <li>
+                    <a href="/about-us">
+                        About us
+                    </a>
+                </li>
+            </ul>
+            <div class="navbar-right">
+                <div class = "dropdown-head">
+                    <button class = "dropdown-btn"><img src = "/static/images/profile.png"></button>
+                    <div class="dropdown-content green-border green-fill">
+                        <a class = "dropdown-elem" href = "/user">Account information</a>
+                        <a class = "dropdown-elem" href = "/forms-editor">Forms Editor</a>
+                        <a class = "dropdown-elem" href = "/events-editor">Events Editor</a>
+                        <a class = "dropdown-elem" href = "/logout">Logout</a>
                     </div>                    
                 </div>
             </div>
-        </div>
+        </nav>
         <div id = "kontekst">
             <div id = "mapa"></div>
             <form id = "place">
@@ -34,7 +58,7 @@
                 <input type="submit" id = "pick_btn" value = "Pick" data-fun = "p">
             </form>
         </div>
-        <div id = "footer">
+        <div class="footer green-fill">
             <p>Made by Andreja Janković, 2023, andrejajanja@gmail.com</p>
         </div>
     </body>

@@ -45,7 +45,7 @@ html = f'''<!DOCTYPE html lang = "en">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{ime_rute} • The Environmental Team</title>
-        <link rel="icon" href="/static/images/light-bulb.png" type="image/x-icon"/>
+        <link rel="icon" href="/static/images/logo.png" type="image/x-icon"/>
         <script type = "text/javascript" src='/static/js/lib.js'></script>
         <script defer type="text/javascript" src='/static/js/{ime_rute}.js'></script>
         <link rel="stylesheet" type="text/css" href='/static/styles/head_style.css'>

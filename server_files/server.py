@@ -43,7 +43,13 @@ def page_not_found(e):
 
 @app.route('/', methods = ["GET", "POST"])
 def default():
-    return render_template("main.html")
+    if request.method == "GET":
+        try:
+            if session_driver.exists(request.cookies["session_id"]) == 1:                
+                return render_template("main.html", loged_in = "inserted_html/loged.html")
+        except:
+            pass
+        return render_template("main.html", loged_in = "inserted_html/sign_in_html.html")
 
 @app.route('/login', methods = ["GET", "POST"])
 def logging_in():
@@ -90,7 +96,7 @@ def logout_route():
     except:
         return jsonify({"msg": "Invalid request for this route"})
     session_driver.delete(coockie_id)
-    res = make_response(redirect("/login"))
+    res = make_response(redirect("/"))
     res.set_cookie("session_id", "", max_age=0)
     return res
 
@@ -120,7 +126,7 @@ def profile_page():
 
 #FINNISH FORGOT PASSWORD
 
-@app.route('/form-editor', methods = ["GET", "POST"])
+@app.route('/forms-editor', methods = ["GET", "POST"])
 def makeform_route():
     # try:
     #     if session_driver.exists(request.cookies["session_id"]) != 1:
@@ -282,7 +288,7 @@ def event_route():
             pass
         return render_template("events.html", loged_in = "inserted_html/sign_in_html.html")
 
-@app.route('/event-editor', methods = ["GET", "POST", "PUT"])
+@app.route('/events-editor', methods = ["GET", "POST", "PUT"])
 def event_editor_route():
     global active_posts, active_locations
     # try:
@@ -404,18 +410,24 @@ def event_layout_route(pst):
 
 @app.route('/about-us', methods = ["GET", "POST"])
 def about_us_route():
-    return render_template("about-us.html")
+    if request.method == "GET":
+        try:
+            if session_driver.exists(request.cookies["session_id"]) == 1:                
+                return render_template("about-us.html", loged_in = "inserted_html/loged.html")
+        except:
+            pass
+        return render_template("about-us.html", loged_in = "inserted_html/sign_in_html.html")
 
 #placeholder-start
 #placeholder-end
 
 if __name__ == "__main__":
-    app.run(host = "0.0.0.0", port = 7000)
-    # serve(TransLogger(app, 
-    #         setup_console_handler=False,
-    #         logger_name="EKO", 
-    #         format = ('[%(time)s] %(REQUEST_METHOD)s %(status)s\t %(bytes)s [bytes]\t%(REQUEST_URI)s')),
-    #         host='0.0.0.0',
-    #         port=7000
-    #         #url_scheme = "https"                     
-    # )
+    #app.run(host = "0.0.0.0", port = 7000)
+    serve(TransLogger(app, 
+            setup_console_handler=False,
+            logger_name="EKO", 
+            format = ('[%(time)s] %(REQUEST_METHOD)s %(status)s\t %(bytes)s [bytes]\t%(REQUEST_URI)s')),
+            host='0.0.0.0',
+            port=7000,
+            url_scheme = "https"                     
+    )

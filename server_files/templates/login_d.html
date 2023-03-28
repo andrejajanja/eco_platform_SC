@@ -3,22 +3,43 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Login Page • The Environmental Team</title>
-        <link rel="icon" href="static/images/light-bulb.png" type="image/x-icon"/>
+        <link rel="icon" href="static/images/logo.png" type="image/x-icon"/>
         <script type = "text/javascript" src='/static/js/lib.js'></script>
         <script defer type="text/javascript" src='/static/js/login.js'></script>
+        <link rel="stylesheet" type="text/css" href='/static/styles/head-style.css'>
         <link rel="stylesheet" type="text/css" href='/static/styles/head_style.css'>
         <link rel="stylesheet" type="text/css" href='/static/styles/login_d.css'>
     </head>
     <body>
-        <div id = "header">
-            <h1 id = "naslov">The Environmental Team</h1>
-            <div id = "stranice">
-                <a class = "dugme_head" href = "/events">Events</a>
-                <a class = "dugme_head" href = "/map">Map</a>
-                <a class = "dugme_head" href = "/join-us">Join Us</a>
-                <a class = "dugme_head" href = "/about-us">About Us</a>
+        <nav class="green-border-navbar green-fill-navbar navbar">
+            <a href="/">
+                <img class="navbar-left" src="static/images/logo.png"/>
+            </a>
+            <ul class="navbar-middle">
+                <li>
+                    <a href="/events">
+                        Events
+                    </a>
+                </li>
+                <li>
+                    <a href="/map">
+                        Map
+                    </a>
+                </li>
+                <li>
+                    <a href="/contact-us">
+                        Contact us
+                    </a>
+                </li>
+                <li>
+                    <a href="/about-us">
+                        About us
+                    </a>
+                </li>
+            </ul>
+            <div class="navbar-right">
             </div>
-        </div>
+        </nav>
         
         <form id = "kontekst">
             <div id = "status_login">Error! You didn't enter your password.</div>
@@ -27,19 +48,18 @@
             </div>
             <div class = "paket_naslov_txt_unos">
                 <p class = "naslov_za_unos_polje">E-mail:</p>
-                <input name = "usname" class = "unos_polje_txt" type="text" placeholder="H̸̪͑̓e̴̫͒̂r̶͓̫̾e̴̤̞̍͌">
+                <input name = "usname" class = "unos_polje_txt" type="text" placeholder="Here">
             </div>
             <div class = "paket_naslov_txt_unos">
                 <p class = "naslov_za_unos_polje">Password:</p>
-                <input name = "pass" class = "unos_polje_txt" type="password" placeholder="H̷̢̨͙̹̥̞̱͓̪͑́̔́̉̈́͌́e̸͙͉̠̬̞̗̬̱̓̓̊͘ṟ̴̫̥̊é̶̜̘̂͝͝">
+                <input name = "pass" class = "unos_polje_txt" type="password" placeholder="Here">
             </div>
             <div class = "dugmici_region">
                 <input name ="dugmence" data-fun="log" class = "dugme log" type = "submit" value = "Sign in">
-                <input name ="dugmence" data-fun="reg" class = "dugme sign" type = "submit" value = "Create an account">
                 <input name ="dugmence" data-fun="forgp" class = "dugme forgpass" type = "submit" value = "Forgot password?">
             </div>
         </form>
-        <div id = "footer">
+        <div class="footer green-fill">
             <p>Made by Andreja Janković, 2023, andrejajanja@gmail.com</p>
         </div>
     </body>

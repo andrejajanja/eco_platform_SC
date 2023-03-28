@@ -27,5 +27,5 @@ window.initMap = mapInitialization;
 frm_lok.addEventListener("submit", function(e){
     e.preventDefault();
     window.localStorage.setItem("post_lok", JSON.stringify([adr.value, krd.value]));
-    window.location.href = window.origin + "/event-editor";
+    window.location.href = window.origin + "/events-editor";
 })

@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Map • The Environmental Team</title>
+        <title>🗺️Map🗺️ • The Environmental Team</title>
         <link rel="icon" href="/static/images/logo.png" type="image/x-icon"/>
         <link rel="stylesheet" type="text/css" href='/static/styles/head-style.css'>
         <link rel="stylesheet" type="text/css" href='/static/styles/map.css'>
@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/map">
+                    <a style="border-bottom: #34A853 solid 2px;">
                         Map
                     </a>
                 </li>
@@ -39,8 +39,7 @@
                 </li>
             </ul>
             <div class="navbar-right">
-                <img src="profile.png"/>
-                <img src="profile.png"/>
+                {%include loged_in %}
             </div>
         </nav>
         <div id = "mapa"></div>

@@ -3,6 +3,7 @@
     --post_list_size: 2.25em;
 }
 #kontekst{
+    margin-top: 1.5%;
     display: flex;
     flex-direction: row;
 }
@@ -219,7 +220,6 @@
     padding: 0;
     width: 90%;
     border: solid 0.01vh var(--boja-tema);
-    border-top: none;
     border-bottom-right-radius: 2vh;
     border-bottom-left-radius: 2vh;
 }
