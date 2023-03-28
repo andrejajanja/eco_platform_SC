@@ -3,7 +3,7 @@ from datetime import datetime
 from all_library import (User, User_log, random_string,
                     dict_to_file,SQLConnector, create_table_from_dict,file_to_dict,
                     dict_u_html, insert_into, generate_post_from_dict, generate_events_page, generate_main_page,
-                    regenerate_events_page, format_date)
+                    regenerate_events_page, format_date, regenerate_main_page)
 from flask import (Flask, jsonify, make_response, redirect, render_template,
                    request)
 from waitress import serve
@@ -330,8 +330,8 @@ def event_editor_route():
         if request.form["ra"] == "unpub":
             os.remove(f"{root}server_files/templates/event/{request.form['post']}.html")
             regenerate_events_page(request.form['post'], f"{root}server_files/templates/events.html")
+            regenerate_main_page(request.form['post'], f"{root}server_files/templates/main.html")
             active_posts.remove(request.form['post'])
-
             pom = active_locations
             active_locations = {}
             for lok in pom:
@@ -369,6 +369,7 @@ def event_editor_route():
             if request.form['post'] in active_posts:
                 os.remove(f"{root}server_files/templates/event/{request.form['post']}.html")            
             regenerate_events_page(request.form['post'], f"{root}server_files/templates/events.html")
+            regenerate_main_page(request.form['post'], f"{root}server_files/templates/main.html")
             pom = active_locations
             active_locations = {}
             for lok in pom:

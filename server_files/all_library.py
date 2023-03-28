@@ -316,7 +316,6 @@ def generate_events_page(di: dict, file: str)->None:
 def generate_main_page(di: dict, file: str)->None:
     with open(file, mode="r", encoding="UTF-8") as fp:
         soup = bs4.BeautifulSoup(fp.read(), features="html.parser")
-
     cont = soup.find("ul", attrs={"id": "latest"})
     date = ""
     for x in di['date'].split("-")[::-1]:
@@ -329,10 +328,9 @@ def generate_main_page(di: dict, file: str)->None:
                 <p>{date}<br></p>                    
                 </a>
             </li>''')
-    deca = cont.findChildren("li")
-    # GET THIS CHILD REMOVAL TO WORK WHEN THERE ARE MORE THAN TWO POSTS
-    if len(deca) == 3:
-        deca[2].decompose()
+    deca = cont.select("li")
+    if len(deca) == 2:
+        deca[1].decompose()
     
     formatter = bs4.formatter.HTMLFormatter(indent=4)
     with open(file, mode="w", encoding="UTF-8") as fp:
@@ -342,6 +340,21 @@ def regenerate_events_page(page_name: str, file: str):
     with open(file, mode="r", encoding="UTF-8") as fp:
         soup = bs4.BeautifulSoup(fp.read(), features="html.parser")
     cont = soup.find("div", attrs={"class": "events"})
+    for i,post in enumerate(cont):
+        if type(post) == bs4.element.NavigableString:
+            continue
+        link = post.find("a")
+        if page_name in link["href"]:
+            post.decompose()
+            break
+    formatter = bs4.formatter.HTMLFormatter(indent=4)
+    with open(file, mode="w", encoding="UTF-8") as fp:
+        fp.write(soup.prettify(formatter=formatter))
+
+def regenerate_main_page(page_name: str, file: str):
+    with open(file, mode="r", encoding="UTF-8") as fp:
+        soup = bs4.BeautifulSoup(fp.read(), features="html.parser")
+    cont = soup.find("ul", attrs={"id": "latest"})
     for i,post in enumerate(cont):
         if type(post) == bs4.element.NavigableString:
             continue
