@@ -261,11 +261,11 @@ def map_route():
         
 @app.route('/map-editor', methods = ["GET", "POST"])
 def map_editor_route():
-    try:
-        if session_driver.exists(request.cookies["session_id"]) != 1:
-            return redirect("/login")            
-    except:
-        return redirect("/login")
+    # try:
+    #     if session_driver.exists(request.cookies["session_id"]) != 1:
+    #         return redirect("/login")            
+    # except:
+    #     return redirect("/login")
     
     if request.method == "GET":
         return render_template("map-editor.html")
@@ -348,18 +348,18 @@ def event_editor_route():
 
             return jsonify({"msg": "Successfully unpublished the post."})
         if request.form["ra"] == "pub":
-            # try:
+            try:
                 di = file_to_dict(f"{root}server_files/server_data/event_posts/{request.form['name']}.json")
-                # generate_post_from_dict(di, request.form['name'], f"{root}server_files/templates/event_layout.html", f"{root}server_files/templates/event/")
-                # active_posts.append(request.form['name'])
-                # active_locations.append([di["kords"], di["head"], di["type"], format_date(di["date"])])
-                # generate_events_page(di, f"{root}server_files/templates/events.html")
+                generate_post_from_dict(di, request.form['name'], f"{root}server_files/templates/event_layout.html", f"{root}server_files/templates/event/")
+                active_posts.append(request.form['name'])
+                active_locations.append([di["kords"], di["head"], di["type"], format_date(di["date"])])
+                generate_events_page(di, f"{root}server_files/templates/events.html")
                 generate_main_page(di, f"{root}server_files/templates/main.html")
-                # dict_to_file(active_locations, f"{root}server_files/server_data/locations.json")
+                dict_to_file(active_locations, f"{root}server_files/server_data/locations.json")
                 return jsonify({"msg": "Post published successfuly"})
-            # except Exception as e:
-            #     print(e)
-            #     return jsonify({"msg": "An Error occured while publishing the post"})    
+            except Exception as e:
+                print(e)
+                return jsonify({"msg": "An Error occured while publishing the post"})    
         if request.form["ra"] == "dlt":
             di = file_to_dict(f"{event_posts}{request.form['post']}.json")
             for p in di["imgs"]:
