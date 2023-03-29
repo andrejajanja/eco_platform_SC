@@ -163,14 +163,8 @@ h1{
 /* LANDING */
 
 .landing{
-    padding-top: 50px;
-    padding-left: 20%;
+    padding-inline: 3rem;
     width: 50%;
-}
-
-.landing h3{
-    padding: 0px 0px 30px 0px;
-    color: black;
 }
 
 /* CARDS */
@@ -178,8 +172,9 @@ h1{
 .cards-section{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin: 10% 25% 10% 25%;
+    justify-content: center;
+    gap: 2rem;
+    margin-block: 4.5rem;
 }
 
 .cards{
@@ -212,13 +207,24 @@ h1{
     font-family: 'PT Mono', monospace;
 }
 
+.main-title{
+    margin-top: 4.5rem;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    box-sizing: border-box;
+}
+
 /* FOOTER */
 
 .footer{
-    position: absolute;
     left: 0;
     width: 100%;
 
     border-top:#34A853 solid 3px;
     height: 150px;
+}
+
+.landing-desc{
+    padding-bottom: 2rem;
 }

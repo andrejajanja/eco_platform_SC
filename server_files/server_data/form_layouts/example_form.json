@@ -1,0 +1,31 @@
+{
+    "file": "example_form",
+    "exp_date": "",
+    "exp_time": "",
+    "title": "This is an example form",
+    "description": "Description",
+    "fields": [
+        {
+            "type": "sentc",
+            "head": "Name"
+        },
+        {
+            "type": "sentc",
+            "head": "Surname"
+        },
+        {
+            "type": "parag",
+            "head": "Tell us something about yourself"
+        },
+        {
+            "type": "checkb",
+            "head": "Choose position",
+            "options": [
+                "Coordinator",
+                "Assistaint to coordinator",
+                "Organizer"
+            ],
+            "multiple": 1
+        }
+    ]
+}

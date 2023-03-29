@@ -1,2 +1,35 @@
-
 /*Komponente:*/
+
+#kontekst{
+    box-sizing: border-box;
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-card{
+    line-height: 1.6;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    box-sizing: border-box;
+    padding: 3%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.about-img{
+    width: 50%;
+    align-self: center;
+    margin-block: 1.5rem;
+}
+
+.about-head{
+    color: #34A853;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    border-bottom: solid #34A853 2px;
+    padding-bottom: .5rem;
+}

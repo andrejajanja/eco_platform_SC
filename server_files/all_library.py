@@ -303,11 +303,11 @@ def generate_events_page(di: dict, file: str)->None:
         date += f"{x}."
     cont.insert(0, f'''        
         <div class="event-cards green-border green-fill">
-                {di['head']}<br>
+                <h1 class = "event-card-title">{di['head']}</h1>
                 <h2>{di['lok']}</h2>
                 <p>{di["txt"][0:162]}...</p>
-                <a class="green-border button2" href="/events/{di['head'].lower().replace(" ", "-")}">View more</a><br>
-                {date}
+                <p>{date}</p>
+                <a class="green-border button2" href="/events/{di['head'].lower().replace(" ", "-")}">View more</a><br>                
             </div>''')
 
     formatter = bs4.formatter.HTMLFormatter(indent=4)
@@ -326,7 +326,7 @@ def generate_main_page(di: dict, file: str)->None:
                 <a href="/events/{di['head'].lower().replace(" ", "-")}">
                 <h2>{di['head']}<br></h2>
                 <p>{di["lok"]}<br></p>
-                <p>{date}<br></p>                    
+                <p>{date}<br></p>                
                 </a>
             </li>''')
     deca = cont.select("li")

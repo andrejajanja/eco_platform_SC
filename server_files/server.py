@@ -10,6 +10,7 @@ from waitress import serve
 from paste.translogger import TransLogger
 
 root = ""
+#root = "/root/eco_platform_SC/"
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -120,7 +121,6 @@ def profile_page():
             key = session_driver.get(request.cookies['session_id']).decode()
         except:
             return redirect("/login")
-        #bazdari ga da koristi moj konektor za ovaj user login
         korisnik = User(kon.execute_query(f"select * from Users where id = {key};", False))
         return render_template("user_d.html", email = korisnik.email, ime = korisnik.ime, prezime = korisnik.prezime, grad = korisnik.grad)
     return jsonify({"Error": "Server didn't accept that request type"})
@@ -244,10 +244,14 @@ def forms_route(frm):
             return jsonify({"msg": "There was an error while submitting the form, please try again later."})
     if request.method == "GET":
         if frm in active_forms:
-            return render_template(f"forms/{frm}.html")
+            try:
+                if session_driver.exists(request.cookies["session_id"]) == 1:                
+                    return render_template(f"forms/{frm}.html", loged_in = "inserted_html/loged.html")
+            except:
+                pass
+            return render_template(f"forms/{frm}.html", loged_in = "inserted_html/sign_in_html.html")
         else:
-            print("Serviraj ta forma trenuto nije aktivna stranicu")
-            return render_template("form_layout.html")
+            return render_template("default_event.html")
             
 @app.route('/map', methods = ["GET", "POST"])
 def map_route():
@@ -268,11 +272,11 @@ def map_route():
         
 @app.route('/map-editor', methods = ["GET", "POST"])
 def map_editor_route():
-    # try:
-    #     if session_driver.exists(request.cookies["session_id"]) != 1:
-    #         return redirect("/login")            
-    # except:
-    #     return redirect("/login")
+    try:
+        if session_driver.exists(request.cookies["session_id"]) != 1:
+            return redirect("/login")            
+    except:
+        return redirect("/login")
     
     if request.method == "GET":
         return render_template("map-editor.html")
@@ -292,11 +296,11 @@ def event_route():
 @app.route('/events-editor', methods = ["GET", "POST", "PUT"])
 def event_editor_route():
     global active_posts, active_locations
-    # try:
-    #     if session_driver.exists(request.cookies["session_id"]) != 1:
-    #         return redirect("/login")            
-    # except:
-    #     return redirect("/login")
+    try:
+        if session_driver.exists(request.cookies["session_id"]) != 1:
+            return redirect("/login")            
+    except:
+        return redirect("/login")
 
     if request.method == "POST":
         try:
@@ -405,7 +409,12 @@ def event_editor_route():
 def event_layout_route(pst):
     if request.method == "GET":
         if pst in active_posts:
-            return render_template(f"event/{pst}.html")
+            try:
+                if session_driver.exists(request.cookies["session_id"]) == 1:                
+                    return render_template(f"event/{pst}.html", loged_in = "inserted_html/loged.html")
+            except:
+                pass
+            return render_template(f"event/{pst}.html", loged_in = "inserted_html/sign_in_html.html")
         else:
             return render_template("default_event.html")
 
@@ -430,5 +439,6 @@ if __name__ == "__main__":
             format = ('[%(time)s] %(REQUEST_METHOD)s %(status)s\t %(bytes)s [bytes]\t%(REQUEST_URI)s')),
             host='0.0.0.0',
             port=7000,
-            url_scheme = "https"                     
+            threads = 50,
+            url_scheme = "https"
     )

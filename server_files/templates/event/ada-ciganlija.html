@@ -6,49 +6,58 @@
         Ada Ciganlija • The Environmental Team
     </title>
     <link href="/static/images/logo.png" rel="icon" type="image/x-icon"/>
+    <link href="/static/styles/head-style.css" rel="stylesheet" type="text/css"/>
     <link href="/static/styles/head_style.css" rel="stylesheet" type="text/css"/>
     <link href="/static/styles/event_layout.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <div id="header">
-        <h1 id="naslov">
-            The Environmental Team
-        </h1>
-        <div id="stranice">
-            <a class="dugme_head" href="/events">
-                Events
-            </a>
-            <a class="dugme_head" href="/map">
-                Map
-            </a>
-            <a class="dugme_head" href="/about-us">
-                About Us
-            </a>
+    <nav class="green-border-navbar green-fill-navbar navbar">
+        <img class="navbar-left" src="/static/images/logo.png"/>
+        <ul class="navbar-middle">
+            <li>
+                <a href="/events">
+                    Events
+                </a>
+            </li>
+            <li>
+                <a href="/map">
+                    Map
+                </a>
+            </li>
+            <li>
+                <a href="/contact-us">
+                    Contact us
+                </a>
+            </li>
+            <li>
+                <a href="/about-us">
+                    About us
+                </a>
+            </li>
+        </ul>
+        <div class="navbar-right">
+            {%include loged_in %}
         </div>
-    </div>
+    </nav>
     <div id="kontekst">
         <div id ="postHeader">
             <img id = "typeImg" src ="/static/images/Cleaning.png">
             <h1 id = "ttl">Ada Ciganlija</h1>
             <div id = "location">
                 <img src = "/static/images/location.png">
-                <a onclick = "clickLink('Ada Ciganlija')" title = "Click here to see the location" rel = "next" target = "_self" href = "/map">Čukarica, Belgrade, Serbia</a>
+                <a onclick = "clickLink('Ada Ciganlija')" title = "Click here to see the location" rel = "next" target = "_self" href = "/map">985 12, Slovakia</a>
             </div>
             <div id = "time">
                 <img src = "/static/images/calendar.png">
-                <p>22.03.2023.</p>
+                <p>18.05.2023.</p>
             </div>              
-            
+            <a id = "frmLnk" href = "/forms/example_form">Join us by filling out this form!</a>
         </div>
-        <p class = "postParag">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id dignissim diam. Sed id convallis ante. Etiam imperdiet dolor in interdum cursus. Mauris lobortis urna eu nunc ornare, ut cursus urna cursus. Aliquam vel ultrices ipsum, et iaculis dui. Sed vitae elit finibus, vehicula felis a, varius sapien. Proin ultrices mauris eu justo porttitor commodo. Pellentesque ac ultricies neque. Aenean blandit, massa non posuere auctor, odio purus imperdiet urna, sed iaculis lacus erat a sem. Aenean at arcu posuere, egestas dui et, malesuada augue. Nam vel auctor enim, aliquet accumsan est. Suspendisse vel dui euismod, feugiat mi a, aliquet nisi. Ut eu vestibulum quam.Vestibulum luctus quam sit amet libero posuere rutrum. Integer consectetur ipsum augue, quis tincidunt lorem placerat sed. Suspendisse turpis nunc, gravida eget risus eu, maximus fermentum felis. Phasellus vehicula orci finibus, eleifend massa nec, aliquam quam. Nulla vel laoreet tortor. Nullam at efficitur sapien. Etiam sit amet blandit neque. Proin venenatis a nulla in blandit. Praesent luctus at justo eget consequat. Cras condimentum est et eros interdum, ut cursus elit rutrum. Maecenas hendrerit lacus nibh, id sagittis sapien mattis auctor. Mauris eget nulla nisi. Proin posuere congue magna quis pharetra. Aenean et euismod mauris. Curabitur lacus nisi, accumsan at finibus et, eleifend sit amet lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-        <img class = "postImg" src = "/static/event_images/Assassin's%20Creed%20Origins%20Screenshot%202020.12.09%20-%2020.19.59.88.png">
-        <p class = "postParag">Curabitur dui purus, imperdiet eget maximus et, lacinia eu ante. Praesent vitae sollicitudin purus, ac ornare arcu. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin justo eros, dapibus non felis sed, commodo faucibus turpis. Nunc quis justo non orci pellentesque pellentesque. Proin ultrices dignissim felis. Aenean quis pharetra tellus. Pellentesque eget nisi tincidunt, facilisis risus ac, cursus orci.Nullam sit amet maximus tellus. Cras accumsan libero eget sollicitudin rutrum. Sed imperdiet eros vitae egestas auctor. Pellentesque egestas enim ut ex lobortis, a pharetra lorem euismod. Vivamus sodales vel odio quis faucibus. Fusce eleifend scelerisque massa et volutpat. Nam sollicitudin lobortis malesuada. Quisque nec consequat nibh, sed elementum augue. In sem velit, accumsan at lacus eget, molestie tincidunt libero. Curabitur hendrerit efficitur turpis, non tristique ex tincidunt nec. Cras ut rhoncus leo. Mauris varius nisl convallis dui cursus ultricies. Integer sit amet pulvinar neque. Duis congue odio ac luctus interdum. Nunc scelerisque dolor lectus.Praesent ultricies posuere dignissim. Proin a maximus tortor, at dictum dolor. Maecenas quis tempus leo, interdum mattis lectus. Maecenas tristique quam vel velit finibus, non porta massa consectetur. Aliquam rhoncus eros id augue iaculis dictum. Nulla vel ligula at nunc cursus lobortis. Sed vehicula, purus sit amet facilisis tempor, risus ligula fringilla augue, id suscipit neque sem ut ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur auctor ullamcorper. Aenean sodales, urna porttitor mattis dignissim, nunc ipsum tincidunt metus, id convallis sapien est nec lectus. Pellentesque eu ullamcorper quam. Nam dui felis, molestie non congue quis, eleifend at elit.</p>
-        <img class = "postImg" src = "/static/event_images/Assassin's%20Creed%20Origins%20Screenshot%202020.12.09%20-%2020.20.08.59.png">
-        <p class = "postParag">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id dignissim diam. Sed id convallis ante. Etiam imperdiet dolor in interdum cursus. Mauris lobortis urna eu nunc ornare, ut cursus urna cursus. Aliquam vel ultrices ipsum, et iaculis dui. Sed vitae elit finibus, vehicula felis a, varius sapien. Proin ultrices mauris eu justo porttitor commodo. Pellentesque ac ultricies neque. Aenean blandit, massa non posuere auctor, odio purus imperdiet urna, sed iaculis lacus erat a sem. Aenean at arcu posuere, egestas dui et, malesuada augue. Nam vel auctor enim, aliquet accumsan est. Suspendisse vel dui euismod, feugiat mi a, aliquet nisi. Ut eu vestibulum quam.Vestibulum luctus quam sit amet libero posuere rutrum. Integer consectetur ipsum augue, quis tincidunt lorem placerat sed. Suspendisse turpis nunc, gravida eget risus eu, maximus fermentum felis. Phasellus vehicula orci finibus, eleifend massa nec, aliquam quam. Nulla vel laoreet tortor. Nullam at efficitur sapien. Etiam sit amet blandit neque. Proin venenatis a nulla in blandit. Praesent luctus at justo eget consequat. Cras condimentum est et eros interdum, ut cursus elit rutrum. Maecenas hendrerit lacus nibh, id sagittis sapien mattis auctor. Mauris eget nulla nisi. Proin posuere congue magna quis pharetra. Aenean et euismod mauris. Curabitur lacus nisi, accumsan at finibus et, eleifend sit amet lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-        <img class = "postImg" src = "/static/event_images/Assassin's%20Creed%20Origins%20Screenshot%202020.12.09%20-%2020.20.16.21.png">
-        <p class = "postParag">Curabitur dui purus, imperdiet eget maximus et, lacinia eu ante. Praesent vitae sollicitudin purus, ac ornare arcu. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin justo eros, dapibus non felis sed, commodo faucibus turpis. Nunc quis justo non orci pellentesque pellentesque. Proin ultrices dignissim felis. Aenean quis pharetra tellus. Pellentesque eget nisi tincidunt, facilisis risus ac, cursus orci.Nullam sit amet maximus tellus. Cras accumsan libero eget sollicitudin rutrum. Sed imperdiet eros vitae egestas auctor. Pellentesque egestas enim ut ex lobortis, a pharetra lorem euismod. Vivamus sodales vel odio quis faucibus. Fusce eleifend scelerisque massa et volutpat. Nam sollicitudin lobortis malesuada. Quisque nec consequat nibh, sed elementum augue. In sem velit, accumsan at lacus eget, molestie tincidunt libero. Curabitur hendrerit efficitur turpis, non tristique ex tincidunt nec. Cras ut rhoncus leo. Mauris varius nisl convallis dui cursus ultricies. Integer sit amet pulvinar neque. Duis congue odio ac luctus interdum. Nunc scelerisque dolor lectus.Praesent ultricies posuere dignissim. Proin a maximus tortor, at dictum dolor. Maecenas quis tempus leo, interdum mattis lectus. Maecenas tristique quam vel velit finibus, non porta massa consectetur. Aliquam rhoncus eros id augue iaculis dictum. Nulla vel ligula at nunc cursus lobortis. Sed vehicula, purus sit amet facilisis tempor, risus ligula fringilla augue, id suscipit neque sem ut ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur auctor ullamcorper. Aenean sodales, urna porttitor mattis dignissim, nunc ipsum tincidunt metus, id convallis sapien est nec lectus. Pellentesque eu ullamcorper quam. Nam dui felis, molestie non congue quis, eleifend at elit.</p>
+        <p class = "postParag">Jagoda</p>
+        <img class = "postImg" src = "/static/event_images/strawberry-character.webp">
+        <p class = "postParag">Jagodica</p>
     </div>
-    <div id="footer">
+    <div class="footer green-fill">
         <p>
             Made by Andreja Janković, 2023, andrejajanja@gmail.com
         </p>

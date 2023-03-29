@@ -7,8 +7,11 @@
 }
 
 .event-cards{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 25px;
-    height: 300px;
+    height: 370px;
     width: 350px;
 }
 
@@ -25,9 +28,11 @@
 }
 
 .button2{
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 0%);
     padding: 5px 30px 5px 30px;
     background-color: white;
+}
+
+.event-card-title{
+    position: absolute;
+    transform: translateY(-75px);
 }
