@@ -9,6 +9,8 @@ from flask import (Flask, jsonify, make_response, redirect, render_template,
 from waitress import serve
 from paste.translogger import TransLogger
 
+root = ""
+
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 print("Initialized the app and Imported Modules")
@@ -19,10 +21,9 @@ cookie_dur = 3600 #seconds
 #Databases
 session_driver = redis.Redis(host = "127.0.0.1", port = "6379", db=0) #db = 0 - session cookies
 print("Connected to redis")
-kon = SQLConnector(r"EKO.db")
+kon = SQLConnector(r"EKO.db", root)
 print("Loaded and connected to SQL db")
 
-root = ""
 forms_folder = f"{root}server_files/server_data/form_layouts/"
 images_folder = f"{root}server_files/static/event_images/"
 event_posts = f"{root}server_files/server_data/event_posts/"

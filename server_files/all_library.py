@@ -51,8 +51,9 @@ class SQLConnector:
     executr_query
     
     '''
-    def __init__(self, conn_str: str) -> None:
+    def __init__(self, conn_str: str, root: str) -> None:
         self.con = sqlite3.connect(conn_str, check_same_thread=False)
+        self.ro = root
     
     def execute_query(self,query: str, commit: bool):
         '''
@@ -79,7 +80,7 @@ class SQLConnector:
             else:
                 return kurs.fetchall()
         except Exception as e:
-            with open("server_files/server_errors/sql_server_related.txt", "a", encoding="UTF-8") as fp:
+            with open(f"{self.ro}server_files/server_errors/sql_server_related.txt", "a", encoding="UTF-8") as fp:
                     fp.write(f'''--- {datetime.now().strftime("%d/%m/%Y <> %H:%M:%S")} ---\n\nFlask server tried to execute this query:\n\t{query}\nThat caused this error: {e}\n\n''')
             return 0
 
