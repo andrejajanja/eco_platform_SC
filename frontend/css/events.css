@@ -1,0 +1,33 @@
+.events{
+    margin: 10% 15% 10% 15%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.event-cards{
+    margin: 25px;
+    height: 300px;
+    width: 350px;
+}
+
+.event-cards h2{
+    padding: 10px;
+    font-family: 'PT Mono', monospace;
+    text-align: center;
+    margin: 10px 25px 10px 25px;
+    border-bottom: #34A853 solid 2px;
+}
+
+.event-cards p{
+    margin: 20px 20px 30px 20px;
+}
+
+.button2{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    padding: 5px 30px 5px 30px;
+    background-color: white;
+}

@@ -1,0 +1,44 @@
+.signin{
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+
+.signin-card{
+    width: 500px;
+    height: 280px;
+
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.signin-card input{
+    border:none;
+    background-color: #E8F5E9;
+    border-bottom: solid #34A853 2px;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 10px;
+}
+
+.signin-card input[type=text], select{
+    padding: 12px 20px;
+    padding-right: 200px;
+}
+
+.signin-card h2{
+    margin: 8% 5% 0% 10%;
+}
+
+.signin button{
+    margin-top: 30px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+    width: 300px;
+    padding: 5px 0px;
+    border-radius: 10px;
+
+    font-size: 16px;
+}

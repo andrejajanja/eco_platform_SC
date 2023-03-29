@@ -1,0 +1,51 @@
+.contactus{
+    margin: 5% 10% 10% 10%;
+}
+
+.contactus h2{
+    padding: 10px;
+    border-bottom: #34A853 solid 2px;
+}
+
+.contactus-section{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content:flex-start;
+}
+
+.contactus-card{
+    background-color: #E8F5E9;
+    border: #34A853 solid 2px;
+    border-radius: 20px;
+    margin: 20px;
+
+
+    height: 100px;
+    width: 450px;
+}
+
+.contactus-section div img{
+    border-radius: 50px;
+    position: relative;
+    left: 40px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.contactus-card div {
+    position: relative;
+    top: -60%;
+    left: 80%;
+    transform: translate(-50%, 0%);
+}
+
+.contactus-card div h3{
+    margin: 2px;
+    font-weight: 700;
+}
+
+.contactus-card div p{
+    margin: 2px;
+}
+

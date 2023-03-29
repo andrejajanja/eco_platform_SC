@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/head-style.css">
+    <link rel="stylesheet" href="css/eventeditor.css">
     <title>Document</title>
 </head>
 <body>
@@ -31,36 +32,32 @@
         </div>
     </nav>
 
-    <div class="landing green-border green-fill">
-        <h1 style="font-size: 64px;">The<br>Environmental<br>Team</h1>
-        <h3>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</h3>
-        <button class="button1">JOIN US</button>
-    </div>
-
-    <div class="cards-section">
-        <div class="cards green-border green-fill">
-            <h1>Latest Forms</h1>
-            <ul class="cards-items">
-                <li><h2>Form Title 1<br></h2></li>
-                <li><h2>Form Title 1<br></h2></li>
-                <li><h2>Form Title 1<br></h2></li>
-            </ul>
+    <div class="eventeditor">
+        <div class="eventeditor-left">
+            <button class="green-border">New Post</button>
+            <div class="eventeditor-select green-border green-fill">
+                <div class="green-border">
+                    <h2>Post 1</h2>
+                </div>
+            </div>
         </div>
-        <div class="cards green-border green-fill">
-            <h1>Events</h1>
-            <ul class="cards-items">
-                <li>
-                    <h2>Form Title 1<br></h2>
-                    <a>Marcius 15 ter. Budapest, Hungary 2023-10-07</a>
-                </li>
-                <li>       
-                    <h2>Form Title 1<br></h2>
-                    <a>Marcius 15 ter. Budapest, Hungary 2023-10-07</a>
-                </li>
-            </ul>
-        </div>
-        <div class="cards green-border green-fill">
-
+        <div class="eventeditor-right">
+            <div class="green-border green-fill eventeditor-right-form">
+                <label>Title:</label><input type="text" style="width: 600px; margin-left: 10px;"><br>
+                <label>Location:</label><input type="text" style="width: 230px; margin-left: 10px; margin-right: 10px;"><label>Type:</label><input type="text" style="width: 230px; margin-left: 10px;"><br>
+                <label>Form:</label><input type="text" style="width: 230px; margin-left: 40px; margin-right: 10px;"><label>Date:</label><input type="date" style="width: 230px; margin-left: 10px;"><br>
+                <label>Description:</label><br>
+                <textarea rows="8" cols="50">Enter text here...</textarea>
+            </div>
+            <div class="green-border green-fill eventeditor-right-image">
+                <div class="green-border">
+                    <img src="img1.jpg">
+                    <img src="img2.jpg">
+                </div>
+            </div>
+            <div class="eventeditor-right-buttons">
+                <button class="green-border green-fill">Publish</button> <button class="green-border green-fill">Save</button>
+            </div>
         </div>
     </div>
 

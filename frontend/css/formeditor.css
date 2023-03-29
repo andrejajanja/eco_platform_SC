@@ -1,0 +1,91 @@
+.formeditor{
+    margin: 5% 18% 5% 20%;
+    display:flex;
+    justify-content: space-between;
+}
+
+.formeditor-left button{
+    width: 250px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 50px;
+    margin: 8px;
+    margin-left: 5%;
+    background-color: #E8F5E9;
+}
+
+.formeditor-left button:hover{
+    color:white;
+    background-color: #3e8e41;
+}
+
+.formeditor-select{
+    margin-top: 15px;
+    margin-left: 2.5%;
+    width: 300px;
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+    border-right: none;
+    border-radius: 30px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.formeditor-select-card{
+    margin: 25px;
+    border-radius: 50px;
+    background-color: white;
+}
+
+.formeditor-select-card h2{
+    margin: 0;
+    padding: 5px 10px 5px 20px;
+    font-size: 20px;
+}
+
+.formeditor-right{
+    height: 800px;
+    width: 800px;
+    overflow: auto;
+}
+
+.formeditor-right div{
+    border-radius: 30px;
+    width: 700px;
+    height: auto;
+    padding: 20px 30px;
+}
+
+.formeditor-right div label{
+    font-size: 20px;
+    color:#34A853;
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+    font-weight: lighter;
+}
+
+.formeditor-right div input{
+    border: #34A853 solid 2px;
+    border-radius: 50px;
+    padding: 7px;
+    font-size: 16px;
+}
+
+.formeditor-right div textarea{
+    font-size: 16px;
+    border: #34A853 solid 2px;
+}
+
+.formeditor-right-buttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.formeditor-right-buttons button{
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 50px;
+    margin: 8px;
+    margin-left: 5%;
+}

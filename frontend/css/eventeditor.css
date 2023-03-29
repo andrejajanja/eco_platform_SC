@@ -1,0 +1,108 @@
+.eventeditor{
+    margin: 5% 18% 5% 20%;
+    display:flex;
+    justify-content: space-between;
+}
+
+.eventeditor button{
+    width: 250px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 50px;
+    margin: 8px;
+    margin-left: 5%;
+    background-color: #E8F5E9;
+}
+
+.eventeditor button:hover{
+    color:white;
+    background-color: #3e8e41;
+}
+
+.eventeditor-select{
+    margin-top: 15px;
+    margin-left: 2.5%;
+    width: 300px;
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+    border-right: none;
+    border-radius: 30px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.eventeditor-select div{
+    margin: 25px;
+    border-radius: 50px;
+    background-color: white;
+}
+
+.eventeditor-select div h2{
+    margin: 0;
+    padding: 5px 10px 5px 20px;
+    font-size: 20px;
+}
+
+.eventeditor-right{
+    width: 800px;
+}
+
+.eventeditor-right-form{
+    margin-bottom: 20px;
+}
+
+.eventeditor-right div{
+    border-radius: 30px;
+    width: 700px;
+    height: auto;
+    padding: 20px 30px;
+}
+
+.eventeditor-right div label{
+    font-size: 20px;
+    color:#34A853;
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+    font-weight: lighter;
+}
+
+.eventeditor-right div input{
+    border: #34A853 solid 2px;
+    border-radius: 50px;
+    padding: 7px;
+    font-size: 16px;
+}
+
+.eventeditor-right div textarea{
+    font-size: 16px;
+    border: #34A853 solid 2px;
+}
+
+.eventeditor-right-image{
+    padding: 10px !important;
+    width: 740px !important; 
+    margin-bottom: 20px;
+}
+
+.eventeditor-right-image div{
+    padding: 10px;
+    background-color: white;
+    width: 500px;
+}
+
+.eventeditor-right-image div img{
+    display: inline;
+    overflow: auto;
+    margin-left: 10px;
+    height: 128px;
+    width: 128px;
+    border-radius: 10px;
+}
+
+.eventeditor-right-buttons{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
