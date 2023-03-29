@@ -21,7 +21,7 @@ cookie_dur = 3600 #seconds
 #Databases
 session_driver = redis.Redis(host = "127.0.0.1", port = "6379", db=0) #db = 0 - session cookies
 print("Connected to redis")
-kon = SQLConnector(r"EKO.db", root)
+kon = SQLConnector(f"{root}EKO.db", root)
 print("Loaded and connected to SQL db")
 
 forms_folder = f"{root}server_files/server_data/form_layouts/"
