@@ -356,7 +356,6 @@ def event_editor_route():
                 pom.extend(x[1])                
                 active_locations.append(pom)
             dict_to_file(active_locations, f"{root}server_files/server_data/locations.json")
-
             return jsonify({"msg": "Successfully unpublished the post."})
         if request.form["ra"] == "pub":
             try:
@@ -377,23 +376,25 @@ def event_editor_route():
                 p = p[p.rfind("/")+1:].replace("%20", " ")
                 os.remove(images_folder + p)
             os.remove(f"{event_posts}{request.form['post']}.json")
-            if request.form['post'] in active_posts:
+            if request.form['post'] in active_posts:                
+
+                pom = active_locations
+                active_locations = {}
+                for lok in pom:
+                    active_locations[lok[0]] = lok[1:]
+                active_locations.pop(event_locations[request.form['post']])
+                pom = active_locations
+                active_locations = []
+                for x in zip(pom.keys(), pom.values()):
+                    x = list(x)
+                    pom = [x[0]]
+                    pom.extend(x[1])                
+                    active_locations.append(pom)
+                dict_to_file(active_locations, f"{root}server_files/server_data/locations.json")
                 os.remove(f"{root}server_files/templates/event/{request.form['post']}.html")            
             regenerate_events_page(request.form['post'], f"{root}server_files/templates/events.html")
             regenerate_main_page(request.form['post'], f"{root}server_files/templates/main.html")
-            pom = active_locations
-            active_locations = {}
-            for lok in pom:
-                active_locations[lok[0]] = lok[1:]
-            active_locations.pop(event_locations[request.form['post']])
-            pom = active_locations
-            active_locations = []
-            for x in zip(pom.keys(), pom.values()):
-                x = list(x)
-                pom = [x[0]]
-                pom.extend(x[1])                
-                active_locations.append(pom)
-            dict_to_file(active_locations, f"{root}server_files/server_data/locations.json")
+
             event_locations.pop(request.form["post"])
             dict_to_file(event_locations, f"{root}server_files/server_data/savedLocations.json")
             return jsonify({"msg": "File deleted successfully"})    
@@ -432,13 +433,13 @@ def about_us_route():
 #placeholder-end
 
 if __name__ == "__main__":
-    #app.run(host = "0.0.0.0", port = 7000)
-    serve(TransLogger(app, 
-            setup_console_handler=False,
-            logger_name="EKO", 
-            format = ('[%(time)s] %(REQUEST_METHOD)s %(status)s\t %(bytes)s [bytes]\t%(REQUEST_URI)s')),
-            host='0.0.0.0',
-            port=7000,
-            threads = 50,
-            url_scheme = "https"
-    )
+    app.run(host = "0.0.0.0", port = 7000)
+    # serve(TransLogger(app, 
+    #         setup_console_handler=False,
+    #         logger_name="EKO", 
+    #         format = ('[%(time)s] %(REQUEST_METHOD)s %(status)s\t %(bytes)s [bytes]\t%(REQUEST_URI)s')),
+    #         host='0.0.0.0',
+    #         port=7000,
+    #         threads = 50,
+    #         url_scheme = "https"
+    # )
