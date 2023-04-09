@@ -316,7 +316,7 @@ def event_editor_route():
                 isActive = 0
                 if post in active_posts:
                     isActive = 1
-                postovi.append([post,isActive, ])
+                postovi.append([post,isActive])
             return jsonify({"posts": postovi})
         if request.form["ra"] == "lp":
             pom = ""
