@@ -129,11 +129,11 @@ def profile_page():
 
 @app.route('/forms-editor', methods = ["GET", "POST"])
 def makeform_route():
-    # try:
-    #     if session_driver.exists(request.cookies["session_id"]) != 1:
-    #         return redirect("/login")            
-    # except:
-    #     return redirect("/login")
+    try:
+        if session_driver.exists(request.cookies["session_id"]) != 1:
+            return redirect("/login")            
+    except:
+        return redirect("/login")
         
     if request.method == "POST":
         try:
@@ -316,7 +316,7 @@ def event_editor_route():
                 isActive = 0
                 if post in active_posts:
                     isActive = 1
-                postovi.append([post,isActive])
+                postovi.append([post,isActive, ])
             return jsonify({"posts": postovi})
         if request.form["ra"] == "lp":
             pom = ""
@@ -376,8 +376,7 @@ def event_editor_route():
                 p = p[p.rfind("/")+1:].replace("%20", " ")
                 os.remove(images_folder + p)
             os.remove(f"{event_posts}{request.form['post']}.json")
-            if request.form['post'] in active_posts:                
-
+            if request.form['post'] in active_posts:
                 pom = active_locations
                 active_locations = {}
                 for lok in pom:
@@ -394,7 +393,6 @@ def event_editor_route():
                 os.remove(f"{root}server_files/templates/event/{request.form['post']}.html")            
             regenerate_events_page(request.form['post'], f"{root}server_files/templates/events.html")
             regenerate_main_page(request.form['post'], f"{root}server_files/templates/main.html")
-
             event_locations.pop(request.form["post"])
             dict_to_file(event_locations, f"{root}server_files/server_data/savedLocations.json")
             return jsonify({"msg": "File deleted successfully"})    

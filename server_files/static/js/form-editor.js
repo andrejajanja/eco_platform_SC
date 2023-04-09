@@ -247,11 +247,22 @@ explorer.addEventListener("submit", async function(e){
         case "publish":
             if(publs[maker.children[0].children[0].value]){
                 alert("Form is already published");
-            }else{
-                odg = await req_json({"ra": "pub", "pub_form": maker.children[0].children[0].value}, "POST");
-                fillFormsExplorer();
-                alert(odg["msg"]);
-            }            
+                maker.style.display = "flex";
+                loader.style.display = "none";
+                break;
+            }
+
+            if(maker.children[0].children[0].value == ""){
+                alert("You didn't select any form");
+                maker.style.display = "flex";
+                loader.style.display = "none";
+                break;
+            }
+
+            odg = await req_json({"ra": "pub", "pub_form": maker.children[0].children[0].value}, "POST");
+            fillFormsExplorer();
+            alert(odg["msg"]);
+        
             maker.style.display = "flex";
             loader.style.display = "none";
             break;

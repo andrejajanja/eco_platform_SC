@@ -29,8 +29,6 @@ let opcija_frm = templates.querySelector(".opcija_frm");
 let pom_kords = [];
 //#endregion variables
 
-let f = "https://stackoverflow.com/questions/10317017/javascript-get-domain-only-from-document-referrer";
-
 //#region functions
 async function savePost() {
     let pomm;
@@ -289,7 +287,7 @@ posts.addEventListener("submit", async function(e){
             ocistiPovrsinu();
             return;
         case "unpubp":
-            pom = await req_json({"ra": "unpub", "post": e.submitter.dataset.post, "kords": e.submitter.parentNode.dataset.kords},"POST");
+            pom = await req_json({"ra": "unpub", "post": e.submitter.dataset.post},"POST");
             e.submitter.style.display = "none";
             editor.dataset.pubed = "0";
             alert(pom["msg"]);
