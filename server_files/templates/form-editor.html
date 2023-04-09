@@ -5,10 +5,10 @@
         <title>📝Form Editor📝 • The Environmental Team</title>
         <link rel="icon" href="/static/images/logo.png" type="image/x-icon"/>
         <script type = "text/javascript" src='/static/js/lib.js'></script>
-        <script defer type="text/javascript" src='/static/js/makeform.js'></script>
+        <script defer type="text/javascript" src='/static/js/form-editor.js'></script>
         <link rel="stylesheet" type="text/css" href='/static/styles/head_style.css'>
         <link rel="stylesheet" type="text/css" href='/static/styles/head-style.css'>
-        <link rel="stylesheet" type="text/css" href='/static/styles/makeform.css'>
+        <link rel="stylesheet" type="text/css" href='/static/styles/form-editor.css'>
     </head>
     <body>
         <nav class="green-border-navbar green-fill-navbar navbar">
@@ -51,6 +51,10 @@
         </nav>
         <div id = "kontekst">
             <form id = "explorer">
+                <div class ="buttonBox">
+                    <input name = "new" type = "submit" value = "New Form" id = "new_form_btn" class = "controlBtn">
+                    <input name = "publish" type = "submit" value = "Publish Current" id = "publish_btn" class = "controlBtn">
+                </div>
                 <p id = "naslov_past_forms">Past forms:</p>
                 <div id = "prosle_forme"></div>
             </form>

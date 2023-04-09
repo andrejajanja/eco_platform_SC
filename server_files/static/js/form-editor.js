@@ -160,20 +160,7 @@ async function fillFormsExplorer(){
             }
         };
         forme.appendChild(pom);
-    })
-
-    pom = form_file.children[1].cloneNode(true);
-    pom.id = "new_form_btn";
-    pom.name = "new";
-    pom.value = "- New Form -";
-    forme.appendChild(pom);
-
-    //maybe put this one up next to past forms
-    pom = form_file.children[1].cloneNode(true);
-    pom.id = "publish_btn";
-    pom.name = "publish";
-    pom.value = "-- Publish current form --";
-    forme.appendChild(pom); 
+    });
 }
 function new_form() {
     //code cisti sve sot je na forma povrsini;
