@@ -9,6 +9,8 @@ html{
     --hover-color-change: 0.25s;
     --loader-size: 10em;
     --header-height: 3.75em;
+    --fill-tema: #C8E6C9;
+    --text-color-theme: #34A853;
 }
 body{
     margin: 0%;

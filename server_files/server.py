@@ -8,13 +8,12 @@ from flask import (Flask, jsonify, make_response, redirect, render_template,
                    request)
 from waitress import serve
 from paste.translogger import TransLogger
-
+print("Imported modules")
 root = ""
 #root = "/root/eco_platform_SC/"
-
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-print("Initialized the app and Imported Modules")
+print("Initialized server")
 
 #server specific variables -- this can go to the json file
 cookie_dur = 3600 #seconds
@@ -29,7 +28,6 @@ forms_folder = f"{root}server_files/server_data/form_layouts/"
 images_folder = f"{root}server_files/static/event_images/"
 event_posts = f"{root}server_files/server_data/event_posts/"
 
-#getting already published forms and posts
 active_forms, active_posts, = [],[]
 for frm in os.listdir(f"{root}server_files/templates/forms/"):
     active_forms.append(frm[:-5])
