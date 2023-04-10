@@ -19,13 +19,14 @@ let checkbSelect = templates.querySelector(".checkbSelect");
 let checkbRow = templates.querySelector(".checkbRow");
 let checkAll = templates.querySelector('[data-fun = "checkAll"]');
 let uncheckAll = templates.querySelector('[data-fun = "uncheckAll"]');
+let threeDots = templates.querySelector(".threeDots");
 //let tableHeader = templates.querySelector(".tHeader");
 let row = document.createElement("tr");
 let field = document.createElement("td");
 
 let frm_name = "";
 let trenIndex = 0;
-let pocetniIndex = 0;
+let pocetniIndex = 1;
 let publs = {};
 //#endregion variables
 
@@ -37,25 +38,28 @@ function updateSerial(){
     }
 }
 function fokusirajMakerElement(e){
-    let i = e.currentTarget.i;
+    let i = e.currentTarget.parentNode.parentNode.i;
+    console.log(i)
     //dalja logika za dodavanje editora
     if(!(i==(maker.children.length-1)) && !(i<pocetniIndex)){
         //skini ceo editor sa polja koje je bilo pre
         if(trenIndex>0 && !(maker.children[trenIndex].children[0].children.length == 1)){
             try{
                 maker.children[trenIndex].children[0].removeChild(maker.children[trenIndex].children[0].lastChild);
-                maker.children[trenIndex].addEventListener("click", fokusirajMakerElement,false);
+                maker.children[trenIndex].children[0].appendChild(threeDots.cloneNode());
+                maker.children[trenIndex].children[0].children[1].addEventListener("click", fokusirajMakerElement,false);
                 if(maker.children[trenIndex].dataset.type == "checkb"){
                     maker.children[trenIndex].children[1].removeChild(maker.children[trenIndex].children[1].lastChild);
                 }   
             }catch{}  
         }
         //dodaj editor na trenutno polje
+        console.log(maker.children[i])
+        maker.children[i].children[0].removeChild(maker.children[i].children[0].children[1]);
         maker.children[i].children[0].appendChild(tipovi.cloneNode(true));
         if(maker.children[i].dataset.type == "checkb"){
             maker.children[i].children[1].appendChild(panel.cloneNode(true))
         }
-        maker.children[i].removeEventListener("click", fokusirajMakerElement, false);
         maker.children[i].i = i;
     }
     trenIndex = i;
@@ -371,7 +375,7 @@ maker.addEventListener("submit", async function(e){
             let pom_fld = polje_sample.cloneNode(true);
             pom_fld.children[0].children[0].name = "na" + (duzina-pocetniIndex-1);
             maker.insertBefore(pom_fld, maker.children[duzina-1]);
-            maker.children[duzina-1].addEventListener("click", fokusirajMakerElement);
+            maker.children[duzina-1].children[0].children[1].addEventListener("click", fokusirajMakerElement);
             updateSerial();
             break;
         case "sub_fld":
@@ -568,7 +572,7 @@ responces.addEventListener("submit", async function (e) {
 
 fillFormsExplorer();
 for(let i = pocetniIndex; i<maker.children.length-1;i++){
-    maker.children[i].addEventListener("click", fokusirajMakerElement,false);
+    maker.children[i].children[0].children[1].addEventListener("click", fokusirajMakerElement,false);
     maker.children[i].i = i;
 }
 //#endregion funkcije koje se izvrsavaju posthumno

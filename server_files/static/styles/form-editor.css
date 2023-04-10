@@ -612,3 +612,12 @@ td{
     width: 80%;
     margin: 0.25em;
 }
+
+.threeDots{
+    margin-left: auto;
+}
+.threeDots:after{
+    color: black;
+    content: '\2807';
+    font-size: 3em;
+}

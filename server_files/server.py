@@ -127,11 +127,11 @@ def profile_page():
 
 @app.route('/forms-editor', methods = ["GET", "POST"])
 def makeform_route():
-    try:
-        if session_driver.exists(request.cookies["session_id"]) != 1:
-            return redirect("/login")            
-    except:
-        return redirect("/login")
+    # try:
+    #     if session_driver.exists(request.cookies["session_id"]) != 1:
+    #         return redirect("/login")
+    # except:
+    #     return redirect("/login")
         
     if request.method == "POST":
         try:
