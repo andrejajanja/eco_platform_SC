@@ -607,3 +607,8 @@ td{
     border-left: var(--underline-thickness) solid var(--hover-forms);
     border-right: var(--underline-thickness) solid var(--hover-forms);
 }
+
+.checkAll{
+    width: 80%;
+    margin: 0.25em;
+}
