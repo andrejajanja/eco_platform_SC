@@ -307,7 +307,7 @@ def generate_events_page(di: dict, file: str)->None:
                 <h2>{di['lok']}</h2>
                 <p>{di["txt"][0:162]}...</p>
                 <p>{date}</p>
-                <a class="green-border button2" href="/events/{di['head'].lower().replace(" ", "-")}">View more</a><br>                
+                <a class="green-border event-link" href="/events/{di['head'].lower().replace(" ", "-")}">View more</a><br>                
             </div>''')
 
     formatter = bs4.formatter.HTMLFormatter(indent=4)

@@ -5,34 +5,29 @@
     align-items:center;
     justify-content:space-between;
 }
-
 .event-cards{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 25px;
-    height: 370px;
-    width: 350px;
+    margin: 1.5em;
+    height: 25em;
+    width: 21em;
 }
-
 .event-cards h2{
-    padding: 10px;
+    padding: 0.35em;
     font-family: 'PT Mono', monospace;
     text-align: center;
-    margin: 10px 25px 10px 25px;
+    margin: 0.5em 1.5em 0.5em 1.5em;
     border-bottom: #34A853 solid 2px;
 }
-
 .event-cards p{
-    margin: 20px 20px 30px 20px;
+    margin: 1.5em 1.5em 1.5em 1.5em;
 }
-
-.button2{
-    padding: 5px 30px 5px 30px;
+.event-link{
+    padding: 0.5em 2em 0.5em 2em;
     background-color: white;
 }
-
 .event-card-title{
     position: absolute;
-    transform: translateY(-75px);
+    transform: translateY(-2.25em);
 }

@@ -1,17 +1,17 @@
-#kontekst{
+.context{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 5em;
 }
-
-/*Komponente:*/
 #sign_err{
     font-size: 50vh;
-    font-family: var(--font-tema);
+    font-family: 'Open Sans', sans-serif;
     font-weight: 300;
 }
-
 #desc{
+    text-align: center;
+    line-height: 2em;
     font-size: 3vh;
-    font-family: var(--font-tema);
+    font-family: 'Open Sans', sans-serif;
 }

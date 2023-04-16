@@ -6,6 +6,7 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
         <link href="static/images/logo.png" rel="icon" type="image/x-icon"/>
         <link href="/static/styles/head-style.css" rel="stylesheet"/>
+        <link href="/static/styles/index.css" rel="stylesheet"/>
         <title>
             🌿 The Environmental Team 🌿
         </title>
@@ -39,7 +40,7 @@
                 {%include loged_in %}
             </div>
         </nav>
-        <div class="landing green-fill green-border main-title">
+        <div class="landing main-title green-fill green-border">
             <h1 style="font-size: 3.5rem;">
                 The
                 <br/>
@@ -50,9 +51,6 @@
             <p class="landing-desc">
                 Project of the students of the Fifth Belgrade Gymnasium
             </p>
-            <!-- <button class="green-fill button1">
-                JOIN US
-            </button> -->
         </div>
         <div class="cards-section">
             <div class="cards green-border green-fill">
@@ -85,13 +83,33 @@
                     </li>
                 </ul>
             </div>
-            <div class="cards green-border green-fill">
-            </div>
         </div>
         <div class="footer green-fill">
-            <p>
-                Made by Andreja Janković, 2023, andrejajanja@gmail.com
-            </p>
+            <div class="row space-between">
+                <div class="about-grid">
+                    <div class="graphic-logo">
+                        <img src="static/images/logo.png" width="200" height="200" alt="Logo">
+                    </div>
+                    <div class="text-logo">
+                        The Environmental Team
+                    </div>                    
+                    <div class="empty"></div> <!-- empty div just used to form nice-looking grid -->
+                    <div class="description">
+                        Insert some slogan or moto here
+                    </div>
+                </div>
+                <div class="nav-grid">
+                    <div class="nav-link"><a href="/events">events</a></div>
+                    <div class="nav-link"><a href="/map">map</a></div>
+                    <div class="nav-link"><a href="/contact-us">contact us</a></div>
+                    <div class="nav-link"><a href="/about-us">about us</a></div>
+                </div>
+            </div>
+            <div class="row center">
+                <div class="authors">
+                    Made by Andreja Janković, andrejajanja@gmail.com, Year 2023
+                </div>
+            </div>
         </div>
     </body>
 </html>

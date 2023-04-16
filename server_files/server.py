@@ -19,7 +19,7 @@ print("Initialized server")
 cookie_dur = 3600 #seconds
 
 #Databases
-session_driver = redis.Redis(host = "127.0.0.1", port = "6379", db=0) #db = 0 - session cookies
+#session_driver = redis.Redis(host = "127.0.0.1", port = "6379", db=0) #db = 0 - session cookies
 print("Connected to redis")
 kon = SQLConnector(f"{root}EKO.db", root)
 print("Loaded and connected to SQL db")
@@ -46,10 +46,10 @@ def default():
     if request.method == "GET":
         try:
             if session_driver.exists(request.cookies["session_id"]) == 1:                
-                return render_template("main.html", loged_in = "inserted_html/loged.html")
+                return render_template("index.html", loged_in = "inserted_html/loged.html")
         except:
             pass
-        return render_template("main.html", loged_in = "inserted_html/sign_in_html.html")
+        return render_template("index.html", loged_in = "inserted_html/sign_in_html.html")
 
 @app.route('/login', methods = ["GET", "POST"])
 def logging_in():
@@ -294,11 +294,11 @@ def event_route():
 @app.route('/events-editor', methods = ["GET", "POST", "PUT"])
 def event_editor_route():
     global active_posts, active_locations
-    try:
-        if session_driver.exists(request.cookies["session_id"]) != 1:
-            return redirect("/login")            
-    except:
-        return redirect("/login")
+    # try:
+    #     if session_driver.exists(request.cookies["session_id"]) != 1:
+    #         return redirect("/login")            
+    # except:
+    #     return redirect("/login")
 
     if request.method == "POST":
         try:
