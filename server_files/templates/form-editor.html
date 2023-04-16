@@ -6,9 +6,9 @@
         <link rel="icon" href="/static/images/logo.png" type="image/x-icon"/>
         <script type = "text/javascript" src='/static/js/lib.js'></script>
         <script defer type="text/javascript" src='/static/js/form-editor.js'></script>
-        <link rel="stylesheet" type="text/css" href='/static/styles/head_style.css'>
         <link rel="stylesheet" type="text/css" href='/static/styles/head-style.css'>
         <link rel="stylesheet" type="text/css" href='/static/styles/form-editor.css'>
+        <link rel="stylesheet" type="text/css" href='/static/styles/loader.css'>
     </head>
     <body>
         <nav class="green-border-navbar green-fill-navbar navbar">
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </nav>        
-        <div id = "kontekst">
+        <div class = "context">
             <form id = "explorer">
                 <div class ="buttonBox">
                     <input name = "new" type = "submit" value = "New Form" id = "new_form_btn" class = "controlBtn">
@@ -69,32 +69,32 @@
                 </div>
             </div>
             <form id = "maker">
-                <div id="form_header">
-                    <input data-type="name" class = "specifikacija" id = "ime_save_polje" name = "name" type = "text" placeholder="Name under which a form will be saved">
-                    <div id = "exp_box">
-                        <div id = "label_wrapper">
-                            <p id = "exp_label">Expiration:</p>
-                            <p class = "info_box">Leave both fields empty if you want a form to be perminent</p>
+                <div class="form-header green-border">
+                    <input data-type="name" class = "form-header-field yellow-border" id = "form-save-name" name = "name" type = "text" placeholder="Name under which a form will be saved">
+                    <div class = "expiration-box">
+                        <div class = "label-wrapper">
+                            <p class = "expiration-label">Expiration:</p>
+                            <p class = "info-box green-fill green-border">Leave both fields empty if you want a form to be perminent</p>
                         </div>
-                        <input class = "exp_input" type="date">
-                        <input class = "exp_input" type="time">
+                        <input class = "expiration-input yellow-border" type="date">
+                        <input class = "expiration-input yellow-border" type="time">
                     </div>
-                    <input data-type = "title" class = "specifikacija" id = "naslov_polje" name = "title" type = "text" placeholder="Enter form title here">
-                    <textarea data-type = "desc" class = "specifikacija" id = "opis_polje" name = "desc" placeholder="Enter form decription here"></textarea>
+                    <input data-type = "title" class = "form-header-field yellow-border" id = "form-title-field" name = "title" type = "text" placeholder="Enter form title here">
+                    <textarea data-type = "desc" class = "form-header-field yellow-border" id = "form-description-field" name = "desc" placeholder="Enter form decription here"></textarea>
                 </div>
                 <div data-type = "idk" class = "polje">
                     <div class = "polje_head">
                         <input class = "naslov" name = "na0" type="text" placeholder="How is this field called?">
-                        <div class = "threeDots"></div>
+                        <div class = "three-dots"></div>
                     </div>                    
                     <div class = "polje_vrednosti">
                     </div>                    
                 </div>
     
-                <div id ="dodaj">
-                    <input class = "cntrl_btn" type="submit" value = "+" data-fun = "add_fld">
-                    <input class = "cntrl_btn" type="submit" value = "-" data-fun = "sub_fld">
-                    <input class = "cntrl_btn save" type="submit" value = "Save" data-fun = "save_all">
+                <div id ="controls-panel">
+                    <input class = "controls-panel-button green-border" type="submit" value = "+" data-fun = "add_fld">
+                    <input class = "controls-panel-button green-border" type="submit" value = "-" data-fun = "sub_fld">
+                    <input class = "controls-panel-button green-border controls-panel-save" type="submit" value = "Save" data-fun = "save_all">
                 </div>
             </form>
             
@@ -142,13 +142,13 @@
             <div class = "polje">
                 <div class = "polje_head">
                     <input class = "naslov" name = "na0" type="text" placeholder="How is this field called?">
-                    <div class = "threeDots"></div>
+                    <div class = "three-dots"></div>
                 </div>                    
                 <div class = "polje_vrednosti">
                 </div>  
             </div>
             <select id = "dropdown_lista" data-fun = "select">
-                <!--Dodaj ikonice u svako select polje-->
+                <!--controls-panel ikonice u svako select polje-->
                 <option value = "idk" class = "dropdown_polje"><div class ="dropdown_opcija">Field type</div></option>
                 <option value = "sentc" class = "dropdown_polje"><div class ="dropdown_opcija">Short answer</div></option>
                 <option value = "parag" class = "dropdown_polje"><div class ="dropdown_opcija">Paragraph answer</div></option>
@@ -173,7 +173,7 @@
             <input class = "checkbRow" type = "checkbox">
             <input class = "checkAll btnStyle" data-fun="checkAll" type = "submit" value = "Check All">
             <input class = "checkAll btnStyle" data-fun="uncheckAll" type = "submit" value = "Uncheck All">
-            <div class = "threeDots"></div>
+            <div class = "three-dots"></div>
         </template>
     </body>
 </html>

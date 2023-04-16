@@ -1,12 +1,17 @@
 :root{
     --forms-list-size: 2.25em;
 }
-
-#kontekst{
+.context{
     display: flex;
     flex-direction: row;
 }
-/*Komponente*/
+
+
+/* components */
+textarea, div, input, p{
+    font-family: 'Open Sans', sans-serif;
+}
+
 #explorer{
     width: 30%;
 }
@@ -23,7 +28,6 @@
 #maker::-webkit-scrollbar {
     width: 0.6em;
 }
-
 #maker::-webkit-scrollbar-track {
     box-shadow: inset 0 0 0.1em rgba(0, 0, 0, 0.3);
     border-radius: 0.2em;
@@ -34,78 +38,9 @@
     outline: 1px solid slategrey;
 }
 
-/*#region loader*/
-
-#loader{
-    display: none;
-    width: 70%;
-    height: 100%;
-    padding-left: 30%;
-    align-items: center;
-}
-
-.spinner {
-    width: var(--loader-size);
-    height: var(--loader-size);
-    animation: spinner-y0fdc1 2s infinite ease;
-    transform-style: preserve-3d;
-}
-
-.spinner > div {
-    background-color: rgba(0, 255, 34, 0.075);
-    height: 100%;
-    position: absolute;
-    width: 100%;
-    border: 0.2em solid #09ff00;
-}
-
-.spinner div:nth-of-type(1) {
-    transform: translateZ(calc(var(--loader-size)/2*(-1))) rotateY(180deg);
-}
-
-.spinner div:nth-of-type(2) {
-    transform: rotateY(-270deg) translateX(50%);
-    transform-origin: top right;
-}
-
-.spinner div:nth-of-type(3) {
-    transform: rotateY(270deg) translateX(-50%);
-    transform-origin: center left;
-}
-
-.spinner div:nth-of-type(4) {
-    transform: rotateX(90deg) translateY(-50%);
-    transform-origin: top center;
-}
-
-.spinner div:nth-of-type(5) {
-    transform: rotateX(-90deg) translateY(50%);
-    transform-origin: bottom center;
-}
-
-.spinner div:nth-of-type(6) {
-    transform: translateZ(calc(var(--loader-size)/2));
-}
-
-@keyframes spinner-y0fdc1 {
-0% {
-    transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
-}
-
-50% {
-    transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
-}
-
-100% {
-    transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
-}
-}
-/*#endregion loader*/
-
 /*#region zavrsi ovo celo za naslov deo forme*/
-#form_header{
+.form-header{
     margin-top: 1em;
-    border: var(--boja-tema) solid var(--underline-thickness);
     width: 42em;
     display: flex;
     height: fit-content;
@@ -113,28 +48,20 @@
     border-radius: 1em;
 }
 
-.specifikacija{
+.form-header-field{
     align-self: flex-start;
     margin-top: 1em;
     margin-left: 1em;
     width: 38em;
-    border: transparent;
-    border-bottom: var(--hover-forms) solid var(--underline-thickness);
-    font-size: medium;
+    font-size: 1em;
+    padding: 0.25em;
 }
 
-textarea, div, input, p{
-    font-family: var(--font-tema);
-}
-
-#ime_save_polje{
-    
-}
-#ime_save_polje:focus{
+#form-save-name:focus{
     outline: none;
 }
 
-#exp_box{
+.expiration-box{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -142,29 +69,15 @@ textarea, div, input, p{
     width: 100%;
 }
 
-#label_wrapper{
+.label-wrapper{
     position: relative;
     margin-left: 3%;
     cursor: default;
 }
-
-#exp_label{
-    font-size: 1em;
-    font-weight: 350;
+.label-wrapper:hover > .info-box{
+    display: block;
+    animation: fadein var(--hover-color-change);
 }
-.info_box{
-    display: none;
-    position: absolute;
-    width: 28em;
-    text-align: center;
-    z-index: 2;
-    top: -2.75em;
-    padding: 0.5em;
-    background-color: var(--boja-tema);
-    border-radius: 0.75em;
-    color: var(--boja-teksta);
-}
-
 @keyframes fadein {
     0% {
         display: none;
@@ -182,37 +95,47 @@ textarea, div, input, p{
     }
 }
 
-#label_wrapper:hover > .info_box{
-    display: block;
-    animation: fadein var(--hover-color-change);
+.expiration-label{
+    font-size: 1em;
+    font-weight: 350;
 }
-.exp_input{
+.info-box{
+    display: none;
+    position: absolute;
+    width: 28em;
+    text-align: center;
+    z-index: 2;
+    top: -2.75em;
+    padding: 0.5em;
+    border-radius: 0.75em;
+    color: var(--text-color);
+}
+
+.expiration-input{
     margin-left: 5%;
     padding: 1%;
     width: 25%;
     font-weight: 350;
-    border: none;
-    border-bottom: solid var(--hover-forms) 0.1em;
     outline: none;
 }
 
-#naslov_polje{
+#form-title-field{
     font-size:large;
     width: 33.6em;
 }
-#naslov_polje:focus{
+#form-title-field:focus{
     font-size:large;
     width: 33.6em;
     outline: none;
 }
-#opis_polje{
+#form-description-field{
     outline: none;
     resize: none;
     width: 38em;
     min-height: 5em;
     margin-bottom: 1em;
 }
-#opis_polje:focus{
+#form-description-field:focus{
     outline: none;
 }
 /*#endregion zavrsi ovo celo za naslov deo forme*/
@@ -223,30 +146,29 @@ textarea, div, input, p{
     flex-direction: column;
     width: 100%;
 }
-#dodaj{
+#controls-panel{
     margin-top: 1em;
     margin-bottom: 1em;
     display: flex;
     flex-direction: row;
 }
-.cntrl_btn{
-    background-color: #ffffff;
-    border: var(--hover-forms) solid var(--underline-thickness);
+.controls-panel-button{
+    background-color: var(--green-filling);
     width: 3em;
     height: 3em;
     margin-right: 1em;
-    border-radius: 1em;
     font-size: small;
     font-weight: 600;
+    color: var(--text-color);
     padding: 0em;
     cursor:pointer;
     transition: background-color var(--hover-color-change);
 }
 
-.cntrl_btn:hover{
+.controls-panel-button:hover{
     background-color: var(--boja-teksta);
 }
-.save{
+.controls-panel-save{
     margin-left: 5em;
     width: 7em;
 }
@@ -315,12 +237,11 @@ textarea, div, input, p{
     margin-right: auto;
     padding: 1em;
     outline: none;
-
     font-family: var(--font-tema);
     font-weight: 300;
     background-color: transparent;
     border-radius: 1em;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .name_btn{
@@ -613,10 +534,10 @@ td{
     margin: 0.25em;
 }
 
-.threeDots{
+.three-dots{
     margin-left: auto;
 }
-.threeDots:after{
+.three-dots:after{
     color: black;
     content: '\2807';
     font-size: 3em;

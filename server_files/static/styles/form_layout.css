@@ -26,7 +26,7 @@ form{
     border-radius: 1em;
 }
 
-.specifikacija{
+.form-header-field{
     font-family: var(--font-tema);
     align-self: flex-start;
     margin-top: 1em;

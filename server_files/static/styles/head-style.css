@@ -6,10 +6,9 @@
     --text-color:  #34A853;
     --green-filling-nav: #C8E6C9;
     --green-filling: #E8F5E9;
+    --yellow-border-bottom: #aa8f24;
 
 /* neke stare promenljive, optimizuj */
-
-    --hover-forms: #aa8f24;
     --boja-tema: #12942a; 
     --underline-thickness: 0.1em;
     --boja-teksta: #ffe16c;
@@ -34,11 +33,15 @@ ul{
     list-style-type: none;
 }
 .green-border{
-    border:  var(--text-color) solid 2px;
-    border-radius: 20px;
+    border:  var(--text-color) solid 0.1em;
+    border-radius: 1em;
 }
 .green-fill{
     background-color: var(--green-filling);
+}
+.yellow-border{
+    border: none;
+    border-bottom: #aa8f24 solid 0.1em;
 }
 
 /* navbar and it's parts */

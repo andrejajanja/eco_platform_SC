@@ -5,7 +5,7 @@ let maker = document.querySelector("#maker");
 let responces = document.querySelector("#responces");
 let forme = document.querySelector("#prosle_forme");
 let loader = document.querySelector("#loader");
-let opisp = document.querySelector("#opis_polje");
+let opisp = document.querySelector("#form-description-field");
 let table = document.querySelector(".respoTable");
 let copyFlds = document.querySelector("#copyFlds");
 //templates
@@ -19,7 +19,7 @@ let checkbSelect = templates.querySelector(".checkbSelect");
 let checkbRow = templates.querySelector(".checkbRow");
 let checkAll = templates.querySelector('[data-fun = "checkAll"]');
 let uncheckAll = templates.querySelector('[data-fun = "uncheckAll"]');
-let threeDots = templates.querySelector(".threeDots");
+let threeDots = templates.querySelector(".three-dots");
 //let tableHeader = templates.querySelector(".tHeader");
 let row = document.createElement("tr");
 let field = document.createElement("td");
@@ -39,7 +39,6 @@ function updateSerial(){
 }
 function fokusirajMakerElement(e){
     let i = e.currentTarget.parentNode.parentNode.i;
-    console.log(i)
     //dalja logika za dodavanje editora
     if(!(i==(maker.children.length-1)) && !(i<pocetniIndex)){
         //skini ceo editor sa polja koje je bilo pre
@@ -53,8 +52,7 @@ function fokusirajMakerElement(e){
                 }   
             }catch{}  
         }
-        //dodaj editor na trenutno polje
-        console.log(maker.children[i])
+        //doodaj editor na trenutno polje
         maker.children[i].children[0].removeChild(maker.children[i].children[0].children[1]);
         maker.children[i].children[0].appendChild(tipovi.cloneNode(true));
         if(maker.children[i].dataset.type == "checkb"){
@@ -234,7 +232,7 @@ explorer.addEventListener("submit", async function(e){
                         maker.children[i+1].children[1].appendChild(checkb);
                     })
                 }
-                //dodaj ovde da moze i checkb tip polja da bazdari kako valja, jer ovde ne ubacuje uopste
+                //doodaj ovde da moze i checkb tip polja da bazdari kako valja, jer ovde ne ubacuje uopste
                 maker.children[i+1].addEventListener("click", fokusirajMakerElement,false);
             }            
             autoResize();
@@ -403,7 +401,7 @@ maker.addEventListener("submit", async function(e){
                 pom_dete = maker.children[i].cloneNode(true);
                 let tip = pom_dete.dataset.type;                
                 if(tip == "idk" || tip == undefined){
-                    //dodaj da obavestava korisnika i obelezava gde nema
+                    //doodaj da obavestava korisnika i obelezava gde nema
                     console.log("Field type unknown, skipping field");
                     continue;
                 }
