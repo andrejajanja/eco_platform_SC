@@ -219,7 +219,7 @@ def dict_u_html(di: dict, default_path: str, default_file: str) -> None:
         if item["type"] == "checkb":
             pom.p.string = item["head"]
             for opc in item["options"]:
-                kutija = bs4.BeautifulSoup('''<div class = "checkbox_polje">
+                kutija = bs4.BeautifulSoup('''<div class = "checkbox-field">
                     <input type="checkbox" class = "checkb_in">
                     <p class = "checkp_in"></p>
                 </div>''',features="html.parser")

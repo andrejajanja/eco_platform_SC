@@ -5,13 +5,10 @@
     display: flex;
     flex-direction: row;
 }
-
-
 /* components */
 textarea, div, input, p{
     font-family: 'Open Sans', sans-serif;
 }
-
 #explorer{
     width: 30%;
 }
@@ -23,8 +20,6 @@ textarea, div, input, p{
     flex-direction: column;
     overflow-y: auto;
 }
-
-/*SREDI DA SVUGDE BUDU CUSTOM SCROLL BAROVI*/
 #maker::-webkit-scrollbar {
     width: 0.6em;
 }
@@ -32,13 +27,10 @@ textarea, div, input, p{
     box-shadow: inset 0 0 0.1em rgba(0, 0, 0, 0.3);
     border-radius: 0.2em;
 }
-
 #maker::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
 }
-
-/*#region zavrsi ovo celo za naslov deo forme*/
 .form-header{
     margin-top: 1em;
     width: 42em;
@@ -47,7 +39,6 @@ textarea, div, input, p{
     flex-direction: column;
     border-radius: 1em;
 }
-
 .form-header-field{
     align-self: flex-start;
     margin-top: 1em;
@@ -56,11 +47,9 @@ textarea, div, input, p{
     font-size: 1em;
     padding: 0.25em;
 }
-
 #form-save-name:focus{
     outline: none;
 }
-
 .expiration-box{
     display: flex;
     flex-direction: row;
@@ -68,7 +57,6 @@ textarea, div, input, p{
     height: 3em;
     width: 100%;
 }
-
 .label-wrapper{
     position: relative;
     margin-left: 3%;
@@ -83,18 +71,15 @@ textarea, div, input, p{
         display: none;
         opacity: 0;
     }
-
     1% {
         display: block;
         opacity: 0;
     }
-
     100% {
         display: block;
         opacity: 1;
     }
 }
-
 .expiration-label{
     font-size: 1em;
     font-weight: 350;
@@ -110,7 +95,6 @@ textarea, div, input, p{
     border-radius: 0.75em;
     color: var(--text-color);
 }
-
 .expiration-input{
     margin-left: 5%;
     padding: 1%;
@@ -118,7 +102,6 @@ textarea, div, input, p{
     font-weight: 350;
     outline: none;
 }
-
 #form-title-field{
     font-size:large;
     width: 33.6em;
@@ -138,8 +121,6 @@ textarea, div, input, p{
 #form-description-field:focus{
     outline: none;
 }
-/*#endregion zavrsi ovo celo za naslov deo forme*/
-
 #polja{
     height: fit-content;
     display: flex;
@@ -164,7 +145,6 @@ textarea, div, input, p{
     cursor:pointer;
     transition: background-color var(--hover-color-change);
 }
-
 .controls-panel-button:hover{
     background-color: var(--boja-teksta);
 }
@@ -172,9 +152,8 @@ textarea, div, input, p{
     margin-left: 5em;
     width: 7em;
 }
-
-/*#region past forms*/
-#naslov_past_forms{
+/*past forms*/
+.title-past-forms{
     font-size: medium;
     border: 0.1em solid var(--boja-tema);
     margin-left: 1em;
@@ -184,14 +163,32 @@ textarea, div, input, p{
     padding-right: 2em;
     border-radius: 0.75em;
 }
-#prosle_forme{
+.main-controls-panel{
+    width: 100%;
+    padding: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+}
+.button-main-controls{
+    margin-right: auto;
+    padding: 1em;
+    outline: none;
+    font-family: var(--font-tema);
+    font-weight: 300;
+    background-color: transparent;
+    border-radius: 1em;
+    cursor: pointer;
+}
+#past-forms{
     width: 100%;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
 }
-
-.formice{
+.form-in-past-forms{
     width: 20vw;
     margin-left: 2em;
     background-color: transparent;
@@ -201,8 +198,7 @@ textarea, div, input, p{
     padding-bottom: 0.5em;
     border-bottom: var(--hover-forms) solid var(--underline-thickness);
 }
-
-.del_btn{
+.delete-button{
     background-image: url(/static/images/delete.png);
     background-size: 100% 100%;
     background-color: #ffffff;
@@ -217,34 +213,10 @@ textarea, div, input, p{
     transition: background-color var(--hover-color-change);
     outline: none;
 }
-
-.del_btn:hover{
+.delete-button:hover{
     background-color: var(--boja-teksta);   
 }
-
-
-.buttonBox{
-    width: 100%;
-    padding: 1em;
-    padding-left: 2em;
-    padding-right: 2em;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-}
-
-.controlBtn{
-    margin-right: auto;
-    padding: 1em;
-    outline: none;
-    font-family: var(--font-tema);
-    font-weight: 300;
-    background-color: transparent;
-    border-radius: 1em;
-    cursor: pointer;
-}
-
-.name_btn{
+.form-name-button{
     outline: none;
     font-size: 0.9em;
     width: 11em;
@@ -254,12 +226,10 @@ textarea, div, input, p{
     margin-left: 1em;
     border: transparent;
 }
-
-.name_btn:hover{
+.form-name-button:hover{
     border-bottom: var(--boja-tema) solid var(--underline-thickness);
 }
-
-.respo_btn{
+.form-responces-button{
     display: block;
     background-image: url(/static/images/exam.png);
     background-size: 100% 100%;
@@ -276,14 +246,11 @@ textarea, div, input, p{
     transition: background-color var(--hover-color-change);
     outline: none;
 }
-
-.respo_btn:hover{
+.form-responces-button:hover{
     background-color: var(--boja-teksta);   
 }
-
-/*#endregion past forms*/
-/*celo polje forme i sve njegove komponente*/
-.polje{
+/*Form field and it's components*/
+.form-field{
     display: flex;
     flex-direction: column;
     margin-top: 1em;
@@ -294,8 +261,7 @@ textarea, div, input, p{
     align-items: center;
     padding: 1em;
 }
-/*komponenete samog polja*/
-.polje_head{
+.form-field-head{
     align-items: center;
     align-self: flex-start;
     display: flex;
@@ -303,8 +269,7 @@ textarea, div, input, p{
     width: 100%;
     margin-bottom: 0.5em;
 }
-/*komponente u naslovu*/
-.naslov{
+.form-field-title{
     font-size: medium;
     align-self: flex-start;
     width: 28em;
@@ -312,40 +277,37 @@ textarea, div, input, p{
     border: transparent;
     border-bottom: var(--hover-forms) solid var(--underline-thickness);
 }
-.naslov:focus{
+.form-field-title:focus{
     outline: none;
 }
-#dropdown_lista{
+#dropdown-list-edited-field{
     font-size: medium;
     padding: 0.5em;
     margin-left: auto;
     width: 10em;
 }
-/* klasa za svaki pojedinacni tip polja*/
-.sentance_fld{
+/* Classes for individual fields*/
+.sentance-field-type{
     width: 100%;
     margin-bottom: 1em;
 }
-.paragraph_fld{
+.paragraph-field-type{
     width: 100%;
     margin-bottom: 1em;
 }
-.checkbox_fld{
+.checkbox-field-type{
     width: 100%;
     margin-bottom: 1em;
     display: flex;
     flex-direction: column;
 }
 /*#region checkboxes deo*/
-.checkbox_polje{
+.checkbox-field{
     display: flex;
     flex-direction: row;
     margin-bottom: 1.5em;
 }
-.checkkutija{
-
-}
-.checklabel{
+.checkbox-label{
     padding-bottom: 0.2em;
     align-self: flex-start;
     margin-left: 1em;
@@ -355,14 +317,14 @@ textarea, div, input, p{
     font-size: medium;
 }
 
-.checklabel:focus{
+.checkbox-label:focus{
     outline: none;
 }
 
-.panel_za_dodavanje{
+.panel-for-checkboxes{
     margin-left: 6em;
 }
-.check_btn{
+.check-button{
     width: 2em;
     height: 2em;
     border: var(--hover-forms) solid calc(var(--underline-thickness)/10); /*sredi debljinu ove granice*/

@@ -3,7 +3,7 @@ const url_stranice = window.location.href;
 const explorer = document.querySelector("#explorer");
 let maker = document.querySelector("#maker");
 let responces = document.querySelector("#responces");
-let forme = document.querySelector("#prosle_forme");
+let forme = document.querySelector("#past-forms");
 let loader = document.querySelector("#loader");
 let opisp = document.querySelector("#form-description-field");
 let table = document.querySelector(".respoTable");
@@ -11,10 +11,10 @@ let copyFlds = document.querySelector("#copyFlds");
 //templates
 let templates = document.querySelector("#templates").content.cloneNode(true);
 let polje_sample = templates.querySelector(".polje");
-let tipovi = templates.querySelector("#dropdown_lista");
-let checkkutija = templates.querySelector(".checkbox_polje");
-let panel = templates.querySelector(".panel_za_dodavanje");
-let form_file = templates.querySelector(".formice");
+let tipovi = templates.querySelector("#dropdown-list-edited-field");
+let checkkutija = templates.querySelector(".checkbox-field");
+let panel = templates.querySelector(".panel-for-checkboxes");
+let form_file = templates.querySelector(".form-in-past-forms");
 let checkbSelect = templates.querySelector(".checkbSelect");
 let checkbRow = templates.querySelector(".checkbRow");
 let checkAll = templates.querySelector('[data-fun = "checkAll"]');
@@ -77,7 +77,7 @@ function bazdariTipPolja(index){
         pom_polje.children[1].appendChild(komp);
         maker.replaceChild(pom_polje,maker.children[index]);
         maker.children[index].i = index;
-        maker.children[index].children[1].className = "sentance_fld";
+        maker.children[index].children[1].className = "sentance-field-type";
         return;
     }
 
@@ -90,7 +90,7 @@ function bazdariTipPolja(index){
         pom_polje.children[1].appendChild(komp);
         maker.replaceChild(pom_polje,maker.children[index]);
         maker.children[index].i = index;
-        maker.children[index].children[1].className = "paragraph_fld";
+        maker.children[index].children[1].className = "paragraph-field-type";
         return;
     }
 
@@ -103,7 +103,7 @@ function bazdariTipPolja(index){
 
         pom_polje.children[1].append(kutija, pom_panel)
         maker.replaceChild(pom_polje,maker.children[index]);
-        maker.children[index].children[1].className = "checkbox_fld";
+        maker.children[index].children[1].className = "checkbox-field-type";
         maker.children[index].i = index;
         return;
     }
@@ -417,7 +417,7 @@ maker.addEventListener("submit", async function(e){
                     //opc su sve opcije u samom polju, mult je da li moze vise kutija da se klikne odjednom
                     let opc = [], mult = 1;
                     pom_dete = pom_dete.children[1];
-                    if(pom_dete.children[pom_dete.children.length-1].className == "panel_za_dodavanje"){
+                    if(pom_dete.children[pom_dete.children.length-1].className == "panel-for-checkboxes"){
                         pomocna = pom_dete.children.length-1;
                     }else{
                         pomocna = pom_dete.children.length;
