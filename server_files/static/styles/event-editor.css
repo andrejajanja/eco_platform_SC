@@ -2,7 +2,9 @@
     --loader-size: 20vh;
     --post_list_size: 2.25em;
 }
-#kontekst{
+#context{
+    width: 100%;
+    height: 80%;
     margin-top: 1.5%;
     display: flex;
     flex-direction: row;
@@ -16,14 +18,14 @@
     display: flex;
     flex-direction: column;
 }
-#posts_header{
+.posts-header{
     display: flex;
     flex-direction: column;
     margin-top: 2%;
     height: fit-content;
     width: 50%;
 }
-#posts_label{
+.posts-label{
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -34,35 +36,22 @@
     font-family: var(--font-tema);
     font-size: 1.25em;
     font-weight: 350;
-    border-bottom: solid var(--boja-tema) 0.05vh;
 }
-#posts_panel{
+#posts-panel{
     display: flex;
     flex-direction: row;
     height: 50%;
     width: 100%;
 }
-.posts_panel_btn{
+.posts-panel-button{
     display: inline-flex;
     text-align: center;
     padding: 0.75em;
     padding-top: 0.55em;
     margin-left: 10%;
-    font-family: var(--font-tema);
-    font-size: 1em;
-    font-weight: 400;
-    color: black;
-    background: transparent;
-    border: solid var(--boja-tema) 0.01vh;
-    border-radius: 0.75em;
     outline: none;
-    transition: color var(--hover-color-change), background var(--hover-color-change);
 }
-.posts_panel_btn:hover{
-    color: var(--boja-teksta);
-    background: var(--boja-tema);
-}
-#posts_list{
+#posts-list{
     display: flex;
     flex-direction: column;
     width: 100%;

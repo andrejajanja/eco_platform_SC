@@ -40,6 +40,22 @@ ul{
     border-bottom: #aa8f24 solid 0.1em;
 }
 
+.green-button{
+    color: var(--text-color);
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+    font-weight: lighter;
+    border:  var(--text-color) solid 0.1em;
+    border-radius: 1em;
+    background-color: var(--green-filling);
+    transition: background-color var(--hover-color-change), color var(--hover-color-change);
+}
+
+.green-button:hover{
+    background-color: var(--text-color);
+    color: var(--green-filling);
+}
+
 /* navbar and it's parts */
 @media (max-width: 1000px) {
     .navbar {

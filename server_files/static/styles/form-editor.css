@@ -175,19 +175,8 @@ textarea, div, input, p{
     margin-right: auto;
     padding: 1em;
     outline: none;
-    font-family: var(--font-tema);
-    font-weight: 300;
-    color: var(--text-color);
-    border-radius: 1em;
     cursor: pointer;
-    transition: background-color var(--hover-color-change);
 }
-
-.button-main-controls:hover{
-    color: var(--green-filling);
-    background-color: var(--text-color);
-}   
-
 #past-forms{
     width: 100%;
     display: flex;
