@@ -99,10 +99,10 @@
                         <option value = "Planting">Planting</option>
                     </select>
                 </div>
-                <textarea id = "editor_text" placeholder="Enter event post text here"></textarea>
-                <div id = "editor_panel">
-                    <input type="submit" class="editor_panel_btn" value = "Save" data-fun="save">
-                    <input type="submit" class="editor_panel_btn" value = "Publish post" data-fun="pub">
+                <textarea id = "editor-text" placeholder="Enter event post text here"></textarea>
+                <div id = "editor-panel">
+                    <input type="submit" class="editor-panel-button green-button" value = "Save" data-fun="save">
+                    <input type="submit" class="editor-panel-button green-button" value = "Publish post" data-fun="pub">
                 </div>
             </form>
         </div>
@@ -135,10 +135,10 @@
         </div>
         <template id = "templates">
             <input type="image" class = "added_image" data-fun="img" src = "">
-            <div class = "posts_post">
-                <input class = "del_img_post" value = "" type = "submit" data-fun = "delp" data-post="">
-                <input class = "post_txt" type="submit" value = ""  data-fun = "post">
-                <input class = "pub_img_post" value = "" type = "submit" data-fun = "unpubp" data-post="">
+            <div class = "posts-post">
+                <input class = "posts-post-delete" value = "" type = "submit" data-fun = "delp" data-post="">
+                <input class = "posts-post-text" type="submit" value = ""  data-fun = "post">
+                <input class = "posts-post-publish" value = "" type = "submit" data-fun = "unpubp" data-post="">
             </div>
             <option class="opcija_frm" value = ""></option>
         </template>

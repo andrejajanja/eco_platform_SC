@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Rajdhani:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');
-
 :root{
     --text-color:  #34A853;
     --green-filling-nav: #C8E6C9;
@@ -14,10 +13,14 @@ body{
     margin: 0;
     padding: 0;
 }
-
 /* basic elements and building block classes*/
 h1, h2, h3, h4, p, a{
     color: var(--text-color);
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+    font-weight: lighter;
+}
+textarea{
     font-family: 'Open Sans', sans-serif;
     text-decoration: none;
     font-weight: lighter;
@@ -39,7 +42,6 @@ ul{
     border: none;
     border-bottom: #aa8f24 solid 0.1em;
 }
-
 .green-button{
     color: var(--text-color);
     font-family: 'Open Sans', sans-serif;
@@ -50,12 +52,10 @@ ul{
     background-color: var(--green-filling);
     transition: background-color var(--hover-color-change), color var(--hover-color-change);
 }
-
 .green-button:hover{
     background-color: var(--text-color);
     color: var(--green-filling);
 }
-
 /* navbar and it's parts */
 @media (max-width: 1000px) {
     .navbar {
@@ -101,7 +101,7 @@ ul{
     font-size: 30px;
 }
 .navbar-middle li a{
-    transition: all 0.3s;
+    transition: all var(--hover-color-change);
 }
 .navbar-middle li a:hover{
     color: white;
@@ -113,15 +113,14 @@ ul{
 .navbar-signin{
     padding: 10px;    
     font-size: 30px;
-    transition: all 0.3s;
+    transition: all var(--hover-color-change);
 }
 .navbar-signin:hover{
     color: white;
 }
 .underlined{
-    border-bottom: #34A853 solid 2px;
+    border-bottom: #34A853 solid 0.1em;
 }
-
 /* dropdown list */
 .dropdown-head{
     
@@ -136,7 +135,7 @@ ul{
     font-size: 30px;
     border: transparent;
     background-color: transparent;
-    transition: all 0.3s;
+    transition: all var(--hover-color-change);
 }
 .dropdown-content{
     position: absolute;
@@ -149,12 +148,11 @@ ul{
 .dropdown-elem{
     padding: 10px;
     font-size: 20px;
-    transition: all 0.3s;
+    transition: all var(--hover-color-change);
 }
 .dropdown-elem:hover{
     color: white;
 }
-
 /* FOOTER */
 .footer{
     left: 0;
@@ -233,5 +231,5 @@ ul{
     font-size: 1.1rem;
     padding-top: 2rem;
     font-family: 'Open Sans', sans-serif;
-    color: var(--text-color)
+    color: var(--text-color);
 }

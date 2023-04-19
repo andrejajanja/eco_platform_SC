@@ -23,6 +23,11 @@ textarea, div, input, p{
     flex-direction: column;
     overflow-y: auto;
 }
+#loader{   
+    width: 70%;
+    height: 100%;
+    padding-left: 30%;
+}
 #maker::-webkit-scrollbar {
     width: 0.6em;
 }
@@ -131,21 +136,13 @@ textarea, div, input, p{
     flex-direction: row;
 }
 .controls-panel-button{
-    background-color: var(--green-filling);
     width: 3em;
     height: 3em;
     margin-right: 1em;
     font-size: small;
     font-weight: 600;
-    color: var(--text-color);
     padding: 0em;
     cursor:pointer;
-    transition: background-color var(--hover-color-change);
-}
-
-.controls-panel-button:hover{
-    color: var(--green-filling);
-    background-color: var(--text-color);
 }
 .controls-panel-save{
     margin-left: 5em;
@@ -173,7 +170,8 @@ textarea, div, input, p{
 }
 .button-main-controls{
     margin-right: auto;
-    padding: 1em;
+    padding: 0.75em;
+    font-size: 1em;
     outline: none;
     cursor: pointer;
 }
@@ -380,18 +378,9 @@ textarea, div, input, p{
 }
 
 .reponces-header-button{
-    padding: 0.5em;
-    color: var(--text-color);
-    font-family: var(--font-tema);
-    font-weight: 300;
-    background-color: var(--green-filling);
+    padding: 0.75em;
+    font-size: 1em;
     cursor: pointer;
-    transition: background-color var(--hover-color-change), color var(--hover-color-change);
-}
-
-.reponces-header-button:hover{
-    background-color: var(--text-color);
-    color: var(--green-filling);
 }
 
 .responces-header-fetch{
@@ -488,8 +477,10 @@ td{
 }
 
 .check-all-table-header{
-    width: 80%;
+    width: 60%;
     margin: 0.25em;
+    padding: 0.5em;
+    font-size: 0.75em;
 }
 
 .three-dots{

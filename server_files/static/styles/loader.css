@@ -3,10 +3,8 @@
 }
 
 #loader{
+    box-sizing: border-box;
     display: none;
-    width: 70%;
-    height: 100%;
-    padding-left: 30%;
     align-items: center;
 }
 
@@ -22,7 +20,7 @@
     height: 100%;
     position: absolute;
     width: 100%;
-    border: 0.2em solid #09ff00;
+    border: 0.15em solid #09ff00;
 }
 
 .spinner div:nth-of-type(1) {

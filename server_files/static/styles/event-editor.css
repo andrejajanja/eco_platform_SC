@@ -1,15 +1,15 @@
 :root{
     --loader-size: 20vh;
-    --post_list_size: 2.25em;
+    --post-list-size: 2.25em;
 }
 #context{
     width: 100%;
-    height: 80%;
+    height: 90%;
     margin-top: 1.5%;
     display: flex;
     flex-direction: row;
 }
-
+/* past posts section */
 #posts{
     padding: 0;
     margin: 0;
@@ -26,28 +26,21 @@
     width: 50%;
 }
 .posts-label{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
+    text-align: center;
     margin-left: 20%;
-    padding: 5%;
-    width: 100%;
-    font-family: var(--font-tema);
-    font-size: 1.25em;
-    font-weight: 350;
+    padding: 0.75em;
+    font-size: 1em;
 }
 #posts-panel{
     display: flex;
     flex-direction: row;
     height: 50%;
     width: 100%;
+    margin-bottom: 1em;
 }
 .posts-panel-button{
-    display: inline-flex;
-    text-align: center;
+    font-size: 1em;
     padding: 0.75em;
-    padding-top: 0.55em;
     margin-left: 10%;
     outline: none;
 }
@@ -58,64 +51,66 @@
     height: 90%; 
     overflow-y: auto;
 }
-.posts_post{
+/* past post component and it's parts*/
+.posts-post{
     margin: 0;
     padding: 0;
     margin-top: 2%;
     padding-left: 5%;
-    height: var(--post_list_size);
+    height: var(--post-list-size);
     width: 90%;
+    
     display: flex;
     flex-direction: row;
-    font-family: var(--font-tema);
+
     border: none;
-    border-bottom: var(--hover-forms) solid var(--underline-thickness);
+    border-bottom: var(--text-color) solid var(--underline-thickness);
     transition: color var(--hover-color-change), background-color var(--hover-color-change);
 }
-.del_img_post{
+.posts-post-delete{
     border: none;
     outline: none;
-    height: var(--post_list_size);
-    width: var(--post_list_size);
+    height: var(--post-list-size);
+    width: var(--post-list-size);
     background-size: 100% 100%;
     background-color: #ffffff;
     background-image: url(/static/images/delete.png);
     transition: background-image var(--hover-color-change);
 }
-.del_img_post:hover{
+.posts-post-delete:hover{
     background-image: url(/static/images/deleted.png);
 }
-.post_txt{
+.posts-post-text{
     margin-left: 2%;
     padding: 0;
     height: 90%;
     width: 70%;
-    font-family: var(--font-tema);
-    font-size: calc(var(--post_list_size)*0.45);
+    font-family: 'Open Sans', sans-serif;
+    font-size: calc(var(--post-list-size)*0.45);
     color: black;
-    background: transparent;
-    border: transparent;
-    outline: none;
+    background: none;
+    border: none;
 }
-.post_txt:hover{
-    border-bottom: solid var(--boja-tema) 0.05em;
-    border-top: solid var(--boja-tema) 0.05em;
+.posts-post-text:hover{
+    border-left: solid var(--text-color) 0.1em;
+    border-right: solid var(--text-color) 0.1em;
 }
-.pub_img_post{
+.posts-post-publish{
     margin-left: 2%;
     display: none;
     border: none;
     outline: none;
-    height: var(--post_list_size);
-    width: var(--post_list_size);
+    height: var(--post-list-size);
+    width: var(--post-list-size);
     background-size: 100% 100%;
     background-color: #ffffff;
     background-image: url(/static/images/published.png);
     transition: background-image var(--hover-color-change);
 }
-.pub_img_post:hover{
+.posts-post-publish:hover{
     background-image: url(/static/images/unpublish.png);
 }
+/* post editor and it's parts */
 #editor{
     height: 100%;
     width: 80%;
@@ -142,7 +137,7 @@
     flex-direction: row;
     padding: 0;
     width: 90%;
-    border: solid 0.01vh var(--boja-tema);
+    border: solid 0.01vh var(--text-color);
     border-bottom-right-radius: 2vh;
     border-bottom-left-radius: 2vh;
 }
@@ -294,50 +289,30 @@
     height: 90%;
     width: 20%;
 }
-#editor_text{
+#editor-text{
     box-sizing: border-box;
     padding: 0.5%;
     width: 90%;
     height: 60%;
-    font-family: var(--font-tema);
     font-size: 1em;
-    font-weight: 300;
     resize: none;
     outline: none;
-    border: solid white 0.01vh;
-    border-bottom: solid var(--boja-tema) 0.01vh;
-    transition: border var(--hover-color-change),height var(--hover-color-change);;
+    border: solid white 0.1em;
+    border-bottom: solid var(--text-color) 0.1em;
+    transition: border var(--hover-color-change), height var(--hover-color-change);;
 }
-#editor_text:focus{
-    border: solid var(--boja-tema) 0.01vh;
+#editor-text:focus{
+    border: solid var(--text-color) 0.1em;
 }
-#editor_panel{
-    margin-top: 1vh;
-    height: 5%;
+#editor-panel{
+    margin-top: 1%;
     width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
-.editor_panel_btn{
-    display: inline-flex;
-    justify-content: center;
-    padding: 1vh;
-    height: 3em;
+.editor-panel-button{
+    font-size: 1em;
     margin-right: 5%;
-    padding-left: 2%;
-    padding-right: 2%;
-    font-family: var(--font-tema);
-    font-size: 0.75em;
-    font-weight: 600;
-    color: black;
-    background: transparent;
-    border: solid var(--boja-tema) 0.01vh;
-    border-radius: 2vh;
-    outline: none;
-    transition: color var(--hover-color-change), background var(--hover-color-change);
-}
-.editor_panel_btn:hover{
-    background-color: var(--boja-tema);
-    color: var(--boja-teksta);
+    padding: 0.75em;
 }

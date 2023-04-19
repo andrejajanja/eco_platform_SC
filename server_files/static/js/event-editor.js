@@ -19,12 +19,12 @@ let lok_btn = document.querySelector("#btn_lok");
 let forms = document.querySelector("#sel_frm");
 let dogs = document.querySelector("#sel_eve");
 let date = document.querySelector("#post_date");
-let event_txt = document.querySelector("#editor_text")
+let event_txt = document.querySelector("#editor-text")
 let default_image = window.location.origin +"/static/images/insert-picture-icon.png";
 //templates
 let templates = document.querySelector("#templates").content;
 let lil_img = templates.querySelector(".added_image");
-let post_add = templates.querySelector(".posts_post");
+let post_add = templates.querySelector(".posts-post");
 let opcija_frm = templates.querySelector(".opcija_frm");
 let pom_kords = [];
 //#endregion variables
