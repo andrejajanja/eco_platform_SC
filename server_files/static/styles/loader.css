@@ -1,3 +1,7 @@
+:root{
+    --loader-size: 10em;
+}
+
 #loader{
     display: none;
     width: 70%;

@@ -6,12 +6,8 @@
     --text-color:  #34A853;
     --green-filling-nav: #C8E6C9;
     --green-filling: #E8F5E9;
-    --yellow-border-bottom: #aa8f24;
-
-/* neke stare promenljive, optimizuj */
-    --boja-tema: #12942a; 
+    --yellow-border-bottom: #ebce5b;
     --underline-thickness: 0.1em;
-    --boja-teksta: #ffe16c;
     --hover-color-change: 0.25s;
 }
 body{

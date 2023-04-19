@@ -52,8 +52,8 @@
         <div class = "context">
             <form id = "explorer">
                 <div class ="main-controls-panel">
-                    <input name = "new" type = "submit" value = "New Form" id = "new_form_btn" class = "button-main-controls">
-                    <input name = "publish" type = "submit" value = "Publish Current" id = "publish_btn" class = "button-main-controls">
+                    <input name = "new" type = "submit" value = "New Form" id = "new_form_btn" class = "button-main-controls green-fill green-border">
+                    <input name = "publish" type = "submit" value = "Publish Current" id = "publish_btn" class = "button-main-controls green-fill green-border">
                 </div>
                 <p class = "title-past-forms">Past forms:</p>
                 <div id = "past-forms"></div>
@@ -98,15 +98,15 @@
                 </div>
             </form>
             
-            <form id = "responces">
-                <div class = "respoHeader">
-                    <div class = "tableTitle">Responces for: </div>
-                    <input class = "fetchBtn btnStyle" type = "submit" value = "Fetch answers" data-fun = "fetch">
-                    <input class ="copyBtn btnStyle" type = "submit" value = "Copy selected" data-fun = "copy">
-                    <select id = "copyFlds" class = "checkbSelect"></select>        
+            <form id = "responces-box">
+                <div class = "responces-header">
+                    <div class = "table-title">Responces for: </div>
+                    <input class = "responces-header-fetch reponces-header-button green-border" type = "submit" value = "Fetch answers" data-fun = "fetch">
+                    <input class ="responces-header-copy reponces-header-button green-border" type = "submit" value = "Copy selected" data-fun = "copy">
+                    <select id = "copyFlds" class = "checkboxes-select"></select>        
                 </div>
-                <div class = "queryMaker"></div>
-                <table class = "respoTable">
+                <div class = "query-maker-box"></div>
+                <table class = "responces-table">
                 </table>
             </form>
         </div>
@@ -168,10 +168,10 @@
                 <input name = "file" type = "submit" value = "" class = "form-name-button" >
                 <input name = "resp" type = "submit" value = "" class = "form-responces-button" alt = "Responces">
             </div>
-            <select class = "checkbSelect"></select>
+            <select class = "checkboxes-select"></select>
             <input class = "checkbRow" type = "checkbox">
-            <input class = "checkAll btnStyle" data-fun="checkAll" type = "submit" value = "Check All">
-            <input class = "checkAll btnStyle" data-fun="uncheckAll" type = "submit" value = "Uncheck All">
+            <input class = "check-all-table-header reponces-header-button green-border" data-fun="checkAll" type = "submit" value = "Check All">
+            <input class = "check-all-table-header reponces-header-button green-border" data-fun="uncheckAll" type = "submit" value = "Uncheck All">
             <div class = "three-dots"></div>
         </template>
     </body>

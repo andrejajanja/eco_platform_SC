@@ -2,20 +2,20 @@
 const url_stranice = window.location.href;
 const explorer = document.querySelector("#explorer");
 let maker = document.querySelector("#maker");
-let responces = document.querySelector("#responces");
+let responces = document.querySelector("#responces-box");
 let forme = document.querySelector("#past-forms");
 let loader = document.querySelector("#loader");
 let opisp = document.querySelector("#form-description-field");
-let table = document.querySelector(".respoTable");
+let table = document.querySelector(".responces-table");
 let copyFlds = document.querySelector("#copyFlds");
 //templates
 let templates = document.querySelector("#templates").content.cloneNode(true);
-let polje_sample = templates.querySelector(".polje");
+let polje_sample = templates.querySelector(".form-field");
 let tipovi = templates.querySelector("#dropdown-list-edited-field");
 let checkkutija = templates.querySelector(".checkbox-field");
 let panel = templates.querySelector(".panel-for-checkboxes");
 let form_file = templates.querySelector(".form-in-past-forms");
-let checkbSelect = templates.querySelector(".checkbSelect");
+let checkbSelect = templates.querySelector(".checkboxes-select");
 let checkbRow = templates.querySelector(".checkbRow");
 let checkAll = templates.querySelector('[data-fun = "checkAll"]');
 let uncheckAll = templates.querySelector('[data-fun = "uncheckAll"]');
@@ -69,7 +69,7 @@ function bazdariTipPolja(index){
     //komp kao komponenta
     if(tip == "sentc"){
         let komp = document.createElement("input");
-        komp.className = "txt_fld";
+        komp.className = "text-form-field";
         komp.type = "text"
         komp.name = "vr" + index;
         komp.placeholder = "Short text answer";
@@ -83,7 +83,7 @@ function bazdariTipPolja(index){
 
     if(tip == "parag"){
         let komp = document.createElement("textarea");
-        komp.className = "parag_fld";
+        komp.className = "paragraph-form-field";
         komp.name = "vr" + index;
         komp.value = "This is a field for paragraph input.";
         komp.disabled = true;
@@ -110,27 +110,27 @@ function bazdariTipPolja(index){
 
     if(tip == "date"){
         let komp = document.createElement("input");
-        komp.className = "date_box";
+        komp.className = "date-form-field";
         komp.type = "date"
         komp.name = "vr" + index;
         komp.disabled = true;
         pom_polje.children[1].appendChild(komp);
         maker.replaceChild(pom_polje,maker.children[index]);
         maker.children[index].i = index;
-        maker.children[index].children[1].className = "date_fld";
+        maker.children[index].children[1].className = "date-field";
         return;
     }
 
     if(tip == "time"){
         let komp = document.createElement("input");
-        komp.className = "time_box";
+        komp.className = "time-form-field";
         komp.type = "time"
         komp.name = "vr" + index;
         komp.disabled = true;
         pom_polje.children[1].appendChild(komp);
         maker.replaceChild(pom_polje,maker.children[index]);
         maker.children[index].i = index;
-        maker.children[index].children[1].className = "time_fld";
+        maker.children[index].children[1].className = "time-field";
         return;
     }
 }
@@ -149,15 +149,17 @@ async function fillFormsExplorer(){
         if(ime_forme[1] == true){
             pom.children[2].style.display = "block";
         }
-        pom.dataset.postoji = ime_forme[1]
-        pom.onmousedown = async function (e) {
+        pom.dataset.postoji = ime_forme[1];
+        pom.children[2].onmousedown = async function (e) {
             if (e.which == 3) {
                 let odg = await req_json({"ra": "unpub", "form": ime_forme[0]}, "POST");
                 publs[maker.children[0].children[0].value] = false;
+                console.log(publs[maker.children[0].children[0].value]);
+                pom.dataset.postoji = false;
                 if(odg["msg"] == "1"){
                     forme.children[i].children[2].style.display = "none";
                 }else{
-                    alert('An Error occured while trying to unpublish form: ${ime_forme[0]}');
+                    alert("An Error occured while trying to unpublish form: " + ime_forme[0]);
                 }
             }
         };
@@ -177,12 +179,10 @@ function new_form() {
     maker.children[0].children[1].children[2].value = "";
     maker.children[0].children[2].value = "";
     maker.children[0].children[3].value = "";
-
     maker.children[1].addEventListener("click", fokusirajMakerElement, false);
     maker.children[1].i = 1;
     opisp.style.height = "5em";
 }
-
 
 //#endregion funkcije
 
@@ -323,7 +323,7 @@ explorer.addEventListener("submit", async function(e){
                 if (fld["type"] == "checkb") {
                     colLabel1.innerHTML = fld["head"];
                     colLabel1.colSpan = fld["options"].length;
-                    colLabel1.className = "checkbHeader";
+                    colLabel1.className = "checkboxes-table-header";
                     pom1.append(colLabel1);
                     fld["options"].forEach(function (opc) {
                         colLabel2 = document.createElement("th");
