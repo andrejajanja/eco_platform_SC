@@ -1,29 +1,29 @@
 //#region variables
 const url_stranice = window.location.href;
 let folded = true;
-let kontekst = document.querySelector("#kontekst");
+let context = document.querySelector("#context");
 let loader = document.querySelector("#loader");
 let posts = document.querySelector("#posts");
 let posts_list = document.querySelector("#posts-list");
 let editor = document.querySelector("#editor");
-let img_cont = document.querySelector("#images_container");
-let image_box = document.querySelector("#image_box");
-let img_btn = document.querySelector("#img_btn");
+let img_cont = document.querySelector("#images-container");
+let image_box = document.querySelector("#image-box");
+let img_btn = document.querySelector("#images-container-button");
 //event components
-let add_dugme = document.querySelector("#images_add_btn");
+let add_dugme = document.querySelector("#images-add-button");
 let images = document.querySelector("#images");
-let prew = document.querySelector("#previewed");
+let prew = document.querySelector("#images-previewed");
 let file_upload = document.querySelector("#files");
-let title = document.querySelector("#post_title");
-let lok_btn = document.querySelector("#btn_lok");
-let forms = document.querySelector("#sel_frm");
-let dogs = document.querySelector("#sel_eve");
-let date = document.querySelector("#post_date");
+let title = document.querySelector("#editor-properties-title");
+let lok_btn = document.querySelector("#editor-properties-map-button");
+let forms = document.querySelector("#editor-properties-select-form");
+let dogs = document.querySelector("#editor-properties-select-event");
+let date = document.querySelector("#editor-properties-post-date");
 let event_txt = document.querySelector("#editor-text")
 let default_image = window.location.origin +"/static/images/insert-picture-icon.png";
 //templates
 let templates = document.querySelector("#templates").content;
-let lil_img = templates.querySelector(".added_image");
+let lil_img = templates.querySelector(".image-added");
 let post_add = templates.querySelector(".posts-post");
 let opcija_frm = templates.querySelector(".opcija_frm");
 let pom_kords = [];
@@ -124,7 +124,7 @@ function ocistiPovrsinu(){
     pom = images.children[0].cloneNode(true);
     images.innerHTML = "";
     images.appendChild(pom);
-    add_dugme = document.querySelector("#images_add_btn");
+    add_dugme = document.querySelector("#images-add-button");
     if (!folded) {
         add_dugme.style.opacity = "1";
         add_dugme.style.display = "block";
@@ -174,7 +174,7 @@ async function popuniEditor(name){
     img = images.children[0].cloneNode(true);
     images.innerHTML = "";
     images.appendChild(img);
-    add_dugme = document.querySelector("#images_add_btn");
+    add_dugme = document.querySelector("#images-add-button");
     pom["imgs"].forEach(function (v) {
         img = lil_img.cloneNode(true);
         img.src = v;
@@ -183,7 +183,7 @@ async function popuniEditor(name){
     dodeliDesniKlik();
     if (!folded) {
         for (let i = 1; i < images.children.length; i++) {
-            images.children[i].classList.add("added_image_clicked");
+            images.children[i].classList.add("image-added-clicked");
         }
     }
     prew.src = "static/images/insert-picture-icon.png";
@@ -216,7 +216,7 @@ file_upload.onchange = async function(e){
         }
         slike.append("imgs", file_upload.files[i]);
     }
-    kontekst.style.display = "none";
+    context.style.display = "none";
     loader.style.display = "flex";
     try {
         let odg = await fetch(url_stranice, {
@@ -229,19 +229,19 @@ file_upload.onchange = async function(e){
             file_upload.pop();
         }          
     } catch {
-        kontekst.style.display = "flex";
+        context.style.display = "flex";
         loader.style.display = "none";
         alert("A front-end error occured while trying to upload images")
         return;
     }
     slike.forEach(function (s){
         pom = lil_img.cloneNode(true);
-        pom.classList.add("added_image_clicked");
+        pom.classList.add("image-added-clicked");
         pom.src = "/static/event_images/" + s.name;
         images.appendChild(pom);
     })
     dodeliDesniKlik();
-    kontekst.style.display = "flex";
+    context.style.display = "flex";
     loader.style.display = "none";
     if(preskoceni.length != 0){
         pom = "";
@@ -263,7 +263,7 @@ posts.addEventListener("submit", async function(e){
     let pom;
     switch (e.submitter.dataset.fun) {
         case "post":
-            kontekst.style.display = "none";
+            context.style.display = "none";
             loader.style.display = "flex";
             editor.dataset.tren = e.submitter.value;
             window.localStorage.setItem("current_post", e.submitter.value)
@@ -273,7 +273,7 @@ posts.addEventListener("submit", async function(e){
                 editor.dataset.pubed = "0";
             }
             await popuniEditor(e.submitter.value);
-            kontekst.style.display = "flex";
+            context.style.display = "flex";
             loader.style.display = "none";
             return;
         case "delp":
@@ -325,7 +325,7 @@ editor.addEventListener("submit", async function(e){
                 add_dugme.style.opacity = "1";
                 add_dugme.style.display = "block";
                 for (let i = 1; i < images.children.length; i++) {
-                    images.children[i].classList.add("added_image_clicked");
+                    images.children[i].classList.add("image-added-clicked");
                 }
             }else{
                 img_cont.style.height = "20%";
@@ -340,7 +340,7 @@ editor.addEventListener("submit", async function(e){
                 add_dugme.style.opacity = "0";
                 add_dugme.style.display = "none";
                 for (let i = 1; i < images.children.length; i++) {
-                    images.children[i].classList.remove("added_image_clicked");
+                    images.children[i].classList.remove("image-added-clicked");
                 }
             }
             folded = !folded

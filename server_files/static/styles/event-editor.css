@@ -23,7 +23,6 @@
     flex-direction: column;
     margin-top: 2%;
     height: fit-content;
-    width: 50%;
 }
 .posts-label{
     text-align: center;
@@ -118,7 +117,7 @@
     flex-direction: column;
     align-items: center;
 }
-#images_container{
+#images-container{
     display: flex;
     flex-direction: row;
     padding: 0;
@@ -126,13 +125,13 @@
     width: 90%;
     transition: height var(--hover-color-change);
 }
-#img_btn{
+#images-container-button{
     margin-left: auto;
     height: 5em;
     width: 5em;
     outline: none;
 }
-#editor_images{
+#editor-images{
     display: flex;
     flex-direction: row;
     padding: 0;
@@ -152,49 +151,25 @@
     overflow-x: auto;
     transition: width var(--hover-color-change);
 }
-/* .images_clicked{
-    flex-direction: column;
-    width: 20%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    border-right: 0.2vw solid var(--boja-tema);
-} */
-.added_image{
+.image-added{
     height: 80%;
     margin-left: 2%;
     cursor:default;
     outline: none;
 }
-.added_image_clicked{
+.image-added-clicked{
     height: 20%;
     margin-right: 0;
     margin-top: 5%;
 }
-#label_img_btn{
-    display: inline-block;
-    vertical-align: middle;
-}
-#images_add_btn{
+#images-add-button{
     display: none;
     margin-top: 3%;
     width: 70%;
-    height: 7.5%;
-    font-family: var(--font-tema);
-    font-size: 0.8em;
-    font-weight: 500;
-    color: black;
-    background: transparent;
-    border: solid var(--boja-tema) 0.01vh;
-    border-radius: 2vh;
+    padding: 0.5em;
     opacity: 0;
-    outline: none;
-    transition: color var(--hover-color-change), background var(--hover-color-change), opacity var(--hover-color-change); /*sredi opaciti kako se menja*/
 }
-#images_add_btn:hover{
-    background-color: var(--boja-tema);
-    color: var(--boja-teksta);
-}
-#image_box{
+#image-box{
     display: none;
     align-items: center;
     justify-content: center;
@@ -203,10 +178,10 @@
     opacity: 0;
     transition: opacity var(--hover-color-change);
 }
-#previewed{
+#images-previewed{
     height: 90%;
 }
-#editor_date_title{
+#editor-properties{
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -215,19 +190,11 @@
     height: 7.5%;
     width: 80%;
 }
-#post_title{
+#editor-properties-title{
     width: 40%;
 }
-#editor_label{
-    margin-left: 2%;
-    margin-right: 1%;
-    width: 10%;
-    font-family: var(--font-tema);
-    font-size: 1em;
-    font-weight: 300;
-}
 
-#map_lok{
+#editor-properties-map{
     margin-left: 1%;
     display: flex;
     flex-direction: row;
@@ -235,59 +202,40 @@
     height: 90%;
     width: 30%;
 }
-#img_lok{
+#editor-properties-map-image{
     width: 15%;
 }
-#btn_lok{
+#editor-properties-map-button{
     margin-left: 5%;
     height: 100%;
     width: 80%;
-    font-family: var(--font-tema);
-    font-size: 1em;
-    font-weight: 300;
-    outline: none;
-    border: solid white 0.01vh;
-    padding: 0.5%;
-    background-color: white;
-    border-bottom: solid var(--boja-tema) 0.01vh;
+    background: none;
 }
-.editor_txt_fld{
+.editor-properties-text-field{
+    margin-right: 2%;
     height: 95%;
-    font-family: var(--font-tema);
+    min-width: fit-content;
+    font-family: 'Open Sans', sans-serif;
     font-size: 1em;
     font-weight: 300;
+    border: solid white 0.1em;
+    padding: 0.25em;
     outline: none;
-    border: solid white 0.01vh;
-    padding: 0.5%;
-    border-bottom: solid var(--boja-tema) 0.01vh;
+    border-bottom: solid var(--text-color) 0.1em;
     transition: border var(--hover-color-change);
 }
-.editor_txt_fld:focus{
-    border: solid var(--boja-tema) 0.01vh;
+.editor-properties-text-field:focus{
+    border: solid var(--text-color) 0.1em;
 }
-
-.dropdownl{
-    outline: none;
-    margin-left: 1%;
-    padding-left: 1%;
+.editor-properties-dropdown-list{
     height: 90%;
-    width: 20%;
-
-    font-family: var(--font-tema);
-    font-size: 1em;
-    font-weight: 300;
-
-    border: solid white 0.01vh;
-    border-bottom: solid var(--boja-tema) 0.01vh;
-    transition: border var(--hover-color-change);
+    width: fit-content;
 }
-.dropdownl:focus{
-    border: solid var(--boja-tema) 0.01vh;
+.editor-properties-dropdown-list:focus{
+    border: solid var(--text-color) 0.1em;
 }
-#post_date{
-    margin-left: 1%;
+#editor-properties-post-date{
     height: 90%;
-    width: 20%;
 }
 #editor-text{
     box-sizing: border-box;
