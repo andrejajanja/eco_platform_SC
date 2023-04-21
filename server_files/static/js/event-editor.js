@@ -37,7 +37,7 @@ async function savePost() {
             alert("You can't save a post without title.");
             return;
         }else{
-            pomm = title.value.replaceAll(" ", "-").toLowerCase();
+            pomm = title.value.replaceAll(" ", "_").toLowerCase();
             editor.dataset.tren = pomm;
         }
         
