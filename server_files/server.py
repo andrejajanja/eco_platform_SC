@@ -321,11 +321,16 @@ def event_editor_route():
             with open(f"{event_posts}{request.form['n']}.json", "r", encoding="UTF-8") as f:
                 pom = f.read()
             return jsonify({"data": pom})
-        if request.form["ra"] == "dlt_img":
+        if request.form["ra"] == "dlt_img":                    
             try:
                 p = request.form["img"]
                 p = p[p.rfind("/")+1:]
                 os.remove(images_folder + p)
+                di = file_to_dict(f"{event_posts}{request.form['frm']}.json")
+                di["imgs"].remove(request.form["img"])                
+                print(json.dumps(di))
+                with open(f"{event_posts}{request.form['frm']}.json", "w", encoding="UTF-8") as f:
+                    f.write(json.dumps(di))
                 return jsonify({"msg": "Image deleted successfully"})
             except:
                 return jsonify({"msg": "Error deleting an images"})
