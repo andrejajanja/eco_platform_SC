@@ -326,12 +326,9 @@ def event_editor_route():
                 p = request.form["img"]
                 p = p[p.rfind("/")+1:]
                 os.remove(images_folder + p)
-<<<<<<< HEAD
                 di = file_to_dict(f"{event_posts}{request.form['frm']}.json")
                 di["imgs"].remove(request.form["img"])                
                 dict_to_file(di, f"{event_posts}{request.form['frm']}.json")
-=======
->>>>>>> parent of a986592 (Fixed some more CSS,)
                 return jsonify({"msg": "Image deleted successfully"})
             except:
                 return jsonify({"msg": "Error deleting an images"})

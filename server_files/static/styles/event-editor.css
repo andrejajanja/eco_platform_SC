@@ -191,11 +191,12 @@
     width: 80%;
 }
 #editor-properties-title{
+    height: 70%;
     width: 40%;
 }
 
 #editor-properties-map{
-    margin-left: 1%;
+    margin-right: 2%;
     display: flex;
     flex-direction: row;
     align-items: center;
