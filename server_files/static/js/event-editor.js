@@ -94,7 +94,7 @@ function dodeliDesniKlik() {
     for (let i = 1; i < images.children.length; i++) { 
         images.children[i].onmousedown = async function (e) {
             if (e.which == 3) {
-                let odg = await req_json({"ra": "dlt_img", "frm": editor.dataset.tren ,"img": images.children[i].src}, "POST");                
+                let odg = await req_json({"ra": "dlt_img", "img": images.children[i].src}, "POST");                
                 console.log(odg["msg"]);
                 await savePost();
                 images.removeChild(images.children[i]);                
@@ -321,7 +321,7 @@ editor.addEventListener("submit", async function(e){
                 images.style.width = "20%";
                 images.style.overflowX = "hidden";
                 images.style.overflowY = "auto";
-                images.style.borderRight = "var(--text-color) solid 0.1em";
+                images.style.borderRight = "0.01vh solid var(--boja-tema)";
                 add_dugme.style.opacity = "1";
                 add_dugme.style.display = "block";
                 for (let i = 1; i < images.children.length; i++) {

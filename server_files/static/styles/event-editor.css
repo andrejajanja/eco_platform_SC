@@ -136,7 +136,7 @@
     flex-direction: row;
     padding: 0;
     width: 90%;
-    border: solid 0.1em var(--text-color);
+    border: solid 0.01vh var(--text-color);
     border-bottom-right-radius: 2vh;
     border-bottom-left-radius: 2vh;
 }
@@ -191,12 +191,11 @@
     width: 80%;
 }
 #editor-properties-title{
-    height: 80%;
     width: 40%;
 }
 
 #editor-properties-map{
-    margin-right: 2%;
+    margin-left: 1%;
     display: flex;
     flex-direction: row;
     align-items: center;
