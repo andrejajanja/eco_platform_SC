@@ -1,10 +1,6 @@
 html{
-    --leva-razmaknutost: 2%;
-    --debljina-border: 0.1em;
+    --left-spacing: 2%;
     --padding-vertical-box: 0.5em;
-}
-a:link{
-    text-decoration: none;
 }
 #context{
     padding-bottom: 2%;
@@ -23,28 +19,25 @@ a:link{
     align-items: center;
     height: fit-content;
     width: 100%;
-    border-top: var(--boja-tema) solid var(--debljina-border);
-    border-bottom: var(--boja-tema) solid var(--debljina-border);
+    border-top: var(--text-color) solid var(--underline-thickness);
+    border-bottom: var(--text-color) solid var(--underline-thickness);
 }
 #event-type-img{
     height: 3em;
     width: 3em;
     /*
-    border: var(--boja-tema) dashed var(--debljina-border);
+    border: var(--text-color) dashed var(--underline-thickness);
     box-shadow: 
         0 0 0.25em 0.25em #fff, 
         0 0 0.25em 1em var(--boja-teksta); */
 }
 #event-title{
-    margin-left: var(--leva-razmaknutost);
-    font-family: var(--font-tema);
-    font-size: 4vh;
-    font-weight: 500;   
+    margin-left: var(--left-spacing);
 }
 #event-loation-box{
     padding-top: var(--padding-vertical-box);
     padding-bottom: var(--padding-vertical-box);
-    margin-left: var(--leva-razmaknutost);
+    margin-left: var(--left-spacing);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -52,8 +45,8 @@ a:link{
     box-sizing: border-box;
     height: fit-content;
     width: 25%;
-    border-top: solid var(--boja-tema) var(--debljina-border);
-    border-bottom: solid var(--boja-tema) var(--debljina-border);
+    border-top: solid var(--text-color) var(--underline-thickness);
+    border-bottom: solid var(--text-color) var(--underline-thickness);
 }
 
 /*SREDI CEO OVAJ DEO SA HEADEWROM DA IMA STO MANJE TEKSTA*/
@@ -63,25 +56,22 @@ a:link{
 }
 #event-loation-box a{
     margin-left: 7.5%;
-    font-family: var(--font-tema);
-    font-size: 1em;
-    font-weight: 300;
 }
 #event-date-box{
+    box-sizing: border-box;
     padding-top: var(--padding-vertical-box);
     padding-bottom: var(--padding-vertical-box);
     padding-left: 2em;
     padding-right: 2em;
-    margin-left: var(--leva-razmaknutost);
+    margin-left: var(--left-spacing);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
     height: fit-content;
     width: fit-content;
-    border-top: solid var(--boja-tema) var(--debljina-border);
-    border-bottom: solid var(--boja-tema) var(--debljina-border);
+    border-top: solid var(--text-color) var(--underline-thickness);
+    border-bottom: solid var(--text-color) var(--underline-thickness);
 }
 #event-date-box img{
     height: 3em;
@@ -96,28 +86,17 @@ a:link{
     cursor: default;
 }
 #event-form-link{
-    margin-left: var(--leva-razmaknutost);
-    padding: var(--padding-vertical-box);
-    font-family: var(--font-tema);
+    margin-left: var(--left-spacing);
+    padding: 0.75em;
     font-size: 1em;
-    font-weight: 500;
-    color: black;
-    background: white;
-    border: solid var(--boja-tema) var(--debljina-border);    
-    border-radius: 2vh;
-    transition: background var(--hover-color-change), color var(--hover-color-change);
-}
-#event-form-link:hover{
-    color: var(--boja-teksta);
-    background: var(--boja-tema);
+    font-weight: 600;
 }
 .event-paragraph{
     padding: 2%;
-    font-family: var(--font-tema);
     font-size: 1em;
-    font-weight: 300;
+    color: black;
     width: 85%;
-    border-left: solid var(--boja-tema) var(--debljina-border);
+    border-left: solid var(--text-color) var(--underline-thickness);
 }
 .event-image{
     width: 50%;

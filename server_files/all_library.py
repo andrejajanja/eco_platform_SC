@@ -269,7 +269,7 @@ def generate_post_from_dict(di, file: str, default_file: str, default_path: str)
 
     frmLink = ""
     if di["frm"] != "":
-        frmLink = f'''<a id = "event-form-link" href = "/forms/{di["frm"]}">Join us by filling out this form!</a>'''
+        frmLink = f'''<a id = "event-form-link" class = "green-button" href = "/forms/{di["frm"]}">Join us by filling out this form!</a>'''
 
     cont.append(f'''<div id ="event-header">
             <img id = "event-type-img" src ="/static/images/{di["type"]}.png">
