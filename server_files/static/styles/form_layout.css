@@ -1,89 +1,46 @@
-* {
-    margin: 0;
-    padding:0;
-    box-sizing: border-box;
-}
-
 #context{
-    margin-bottom: 2vh;
+    margin-bottom: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: fit-content;
-    min-height: calc(100vh - 17.75vh);
 }
-
-form{
-    margin-block-end: 0em;
-}
-
-#form_header{
+#form-header{
     margin-top: 1em;
-    border: var(--boja-tema) solid var(--underline-thickness);
+    padding: 1em;
     width: 40em;
     display: flex;
     flex-direction: column;
-    border-radius: 1em;
 }
-
-.form-header-field{
-    font-family: var(--font-tema);
-    align-self: flex-start;
-    margin-top: 1em;
-    margin-left: 5%;
-    width: 90%;
-    border: transparent;
-    background-color: #ffffff;
-    border-bottom: var(--hover-forms) solid var(--underline-thickness);
-    font-size: medium;
+.form-title{
+    text-align: center;
+    border-bottom: var(--text-color) solid var(--underline-thickness);
 }
-
-#naslov_polje{
-    font-size: 4vh;
-    margin-top: 0.4em;
-    padding: 0.75vh;
-    border-bottom: var(--hover-forms) solid calc(var(--underline-thickness)/3);
-}
-#opis_polje{
-    outline: none;
-    resize: none;
+.form-description{    
     min-height: 5em;
     margin-bottom: 1em;
+    border-bottom: var(--text-color) solid var(--underline-thickness);
 }
-
-.polje{
-    font-family: var(--font-tema);
-    display: flex;
-    flex-direction: column;
+.form-field{
     margin-top: 1em;
     width: 40em;
-    border: var(--hover-forms) solid var(--underline-thickness);
-    border-radius: 0.7em;
-    height: fit-content;
-    padding-bottom: 2vh;
+    padding: 0.5em;
+    display: flex;
+    flex-direction: column;
 }
 
-.fld_head{
+.form-field-head{
     align-self: flex-start;
-    padding: 0%;
-    margin-top: 1vh;
-    margin-left: 5vw;
-    margin-bottom: 1rem;
-    font-size: larger;
-    font-weight: 400;
-    word-wrap: break-word;
-    font-family: var(--font-tema);
     border-bottom: var(--hover-forms) solid calc(var(--underline-thickness));
 }
 
-.txt_in{
+.form-text-input{
     width: 60%;
     margin-left: 20%;
     font-size: medium;
     padding: 0.5vw;
 }
 
-.parag_in{
+.form-paragraph-input{
     width: 80%;
     margin-left: 10%;
     font-size: medium;
@@ -93,7 +50,7 @@ form{
     resize: none;
 }
 
-.checkbox-field{
+.form-field-checkbox{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -101,18 +58,18 @@ form{
     margin-bottom: 2vh;
 }
 
-.checkb_in{
+.form-checkbox-input{
     height: 2vh;
     width: 2vh;
     outline: none;
     transition: box-shadow var(--hover-color-change);
 }
 
-.checkb_in:hover{
+.form-checkbox-input:hover{
     box-shadow: 0vh 0vh 1vh 0.5vh var(--hover-forms);
 }
 
-.checkp_in{
+.form-checkbox-title{
     margin: 0vh;
     margin-left: 1.5vw;
     font-size: large;
@@ -120,7 +77,7 @@ form{
     font-family: var(--font-tema);
 }
 
-.date_in{
+.form-date-input{
     margin-left: 30%;
     width: 40%;
     font-size: large;
@@ -129,7 +86,7 @@ form{
     padding: 0.5vw;
 }
 
-.time_in{
+.form-time-input{
     margin-left: 30%;
     width: 40%;
     font-size: large;
@@ -138,23 +95,7 @@ form{
     padding: 0.5vw;
 }
 
-#submit_btn{
-    font-size: 2.7vh;
-    padding-bottom: 0.5vh;
-    font-family: var(--font-tema);
-    color: var(--boja-teksta);
-    font-weight: 700;
-    height: 5vh;
-    width: 15vw;
-    margin-top: 5vh;
-    background-color: #12942a;
-    border-radius: 0.7em;
-    transition: background-color var(--hover-color-change), color var(--hover-color-change);
+#form-submit-button{
+    font-size: 2em;
+    padding: 0.75em;
 }
-
-#submit_btn:hover{
-    outline: none;
-    background-color: var(--boja-teksta);
-    color: var(--boja-tema);   
-}
-

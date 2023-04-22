@@ -46,52 +46,56 @@
         </div>
     </nav>
     <form data-frm="example_form" data-time=" " id="context">
-        <div id="form_header">
-            <input class="form-header-field" data-type="title" disabled="" id="naslov_polje" name="title" type="text" value="This is an example form"/>
-            <textarea class="form-header-field" data-type="desc" disabled="" id="opis_polje" name="desc" value="">Description</textarea>
+        <div id="form-header" class = "green-border">
+            <h1 class="form-title">
+                This is an example form
+            </h1>
+            <p class="form-description">
+                Description
+            </p>
         </div>
-        <div class="polje">
-            <p class="fld_head">
+        <div class="form-field green-border">
+            <p class="form-field-head">
                 Name
             </p>
-            <input class="txt_in" type="text" value=""/>
+            <input class="form-text-input" type="text" value=""/>
         </div>
-        <div class="polje">
-            <p class="fld_head">
+        <div class="form-field green-border">
+            <p class="form-field-head">
                 Surname
             </p>
-            <input class="txt_in" type="text" value=""/>
+            <input class="form-text-input" type="text" value=""/>
         </div>
-        <div class="polje">
-            <p class="fld_head">
+        <div class="form-field green-border">
+            <p class="form-field-head">
                 Tell us something about yourself
             </p>
-            <textarea class="parag_in"></textarea>
+            <textarea class="form-paragraph-input"></textarea>
         </div>
-        <div class="polje">
-            <p class="fld_head">
+        <div class="form-field green-border">
+            <p class="form-field-head">
                 Choose position
             </p>
-            <div class="checkbox-field">
-                <input class="checkb_in" type="checkbox"/>
-                <p class="checkp_in">
+            <div class="form-field-checkbox">
+                <input class="form-checkbox-input" type="checkbox"/>
+                <p class="form-checkbox-title">
                     Coordinator
                 </p>
             </div>
-            <div class="checkbox-field">
-                <input class="checkb_in" type="checkbox"/>
-                <p class="checkp_in">
+            <div class="form-field-checkbox">
+                <input class="form-checkbox-input" type="checkbox"/>
+                <p class="form-checkbox-title">
                     Assistaint to coordinator
                 </p>
             </div>
-            <div class="checkbox-field">
-                <input class="checkb_in" type="checkbox"/>
-                <p class="checkp_in">
+            <div class="form-field-checkbox">
+                <input class="form-checkbox-input" type="checkbox"/>
+                <p class="form-checkbox-title">
                     Organizer
                 </p>
             </div>
         </div>
-        <input id="submit_btn" type="submit" value="Submit form"/>
+        <input class="green-button" id="form-submit-button" type="submit" value="Submit form"/>
     </form>
     <div class="footer green-fill">
         <div class="row space-between">

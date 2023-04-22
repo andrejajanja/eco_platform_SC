@@ -189,19 +189,25 @@ def dict_u_html(di: dict, default_path: str, default_file: str) -> None:
     #making a header
     forma["data-time"] = f'''{di["exp_date"].replace("-", " ")} {di["exp_time"].replace(":", " ")}'''
     forma["data-frm"] = di["file"]
-    forma.input["value"] = di["title"]
-    forma.textarea.string = di["description"]
+
+    forma.insert(0, bs4.BeautifulSoup(
+        f'''
+        <div id="form-header" class = "green-border">
+            <h1 class = "form-title">{di["title"]}</h1>
+            <p class = "form-description">{di["description"]}</p>
+        </div>
+        ''', features="html.parser"))
 
     #filling in fields
     for item in di["fields"]: #vidi da li ovde treba da se doda imena na svako polje
-        pom = bs4.BeautifulSoup('''<div class = "polje">
-            <p class = "fld_head"></p>
+        pom = bs4.BeautifulSoup('''<div class = "form-field green-border">
+            <p class = "form-field-head"></p>
         </div>''', features="html.parser")
 
         if item["type"] == "sentc":
             pom.p.string = item["head"]
             inp = pom.new_tag("input")
-            inp["class"] = "txt_in"
+            inp["class"] = "form-text-input"
             inp["value"] = ""
             inp["type"] = "text"
             pom.div.append(inp)
@@ -211,7 +217,7 @@ def dict_u_html(di: dict, default_path: str, default_file: str) -> None:
         if item["type"] == "parag":
             pom.p.string = item["head"]
             inp = pom.new_tag("textarea")
-            inp["class"] = "parag_in"        
+            inp["class"] = "form-paragraph-input"        
             pom.div.append(inp)
             forma.insert(len(forma)-2, pom)
             continue
@@ -219,9 +225,9 @@ def dict_u_html(di: dict, default_path: str, default_file: str) -> None:
         if item["type"] == "checkb":
             pom.p.string = item["head"]
             for opc in item["options"]:
-                kutija = bs4.BeautifulSoup('''<div class = "checkbox-field">
-                    <input type="checkbox" class = "checkb_in">
-                    <p class = "checkp_in"></p>
+                kutija = bs4.BeautifulSoup('''<div class = "form-field-checkbox">
+                    <input type="checkbox" class = "form-checkbox-input">
+                    <p class = "form-checkbox-title"></p>
                 </div>''',features="html.parser")
                 kutija.p.string = opc
                 pom.div.append(kutija)
@@ -231,7 +237,7 @@ def dict_u_html(di: dict, default_path: str, default_file: str) -> None:
         if item["type"] == "date":
             pom.p.string = item["head"]
             inp = pom.new_tag("input")
-            inp["class"] = "date_in"
+            inp["class"] = "form-date-input"
             inp["type"] = "date"
             pom.div.append(inp)
             forma.insert(len(forma)-2, pom)
@@ -240,7 +246,7 @@ def dict_u_html(di: dict, default_path: str, default_file: str) -> None:
         if item["type"] == "time":
             pom.p.string = item["head"]
             inp = pom.new_tag("input")
-            inp["class"] = "time_in"
+            inp["class"] = "form-time-input"
             inp["type"] = "time"
             pom.div.append(inp)
             forma.insert(len(forma)-2, pom)
