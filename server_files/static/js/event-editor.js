@@ -114,7 +114,6 @@ async function dajPostove() {
         if(v[1] == "1"){
             pom.children[2].style.display = "block";
         }
-
         posts_list.appendChild(pom);
     });
 }

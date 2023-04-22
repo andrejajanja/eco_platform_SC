@@ -343,7 +343,7 @@ def event_editor_route():
         if request.form["ra"] == "unpub":
             os.remove(f"{root}server_files/templates/event/{request.form['post']}.html")
             regenerate_events_page(request.form['post'], f"{root}server_files/templates/events.html")
-            regenerate_main_page(request.form['post'], f"{root}server_files/templates/main.html")
+            regenerate_main_page(request.form['post'], f"{root}server_files/templates/index.html")
             active_posts.remove(request.form['post'])
             pom = active_locations
             active_locations = {}
@@ -366,7 +366,7 @@ def event_editor_route():
                 active_posts.append(request.form['name'])
                 active_locations.append([di["kords"], di["head"], di["type"], format_date(di["date"])])
                 generate_events_page(di, f"{root}server_files/templates/events.html")
-                generate_main_page(di, f"{root}server_files/templates/main.html")
+                generate_main_page(di, f"{root}server_files/templates/index.html")
                 dict_to_file(active_locations, f"{root}server_files/server_data/locations.json")
                 return jsonify({"msg": "Post published successfuly"})
             except Exception as e:
@@ -394,7 +394,7 @@ def event_editor_route():
                 dict_to_file(active_locations, f"{root}server_files/server_data/locations.json")
                 os.remove(f"{root}server_files/templates/event/{request.form['post']}.html")            
             regenerate_events_page(request.form['post'], f"{root}server_files/templates/events.html")
-            regenerate_main_page(request.form['post'], f"{root}server_files/templates/main.html")
+            regenerate_main_page(request.form['post'], f"{root}server_files/templates/index.html")
             event_locations.pop(request.form["post"])
             dict_to_file(event_locations, f"{root}server_files/server_data/savedLocations.json")
             return jsonify({"msg": "File deleted successfully"})    

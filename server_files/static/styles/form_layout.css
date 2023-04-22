@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-#kontekst{
+#context{
     margin-bottom: 2vh;
     display: flex;
     flex-direction: column;

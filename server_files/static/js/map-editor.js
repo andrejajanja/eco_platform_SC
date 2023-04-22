@@ -1,5 +1,5 @@
 const url_stranice = window.location.href;
-let forma = document.querySelector("#kontekst");
+let forma = document.querySelector("#context");
 let frm_lok = document.querySelector("#place");
 let adr = document.querySelector("#adr");
 let krd = document.querySelector("#kord");

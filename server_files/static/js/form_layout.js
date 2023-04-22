@@ -1,5 +1,5 @@
 const url_stranice = window.location.href;
-const forma = document.querySelector("#kontekst");
+const forma = document.querySelector("#context");
 let expiration_date = forma.dataset.time.split(" ").map(Number);
 expiration_date = new Date(expiration_date[0], expiration_date[1]-1,expiration_date[2],expiration_date[3],expiration_date[4]);
 

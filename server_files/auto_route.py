@@ -60,7 +60,7 @@ html = f'''<!DOCTYPE html lang = "en">
                 <a class = "dugme_head" href = "/about-us">About Us</a>
             </div>
         </div>
-        <div id = "kontekst">
+        <div id = "context">
 
         </div>
         <div id = "footer">

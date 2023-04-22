@@ -6,7 +6,7 @@ function sifruj(plaintext)
     return 0;
 }
 const url_stranice = window.location.href;
-const forma = document.querySelector("#kontekst")
+const forma = document.querySelector("#context")
 let status_dis = document.querySelector("#status_login")
 forma.addEventListener("submit", async function(e){
     e.preventDefault();

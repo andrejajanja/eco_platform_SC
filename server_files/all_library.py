@@ -184,7 +184,7 @@ def dict_u_html(di: dict, default_path: str, default_file: str) -> None:
 
     soup.head.title.string = f"The Environmental Team • {di['title']}"
 
-    forma = soup.find("form", attrs={"id": "kontekst"})
+    forma = soup.find("form", attrs={"id": "context"})
 
     #making a header
     forma["data-time"] = f'''{di["exp_date"].replace("-", " ")} {di["exp_time"].replace(":", " ")}'''
@@ -261,7 +261,7 @@ def generate_post_from_dict(di, file: str, default_file: str, default_path: str)
     with open(default_file, mode="r", encoding="UTF-8") as fp:
         soup = bs4.BeautifulSoup(fp.read(), features="html.parser")
     soup.head.title.string = f"{di['head']} • The Environmental Team"
-    cont = soup.find("div", attrs={"id": "kontekst"}) #change this id as to be right on event page
+    cont = soup.find("div", attrs={"id": "context"}) #change this id as to be right on event page
 
     pomd = ""
     for x in di["date"].split("-")[::-1]:
@@ -269,16 +269,16 @@ def generate_post_from_dict(di, file: str, default_file: str, default_path: str)
 
     frmLink = ""
     if di["frm"] != "":
-        frmLink = f'''<a id = "frmLnk" href = "/forms/{di["frm"]}">Join us by filling out this form!</a>'''
+        frmLink = f'''<a id = "event-form-link" href = "/forms/{di["frm"]}">Join us by filling out this form!</a>'''
 
-    cont.append(f'''<div id ="postHeader">
-            <img id = "typeImg" src ="/static/images/{di["type"]}.png">
-            <h1 id = "ttl">{di['head']}</h1>
-            <div id = "location">
+    cont.append(f'''<div id ="event-header">
+            <img id = "event-type-img" src ="/static/images/{di["type"]}.png">
+            <h1 id = "event-title">{di['head']}</h1>
+            <div id = "event-loation-box">
                 <img src = "/static/images/location.png">
                 <a onclick = "clickLink('{di["head"]}')" title = "Click here to see the location" rel = "next" target = "_self" href = "/map">{di["lok"]}</a>
             </div>
-            <div id = "time">
+            <div id = "event-date-box">
                 <img src = "/static/images/calendar.png">
                 <p>{pomd}</p>
             </div>              
@@ -286,9 +286,9 @@ def generate_post_from_dict(di, file: str, default_file: str, default_path: str)
         </div> ''')
 
     for i, paragraf in enumerate(di["txt"].split("\n")):
-        cont.append(f'''<p class = "postParag">{paragraf}</p>''')
+        cont.append(f'''<p class = "event-paragraph">{paragraf}</p>''')
         if i < slike_ln:
-            cont.append(f'''<img class = "postImg" src = "/{di["imgs"][i][di["imgs"][i].find("static"):]}">''')
+            cont.append(f'''<img class = "event-image" src = "/{di["imgs"][i][di["imgs"][i].find("static"):]}">''')
 
     formatter = bs4.formatter.HTMLFormatter(indent=4)
     with open(f"{default_path}{file}.html", mode="w", encoding="UTF-8") as fp:

@@ -6,14 +6,14 @@ html{
 a:link{
     text-decoration: none;
 }
-#kontekst{
+#context{
     padding-bottom: 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: fit-content;
 }
-#postHeader{
+#event-header{
     margin-top: 1%;
     padding: 1%;
     box-sizing: border-box;
@@ -26,7 +26,7 @@ a:link{
     border-top: var(--boja-tema) solid var(--debljina-border);
     border-bottom: var(--boja-tema) solid var(--debljina-border);
 }
-#typeImg{
+#event-type-img{
     height: 3em;
     width: 3em;
     /*
@@ -35,13 +35,13 @@ a:link{
         0 0 0.25em 0.25em #fff, 
         0 0 0.25em 1em var(--boja-teksta); */
 }
-#ttl{
+#event-title{
     margin-left: var(--leva-razmaknutost);
     font-family: var(--font-tema);
     font-size: 4vh;
     font-weight: 500;   
 }
-#location{
+#event-loation-box{
     padding-top: var(--padding-vertical-box);
     padding-bottom: var(--padding-vertical-box);
     margin-left: var(--leva-razmaknutost);
@@ -57,17 +57,17 @@ a:link{
 }
 
 /*SREDI CEO OVAJ DEO SA HEADEWROM DA IMA STO MANJE TEKSTA*/
-#location img{
+#event-loation-box img{
     height: 3em;
     width: 3em;
 }
-#location a{
+#event-loation-box a{
     margin-left: 7.5%;
     font-family: var(--font-tema);
     font-size: 1em;
     font-weight: 300;
 }
-#time{
+#event-date-box{
     padding-top: var(--padding-vertical-box);
     padding-bottom: var(--padding-vertical-box);
     padding-left: 2em;
@@ -83,11 +83,11 @@ a:link{
     border-top: solid var(--boja-tema) var(--debljina-border);
     border-bottom: solid var(--boja-tema) var(--debljina-border);
 }
-#time img{
+#event-date-box img{
     height: 3em;
     width: 3em;
 }
-#time p{
+#event-date-box p{
     margin: 0;
     margin-left: 15%;
     font-family: var(--font-tema);
@@ -95,7 +95,7 @@ a:link{
     font-weight: 300;
     cursor: default;
 }
-#frmLnk{
+#event-form-link{
     margin-left: var(--leva-razmaknutost);
     padding: var(--padding-vertical-box);
     font-family: var(--font-tema);
@@ -107,11 +107,11 @@ a:link{
     border-radius: 2vh;
     transition: background var(--hover-color-change), color var(--hover-color-change);
 }
-#frmLnk:hover{
+#event-form-link:hover{
     color: var(--boja-teksta);
     background: var(--boja-tema);
 }
-.postParag{
+.event-paragraph{
     padding: 2%;
     font-family: var(--font-tema);
     font-size: 1em;
@@ -119,6 +119,6 @@ a:link{
     width: 85%;
     border-left: solid var(--boja-tema) var(--debljina-border);
 }
-.postImg{
+.event-image{
     width: 50%;
 }
