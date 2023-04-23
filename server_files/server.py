@@ -429,6 +429,16 @@ def about_us_route():
             pass
         return render_template("about-us.html", loged_in = "inserted_html/sign_in_html.html")
 
+@app.route('/contact-us', methods = ["GET", "POST"])
+def contact_us_route():
+    if request.method == "GET":
+        try:
+            if session_driver.exists(request.cookies["session_id"]) == 1:                
+                return render_template("contact-us.html", loged_in = "inserted_html/loged.html")
+        except:
+            pass
+        return render_template("contact-us.html", loged_in = "inserted_html/sign_in_html.html")
+
 #placeholder-start
 #placeholder-end
 

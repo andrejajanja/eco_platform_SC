@@ -1,0 +1,86 @@
+<!DOCTYPE html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>📞 Contact Us 📞 • The Environmental Team</title>
+        <link rel="icon" href="/static/images/logo.png" type="image/x-icon"/>
+        <script defer type="text/javascript" src='/static/js/contact-us.js'></script>
+        <link rel="stylesheet" type="text/css" href='/static/styles/head-style.css'>
+        <link rel="stylesheet" type="text/css" href='/static/styles/contact-us.css'>
+    </head>
+    <body>
+        <nav class="green-border-navbar green-fill-navbar navbar">
+            <a href="/">
+                <img class="navbar-left" src="/static/images/logo.png"/>
+            </a>
+            <ul class="navbar-middle">
+                <li>
+                    <a href="/events">
+                        Events
+                    </a>
+                </li>
+                <li>
+                    <a href="/map">
+                        Map
+                    </a>
+                </li>
+                <li>
+                    <a class = "underlined">
+                        Contact us
+                    </a>
+                </li>
+                <li>
+                    <a href="/about-us">
+                        About us
+                    </a>
+                </li>
+            </ul>
+            <div class="navbar-right">
+                {%include loged_in %}
+            </div>
+        </nav>
+        <div class = "context">
+            <div class = "country-card green-border">
+                <h1 class = "country-name" >International office</h1>
+                <div class = "country-pople">
+                    <div class = "country-person">
+                        <div class = "country-person-header">
+                            <img class = "country-person-image" src = "/static/images/avatar.png">
+                            <h2 class = "country-person-name">Nikola Pantelic</h2>
+                        </div>
+                        <p></p>
+                        <p>Email: nikola.pantelic@andreja.dev</p>
+                        <p>Phone number: +3815675978</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer green-fill">
+            <div class="row space-between">
+                <div class="about-grid">
+                    <div class="graphic-logo">
+                        <img src="/static/images/logo.png" width="200" height="200" alt="Logo">
+                    </div>
+                    <div class="text-logo">
+                        The Environmental Team
+                    </div>                    
+                    <div class="empty"></div> <!-- empty div just used to form nice-looking grid -->
+                    <div class="description">
+                        Insert some slogan or moto here
+                    </div>
+                </div>
+                <div class="nav-grid">
+                    <div class="nav-link"><a href="/events">events</a></div>
+                    <div class="nav-link"><a href="/map">map</a></div>
+                    <div class="nav-link"><a>contact us</a></div>
+                    <div class="nav-link"><a href="/about-us">about us</a></div>
+                </div>
+            </div>
+            <div class="row center">
+                <div class="authors">
+                    Made by Andreja Janković, andrejajanja@gmail.com, Year 2023
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

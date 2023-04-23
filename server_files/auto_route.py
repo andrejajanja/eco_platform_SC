@@ -40,41 +40,89 @@ if akcija == "0":
         print("\nRuta ne moze biti obrisana jer je nema\n")
     exit()
 
-html = f'''<!DOCTYPE html lang = "en">
+html =f'''<!DOCTYPE html lang = "en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{ime_rute} • The Environmental Team</title>
         <link rel="icon" href="/static/images/logo.png" type="image/x-icon"/>
-        <script type = "text/javascript" src='/static/js/lib.js'></script>
         <script defer type="text/javascript" src='/static/js/{ime_rute}.js'></script>
-        <link rel="stylesheet" type="text/css" href='/static/styles/head_style.css'>
+        <link rel="stylesheet" type="text/css" href='/static/styles/head-style.css'>
         <link rel="stylesheet" type="text/css" href='/static/styles/{ime_rute}.css'>
     </head>
     <body>
-        <div id = "header">
-            <h1 id = "naslov">The Environmental Team</h1>
-            <div id = "stranice">
-                <a class = "dugme_head" href = "/events">Events</a>
-                <a class = "dugme_head" href = "/map">Map</a>
-                <a class = "dugme_head" href = "/about-us">About Us</a>
+        <nav class="green-border-navbar green-fill-navbar navbar">
+            <a href="/">
+                <img class="navbar-left" src="/static/images/logo.png"/>
+            </a>
+            <ul class="navbar-middle">
+                <li>
+                    <a href="/events">
+                        Events
+                    </a>
+                </li>
+                <li>
+                    <a href="/map">
+                        Map
+                    </a>
+                </li>
+                <li>
+                    <a href="/contact-us">
+                        Contact us
+                    </a>
+                </li>
+                <li>
+                    <a href="/about-us">
+                        About us
+                    </a>
+                </li>
+            </ul>
+            <div class="navbar-right">
+                {{%include loged_in %}}
             </div>
+        </nav>
+        <div class = "context">
         </div>
-        <div id = "context">
-
-        </div>
-        <div id = "footer">
-            <p>Made by Andreja Janković, 2023, andrejajanja@gmail.com</p>
+        <div class="footer green-fill">
+            <div class="row space-between">
+                <div class="about-grid">
+                    <div class="graphic-logo">
+                        <img src="/static/images/logo.png" width="200" height="200" alt="Logo">
+                    </div>
+                    <div class="text-logo">
+                        The Environmental Team
+                    </div>                    
+                    <div class="empty"></div> <!-- empty div just used to form nice-looking grid -->
+                    <div class="description">
+                        Insert some slogan or moto here
+                    </div>
+                </div>
+                <div class="nav-grid">
+                    <div class="nav-link"><a href="/events">events</a></div>
+                    <div class="nav-link"><a href="/map">map</a></div>
+                    <div class="nav-link"><a href="/contact-us">contact us</a></div>
+                    <div class="nav-link"><a href="/about-us">about us</a></div>
+                </div>
+            </div>
+            <div class="row center">
+                <div class="authors">
+                    Made by Andreja Janković, andrejajanja@gmail.com, Year 2023
+                </div>
+            </div>
         </div>
     </body>
 </html>'''
-css = ''''''
-js = '''const url_stranice = window.location.href;\n\n\n'''
+
+css = '''.context{
+
+}
+'''
+js = '''const url_stranice = window.location.href;\n'''
 
 server = f'''placeholder-start\n@app.route('/{ime_rute}', methods = ["GET", "POST"])
 def {ime_rute}_route():
     if request.method == "POST":
-        return "sdsad"
+        return "This route doesn't have any reponces for the POST request at the moment"
     if request.method == "GET":
         return render_template("{ime_rute}.html")\n\n#'''
 
