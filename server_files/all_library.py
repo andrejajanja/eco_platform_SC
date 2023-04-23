@@ -209,6 +209,7 @@ def dict_u_html(di: dict, default_path: str, default_file: str) -> None:
             inp = pom.new_tag("input")
             inp["class"] = "form-text-input"
             inp["value"] = ""
+            inp["placeholder"] = "Enter here"
             inp["type"] = "text"
             pom.div.append(inp)
             forma.insert(len(forma)-2, pom)
@@ -218,6 +219,7 @@ def dict_u_html(di: dict, default_path: str, default_file: str) -> None:
             pom.p.string = item["head"]
             inp = pom.new_tag("textarea")
             inp["class"] = "form-paragraph-input"        
+            inp["placeholder"] = "Enter here"
             pom.div.append(inp)
             forma.insert(len(forma)-2, pom)
             continue

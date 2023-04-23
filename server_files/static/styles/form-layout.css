@@ -1,51 +1,61 @@
 #context{
-    margin-bottom: 1em;
+    margin-bottom: 2em;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 #form-header{
+    padding: 0.5em;
     margin-top: 1em;
-    padding: 1em;
     width: 40em;
     display: flex;
     flex-direction: column;
 }
 .form-title{
+    width: 90%;
+    margin: 0;
     text-align: center;
+    align-self: center;
+    padding: 0.5em;
     border-bottom: var(--text-color) solid var(--underline-thickness);
 }
-.form-description{    
+.form-description{ 
+    width: 90%;
+    padding: 0.5em;   
+    align-self: center;
     min-height: 5em;
-    margin-bottom: 1em;
     border-bottom: var(--text-color) solid var(--underline-thickness);
 }
 .form-field{
+    box-sizing: border-box;
     margin-top: 1em;
     width: 40em;
-    padding: 0.5em;
+    padding: 1em;
     display: flex;
     flex-direction: column;
 }
-
 .form-field-head{
-    align-self: flex-start;
-    border-bottom: var(--hover-forms) solid calc(var(--underline-thickness));
+    margin: 0;
+    padding: 0.25em;
+    margin-bottom: 1em;
+    align-self: center;
+    width: 30em;
+    font-size: 1.2em;
+    border-bottom: var(--text-color) solid calc(var(--underline-thickness));
 }
 
 .form-text-input{
     width: 60%;
     margin-left: 20%;
     font-size: medium;
-    padding: 0.5vw;
+    padding: 0.5em;
 }
 
 .form-paragraph-input{
     width: 80%;
-    margin-left: 10%;
+    align-self: center;
     font-size: medium;
-    font-family: var(--font-tema);
-    padding: 0.75vh;
+    padding: 0.5em;
     height: fit-content;
     resize: none;
 }
@@ -54,8 +64,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 7.5vw;
-    margin-bottom: 2vh;
+    margin-left: 5em;
+    margin-bottom: 1em;
 }
 
 .form-checkbox-input{
@@ -70,32 +80,27 @@
 }
 
 .form-checkbox-title{
-    margin: 0vh;
-    margin-left: 1.5vw;
+    margin: 0;
+    margin-left: 0.75em;
     font-size: large;
-    font-weight: 400;
-    font-family: var(--font-tema);
 }
 
 .form-date-input{
-    margin-left: 30%;
-    width: 40%;
-    font-size: large;
-    font-weight: 400;
-    font-family: var(--font-tema);
-    padding: 0.5vw;
+    width: 60%;
+    margin-left: 20%;
+    font-size: medium;
+    padding: 0.5em;
 }
 
 .form-time-input{
-    margin-left: 30%;
-    width: 40%;
-    font-size: large;
-    font-weight: 400;
-    font-family: var(--font-tema);
-    padding: 0.5vw;
+    width: 60%;
+    margin-left: 20%;
+    font-size: medium;
+    padding: 0.5em;
 }
 
 #form-submit-button{
-    font-size: 2em;
-    padding: 0.75em;
+    margin-top: 2em;
+    font-size: 1.2em;
+    padding: 0.5em;
 }

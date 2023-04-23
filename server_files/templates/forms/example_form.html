@@ -11,8 +11,7 @@
     <script defer="" src="/static/js/form_layout.js" type="text/javascript">
     </script>
     <link href="/static/styles/head-style.css" rel="stylesheet" type="text/css"/>
-    <link href="/static/styles/head_style.css" rel="stylesheet" type="text/css"/>
-    <link href="/static/styles/form_layout.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/styles/form-layout.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <nav class="green-border-navbar green-fill-navbar navbar">
@@ -46,7 +45,7 @@
         </div>
     </nav>
     <form data-frm="example_form" data-time=" " id="context">
-        <div id="form-header" class = "green-border">
+        <div class="green-border" id="form-header">
             <h1 class="form-title">
                 This is an example form
             </h1>
@@ -58,19 +57,19 @@
             <p class="form-field-head">
                 Name
             </p>
-            <input class="form-text-input" type="text" value=""/>
+            <input class="form-text-input" placeholder="Enter here" type="text" value=""/>
         </div>
         <div class="form-field green-border">
             <p class="form-field-head">
                 Surname
             </p>
-            <input class="form-text-input" type="text" value=""/>
+            <input class="form-text-input" placeholder="Enter here" type="text" value=""/>
         </div>
         <div class="form-field green-border">
             <p class="form-field-head">
                 Tell us something about yourself
             </p>
-            <textarea class="form-paragraph-input"></textarea>
+            <textarea class="form-paragraph-input" placeholder="Enter here"></textarea>
         </div>
         <div class="form-field green-border">
             <p class="form-field-head">
@@ -101,7 +100,7 @@
         <div class="row space-between">
             <div class="about-grid">
                 <div class="graphic-logo">
-                    <img alt="Logo" height="200" src="static/images/logo.png" width="200"/>
+                    <img alt="Logo" height="200" src="/static/images/logo.png" width="200"/>
                 </div>
                 <div class="text-logo">
                     The Environmental Team

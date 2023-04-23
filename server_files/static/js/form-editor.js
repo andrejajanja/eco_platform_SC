@@ -154,7 +154,6 @@ async function fillFormsExplorer(){
             if (e.which == 3) {
                 let odg = await req_json({"ra": "unpub", "form": ime_forme[0]}, "POST");
                 publs[maker.children[0].children[0].value] = false;
-                console.log(publs[maker.children[0].children[0].value]);
                 pom.dataset.postoji = false;
                 if(odg["msg"] == "1"){
                     forme.children[i].children[2].style.display = "none";
@@ -203,6 +202,7 @@ explorer.addEventListener("submit", async function(e){
             odg = await req_json({"ra": "frm_meta", "form_name": e.submitter.parentNode.dataset.file}, "POST");
             di = JSON.parse(odg["form_data"]);
 
+            trenIndex = 0;
             //resetuje celu formu
             pomd = [maker.children[0], maker.children[maker.children.length-1]];
             maker.innerHTML = "";
@@ -219,6 +219,7 @@ explorer.addEventListener("submit", async function(e){
             let pom;
             for (let i = 0; i < di["fields"].length; i++) {
                 pom = polje_sample.cloneNode(true);
+                pom.i = i+1;
                 pom.dataset.type = di["fields"][i]["type"];
                 pom.children[0].children[0].value = di["fields"][i]["head"];
                 maker.insertBefore(pom, maker.children[maker.children.length-1]);
@@ -233,7 +234,7 @@ explorer.addEventListener("submit", async function(e){
                     })
                 }
                 //doodaj ovde da moze i checkb tip polja da bazdari kako valja, jer ovde ne ubacuje uopste
-                maker.children[i+1].addEventListener("click", fokusirajMakerElement,false);
+                maker.children[i+1].children[0].children[1].addEventListener("click", fokusirajMakerElement,false);
             }            
             autoResize();
             maker.style.display = "flex";

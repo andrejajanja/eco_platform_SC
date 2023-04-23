@@ -248,7 +248,7 @@ textarea, div, input, p{
     flex-direction: column;
     margin-top: 1em;
     width: 40em;
-    border: var(--yellow-border-bottom) solid var(--underline-thickness);
+    border: var(--text-color) solid var(--underline-thickness);
     border-radius: 0.7em;
     height: fit-content;
     align-items: center;
