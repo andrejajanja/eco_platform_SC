@@ -8,19 +8,27 @@ from flask import (Flask, jsonify, make_response, redirect, render_template,
                    request)
 from waitress import serve
 from paste.translogger import TransLogger
+from subprocess import Popen
+
+#Starting Local instance of Redis server
+x = Popen(["redis-server", "docker_files/redis.conf"])
+
 print("Imported modules")
-root = ""
+root = os.path.abspath(os.curdir) + "/"
+print(root)
 #root = "/root/eco_platform_SC/"
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-print("Initialized server")
+print("Initialized ECO server")
 
 #server specific variables -- this can go to the json file
 cookie_dur = 3600 #seconds
 
 #Databases
-#session_driver = redis.Redis(host = "127.0.0.1", port = "6379", db=0) #db = 0 - session cookies
+#connector to Redis server
+session_driver = redis.Redis(host = "127.0.0.1", port = "6379", db=0) #db = 0 - session cookies
 print("Connected to redis")
+#Instancing a SQLite server
 kon = SQLConnector(f"{root}EKO.db", root)
 print("Loaded and connected to SQL db")
 
@@ -443,7 +451,7 @@ def contact_us_route():
 #placeholder-end
 
 if __name__ == "__main__":
-    app.run(host = "0.0.0.0", port = 7000)
+    app.run(host = "localhost", port = 7000)
     # serve(TransLogger(app, 
     #         setup_console_handler=False,
     #         logger_name="EKO", 
